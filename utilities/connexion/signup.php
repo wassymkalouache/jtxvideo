@@ -13,7 +13,9 @@ function Signup() {
             isset($_POST["promotion"]) && $_POST["promotion"] != "" &&
             isset($_POST["email"]) && $_POST["email"] != "") {  // tous les champs requis cités ic
         if (empty(Utilisateur::getUtilisateur($_POST["login"])) && $_POST["up"] == $_POST["up2"]) {//vérifie que l'utilisateur n'existe pas et que les mots de passe sont identiques.
-            $result = Utilisateur::insererUtilisateur($_POST["login"], $_POST["up"], $_POST["nom"], $_POST["prenom"], $_POST["promotion"], $_POST["email"], 0);
+            Utilisateur::insererUtilisateur($_POST["login"], $_POST["up"], $_POST["nom"], $_POST["prenom"], $_POST["promotion"], $_POST["email"], 0);
+            header('Location: index.php?page=login');
+            exit();
             $form_values_valid = true;
         }
     }

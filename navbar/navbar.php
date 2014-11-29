@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <?php
                 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {//les boutons diffèrent selon que l'on soit connecté ou pas.
-                    echo "<li><a>{$_SESSION['user']}</a></li>";
+                    echo "<li><a href='index.php?page=compte'>{$_SESSION['usertext']}</a></li>";
                     echo "<li><a href='index.php?page=ajout'>Ajouter une vidéo</a></li>";
                     echo "<li><a href='index.php?page=accueil&todo=logout'>Se déconnecter</a></li>";
                 } else {

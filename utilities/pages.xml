@@ -24,4 +24,8 @@
         <name>enregistrement</name>
         <title>JtxVidéo - S'enregistrer</title>
     </page>
+    <page>
+        <name>compte</name>
+        <title>JtxVidéo - Mon compte</title>
+    </page>
 </pages>

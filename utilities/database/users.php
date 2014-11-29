@@ -1,4 +1,6 @@
-<?php require_once 'database.php';
+<?php
+
+require_once 'database.php';
 
 class Utilisateur {
 
@@ -10,7 +12,7 @@ class Utilisateur {
     public $email;
     public $admin; //les hcamps correspondent à cexu de la base de données utilisateurs.
 
-    public function __toString() {
+    public function _toString() {
         if ($this->promo % 2 == 0) {
             $color = 'rouge';
         } else {
@@ -49,4 +51,21 @@ class Utilisateur {
             return (sha1($mdp) == $user->mdp);
         }
     }
+
+    public static function changermdp($login, $new) {
+        // opérations sur la base
+        $dbh = Database::connect();
+        $sth = $dbh->prepare("UPDATE `utilisateurs` SET mdp=SHA1('$new') WHERE login='$login'");
+        $sth->execute();
+        $dbh = null; // Déconnexion de MySQL
+    }
+
+    public static function supprimercompte($login) {
+        // opérations sur la base
+        $dbh = Database::connect();
+        $sth = $dbh->prepare("DELETE FROM `utilisateurs` WHERE login='$login'");
+        $sth->execute();
+        $dbh = null; // Déconnexion de MySQL
+    }
+
 }

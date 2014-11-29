@@ -9,16 +9,33 @@ if (!isset($_SESSION['initiated'])) {
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
 
+function secure($tab){//transforme les caractères spéciaux de PHP et HTML en des expressions innofensives.
+    foreach ($tab as $cle => $valeur){
+        $tab[$cle]=  htmlspecialchars($valeur);
+    }
+    return $tab;
+}
+$_GET = secure($_GET);//sécurise les inputs dans GET et POST.
+$_POST = secure($_POST);
+
 require_once 'utilities/connexion/logInOut.php';
-require_once 'utilities/connexion/signup.php';
 if (isset($_GET['todo']) && $_GET['todo'] == "login") {//si l'on vient sur index.php depuis la page de connexion, ce paramtre est vrai. Sinon on ignore.
     LogIn();
 }
 if (isset($_GET['todo']) && $_GET['todo'] == "logout") {//permet la déconnexion
     LogOut();
 }
+require_once 'utilities/connexion/signup.php';
 if (isset($_GET['todo']) && $_GET['todo'] == "signup") {//cette fonction s'éxécute si l'on provient de la page d'enregistrement
     Signup();
+}
+require_once 'utilities/connexion/changemdp.php';
+if (isset($_GET['todo']) && $_GET['todo'] == "changemdp") {//cette fonction s'éxécute si l'on vient de la page compte et que l'on a rempli le formulaire
+    Changemdp();
+}
+require_once 'utilities/connexion/deleteuser.php';
+if (isset($_GET['todo']) && $_GET['todo'] == "deleteuser") {//cette fonction s'éxécute si l'on vient de la page compte et que l'on a rempli le formulaire
+    SupprimerCompte();
 }
 
 require 'utilities/pages.php';
@@ -37,7 +54,7 @@ if ($authorized) {
 
 <?php
 require 'utilities/display/display.php';
-if ($askedPage == "login" || $askedPage == "enregistrement") {//si l'on veut la page de login, le style est différent.
+if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte") {//si l'on veut la page de login, le style est différent.
     generateHTMLHeader($pageTitle, "css/signin.css");
 } else {
     generateHTMLHeader($pageTitle, "css/perso.css");
