@@ -20,11 +20,11 @@
 }/*règle la position du texte dans le pied de page*/
 
 #logocoincadre {
-    margin: -10px ;
+    margin: -5px 10px ;
 }
 
 #logocoin {
-    margin : 5px ;
+    margin : 0px ;
 }/*les deux id précédents permettent de mettre le logo jtxvidéo en haut à droite dans la barre de navigation*/
 
 .descriptionvideo {

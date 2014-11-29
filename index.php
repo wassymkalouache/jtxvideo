@@ -9,14 +9,17 @@ if (!isset($_SESSION['initiated'])) {
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
 
-require 'utilities/logInOut.php';
-if ($_GET['todo']=="login") {//si l'on vient sur index.php depuis la page de connexion, ce paramtre est vrai. Sinon on ignore.
+require 'utilities/connexion/logInOut.php';
+if (isset($_GET['todo']) && $_GET['todo'] == "login") {//si l'on vient sur index.php depuis la page de connexion, ce paramtre est vrai. Sinon on ignore.
     LogIn();
+}
+if (isset($_GET['todo']) && $_GET['todo'] == "logout") {//permet la déconnexion
+    LogOut();
 }
 
 
 require 'utilities/pages.php';
-if (array_key_exists('page', $_GET) && $_SESSION['loggedIn']) {//il faut que la page existe et que l'utilisateur soit connecté
+if (array_key_exists('page', $_GET)) {//il faut que la page existe et que l'utilisateur soit connecté
     $askedPage = $_GET['page'];
 } else {
     $askedPage = "accueil";
@@ -31,7 +34,7 @@ if ($authorized) {
 ?>
 
 <?php
-require 'utilities/display.php';
+require 'utilities/display/display.php';
 if ($askedPage == "login") {//si l'on veut la page de login, le style est différent.
     generateHTMLHeader($pageTitle, "css/signin.css");
 } else {
@@ -65,6 +68,6 @@ if ($askedPage == "login") {//si l'on veut la page de login, le style est diffé
     ?>
 </body>
 <?php
-require_once 'utilities/display.php';
+require_once 'utilities/display/display.php';
 generateHTMLFooter();
 

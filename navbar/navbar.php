@@ -13,8 +13,16 @@
         </form>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="nav navbar-nav navbar-right">
             <ul class="nav navbar-nav navbar-right">
+                <?php
+                if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {//les boutons diffèrent selon que l'on soit connecté ou pas.
+                    echo "<li><a href='index.php?page=ajout'>Ajouter une vidéo</a></li>";
+                    echo "<li><a href='index.php?page=accueil&todo=logout'>Se déconnecter</a></li>";
+                } else {
+                    echo "<li><a href='index.php?page=login'>Se connecter</a></li>";
+                }
+                ?>
                 <li><a href="index.php?page=accueil" id="logocoincadre"><img src="media/logojtxvideo.svg" height="30" id="logocoin" alt="Logo JtxVidéo"/></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

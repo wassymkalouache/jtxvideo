@@ -11,7 +11,14 @@
                         <li><a href="http://wikix.polytechnique.org/JTX">Page WikiX du JTX</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php?page=ajout">Ajouter une vidéo</a></li>
+                        <?php
+                        if (isset($_SESSION['loggedIn'])&&$_SESSION['loggedIn']) {//les boutons diffèrent selon que l'on soit connecté ou pas.
+                            echo "<li><a href='index.php?page=ajout'>Ajouter une vidéo</a></li>";
+                            echo "<li><a href='index.php?page=accueil&todo=logout'>Se déconnecter</a></li>";
+                        } else {
+                            echo "<li><a href='index.php?page=login'>Se connecter</a></li>";
+                        }       
+                        ?>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
