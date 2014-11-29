@@ -20,4 +20,8 @@
         <name>login</name>
         <title>JtxVidéo - Se connecter</title>
     </page>
+    <page>
+        <name>enregistrement</name>
+        <title>JtxVidéo - S'enregistrer</title>
+    </page>
 </pages>

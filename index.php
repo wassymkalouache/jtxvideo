@@ -9,14 +9,17 @@ if (!isset($_SESSION['initiated'])) {
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
 
-require 'utilities/connexion/logInOut.php';
+require_once 'utilities/connexion/logInOut.php';
+require_once 'utilities/connexion/signup.php';
 if (isset($_GET['todo']) && $_GET['todo'] == "login") {//si l'on vient sur index.php depuis la page de connexion, ce paramtre est vrai. Sinon on ignore.
     LogIn();
 }
 if (isset($_GET['todo']) && $_GET['todo'] == "logout") {//permet la déconnexion
     LogOut();
 }
-
+if (isset($_GET['todo']) && $_GET['todo'] == "signup") {//cette fonction s'éxécute si l'on provient de la page d'enregistrement
+    Signup();
+}
 
 require 'utilities/pages.php';
 if (array_key_exists('page', $_GET)) {//il faut que la page existe et que l'utilisateur soit connecté
@@ -24,7 +27,6 @@ if (array_key_exists('page', $_GET)) {//il faut que la page existe et que l'util
 } else {
     $askedPage = "accueil";
 }//cette condition récupère le nom de la page à afficher.
-
 $authorized = checkpage($askedPage); //détermine si l'on peut afficher la page demandée(existe et a les droits d'accès)
 if ($authorized) {
     $pageTitle = getPageTitle($askedPage);
@@ -35,7 +37,7 @@ if ($authorized) {
 
 <?php
 require 'utilities/display/display.php';
-if ($askedPage == "login") {//si l'on veut la page de login, le style est différent.
+if ($askedPage == "login" || $askedPage == "enregistrement") {//si l'on veut la page de login, le style est différent.
     generateHTMLHeader($pageTitle, "css/signin.css");
 } else {
     generateHTMLHeader($pageTitle, "css/perso.css");
@@ -44,7 +46,7 @@ if ($askedPage == "login") {//si l'on veut la page de login, le style est diffé
 <body>
     <div id="header">
         <?php
-        if ($authorized && ($askedPage == "accueil" || $askedPage == "login")) {
+        if ($authorized && ($askedPage == "accueil")) {
             require 'navbar/navbar_accueil.php';
         } else {
             require 'navbar/navbar.php';
@@ -54,7 +56,7 @@ if ($askedPage == "login") {//si l'on veut la page de login, le style est diffé
     <?php
     if ($authorized) {
         if ($askedPage == "video") {
-            $video = $_GET['video'];
+            $video = $_GET['video'];//la variable $video est réutilisée dans contenu_video
             require "contenu/contenu_video.php";
         } else {
             require "contenu/contenu_{$askedPage}.php";
