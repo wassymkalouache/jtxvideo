@@ -1,0 +1,45 @@
+#logoaccueil {
+    text-align:center ; 
+    margin:150px 10px 40px ;
+}/*Règle la position du logo JtxVidéo sur la page d'accueil*/
+
+#cadrebarre {
+    margin: 0px 80px ;
+}/*s'applique au cadre contenant la barre de recherche et les deux boutons sur la page d'accueil*/
+
+#barrerecherche {
+    margin: 0px 0px 15px ;
+}/* s'applique uneiquement à la barre de recherche*/
+
+#boutonsrecherche {
+    text-align:center ;
+}/* s'applique uniquement aux boutons en dessous de la bare de recherche*/
+
+#pied {
+    text-align:right ;
+}/*règle la position du texte dans le pied de page*/
+
+#logocoincadre {
+    margin: -10px ;
+}
+
+#logocoin {
+    margin : 5px ;
+}/*les deux id précédents permettent de mettre le logo jtxvidéo en haut à droite dans la barre de navigation*/
+
+.descriptionvideo {
+    width:100%;
+}/*grâce à cette classe, la description d'une vidéo prend toute la place
+ à droite de l'écran (problème quand le texte de description faisait moins d'une ligne)*/
+
+.boutonsvideo {
+    float:right;
+}/* les boutons d'action pour une vidéo s'affichent à droite de l'écran*/
+
+.jaune {
+    color:#F2E52E;
+}
+
+.rouge {
+    color:#D62222;
+}
