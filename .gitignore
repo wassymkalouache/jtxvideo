@@ -46,3 +46,7 @@ Temporary Items
 *.webm
 *.mp4
 *.png
+
+*.properties
+nbproject/private/private.xml
+nbproject/project.xml
