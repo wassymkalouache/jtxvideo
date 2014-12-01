@@ -54,7 +54,7 @@ function videoligne($id) {
     }
     echo <<<EOF
     <div class="media">
-        <a class="media-left media-middle">
+        <a href="index.php?page=video&video=$video->video" class="media-left media-middle">
             <img src="$video->poster" alt="$video->titre" width="500"></img>
         </a>
         <div class="media-body descriptionvideo">
