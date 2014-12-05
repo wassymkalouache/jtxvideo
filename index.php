@@ -3,7 +3,7 @@ session_name("JtxVideo");
 // ne pas mettre d'espace dans le nom de session !
 session_start();
 if (!isset($_SESSION['initiated'])) {
-    session_regenerate_id(); salut
+    session_regenerate_id();
     $_SESSION['initiated'] = true;
 }
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
