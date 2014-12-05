@@ -20,10 +20,22 @@
     <p>Si tu as perdu ton mot de passe, <a href="mailto:denis.merigoux@polytechnique.edu">envoie un mail</a>.</p>
     <?php
     if (isset($_GET['error']) && $_GET['error'] == "old") {
-        echo "<p>L'ancien mot de passe n'est pas le bon.</p>";
+        echo <<<EOF
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Erreur :</span>
+                    L'ancien mot de passe n'est pas le bon.
+                </div>
+EOF;
     }
     if (isset($_GET['error']) && $_GET['error'] == "new") {
-        echo "<p>Les deux nouveaux mots de passe ne sont pas les mêmes.</p>";
+        echo <<<EOF
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Erreur :</span>
+                    Les deux nouveaux mots de passe ne sont pas les mêmes.
+                </div>
+EOF;
     }
     ?>
     <input type="password" class="form-control" placeholder="Ancien mot de passe" name="old" required>
