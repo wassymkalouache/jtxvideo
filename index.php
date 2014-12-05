@@ -54,7 +54,7 @@ if ($authorized) {
 
 <?php
 require 'utilities/display/display.php';
-if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte") {//si l'on veut la page de login, le style est différent.
+if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte" || $askedPage=="ajout") {//si l'on veut la page de login, le style est différent.
     generateHTMLHeader($pageTitle, "css/signin.css");
 } else {
     generateHTMLHeader($pageTitle, "css/perso.css");
@@ -75,6 +75,9 @@ if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "co
         if ($askedPage == "video") {
             $video = $_GET['video'];//la variable $video est réutilisée dans contenu_video
             require "contenu/contenu_video.php";
+        } elseif ($askedPage == "recherche") {
+            $query = $_GET['query'];
+            require "contenu/contenu_recherche.php";
         } else {
             require "contenu/contenu_{$askedPage}.php";
         }
