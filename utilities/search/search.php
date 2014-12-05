@@ -4,12 +4,22 @@ require_once 'utilities/database/database.php';
 
 $itemsparpage = 5;
 
+function CreerRequete($query) {
+    $termes = explode(' ',$query);//on prend séparément tous les mots de la requête
+    $requete = "SELECT videos.video, COUNT(tags.tag) AS nombredetags FROM videos INNER JOIN tags ON videos.video = tags.video WHERE (";
+    foreach ($termes as $terme) {
+        $requete = $requete."tags.tag='{$terme}' OR ";
+    }
+    $requete = $requete."false) GROUP BY videos.video ORDER BY nombredetags DESC";
+    return $requete;
+}
+
 function videoListFromQuery($query,$nombre) {
     global $itemsparpage;
     $dbh = Database::connect();
-    $bornesup = $itemsparpage*$nombre;
-    $borneinf = $itemsparpage*($nombre+1)-1;
-    $requete = "SELECT video from `videos` WHERE titre LIKE '%$query%' LIMIT $borneinf,$bornesup";
+    $borneinf = $itemsparpage*$nombre;
+    $bornesup = $itemsparpage*($nombre+1)-1;
+    $requete = CreerRequete($query);
     $sth = $dbh->prepare($requete);
     $sth->execute();
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
