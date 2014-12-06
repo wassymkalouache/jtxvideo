@@ -8,6 +8,7 @@ if (!isset($_SESSION['initiated'])) {
 }
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
+$_SESSION['itemsparpage']=3;//variable globale définie ici.
 
 require_once 'utilities/misc.php';//contient la fonction secure
 $_GET = secure($_GET);//sécurise les inputs dans GET et POST.
@@ -71,7 +72,7 @@ if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "co
             $video = $_GET['video'];//la variable $video est réutilisée dans contenu_video
             require "contenu/contenu_video.php";
         } elseif ($askedPage == "recherche") {
-            $query = $_GET['query'];
+            $query = $_GET['query'];//pour éviter d'avoir à se traîner le $_GET partout
             require "contenu/contenu_recherche.php";
         } else {
             require "contenu/contenu_{$askedPage}.php";
