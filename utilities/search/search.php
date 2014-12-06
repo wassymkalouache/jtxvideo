@@ -2,7 +2,7 @@
 
 require_once 'utilities/database/database.php';
 
-$itemsparpage = 5;
+$itemsparpage = $_SESSION['itemsparpage'];//Attention définition globale, peut-être à mettre à un autre endroit pour modification par exemple dans $_SESSION.
 
 function CreerRequete($query) {//cette fonction généère la requête à envoyer à MySQL. $query a été préalablement sécurisé.
     //définissons d'abord les patterns des expressions régulières utilisées
@@ -60,15 +60,12 @@ function CreerRequete($query) {//cette fonction généère la requête à envoye
     // qu'une seule fois et on trie par le nombre de tags associé à chaque vidéo
 
     $requete = "(" . $requetetitre . ") UNION (" . $requetetags . ")";//on construit finalement la requête.
-    print_r($requete);
     return $requete;
 }
 
-function videoListFromQuery($query, $nombre) {
+function videoListFromQuery($query) {//cette fonction exécute la requête et en limite les résultats pour une affichage par pages.
     global $itemsparpage;
     $dbh = Database::connect();
-    $borneinf = $itemsparpage * $nombre;
-    $bornesup = $itemsparpage * ($nombre + 1) - 1;
     $requete = CreerRequete($query);
     $sth = $dbh->prepare($requete);
     $sth->execute();

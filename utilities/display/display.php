@@ -120,6 +120,7 @@ EOF;
             </div>
         </div>
     </div>
+    <hr>
 EOF;
 }
 
@@ -204,20 +205,22 @@ EOF;
 EOF;
 }
 
-function navigationpages($page, $nombre, $max) {
+function navigationpages($page, $nombre, $max, $query) {
+    $pagemax=ceil($max/$_SESSION['itemsparpage']);//variable $itemsparpage initialisée dans search.php normalement.
     echo "<nav style='text-align: center'><!--bloc pour naviguer entre les pages-->" . PHP_EOL . "<ul class='pagination'>" . PHP_EOL;
     if ($page > $page - $nombre / 2 && $page != 1) {
-        echo "<li><a href='#'>&laquo;</a></li>";
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=1'>&laquo;</a></li>";//on revient au premier
     }
     for ($j = max(floor($page - $nombre / 2), 1); $j < $page; $j++) {
-        echo "<li><a href='#'>$j</a></li>";
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
     }
-    echo "<li class='active'><a href='#'>$page</a></li>";
-    for ($j = $page + 1; $j <= min($page + $nombre / 2, $max); $j++) {
-        echo "<li><a href='#'>$j</a></li>";
+    echo "<li class='active'><a>$page</a></li>";
+    for ($j = $page + 1; $j <= min($page + $nombre / 2, $pagemax); $j++) {
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
     }
-    if ($page != $max) {
-        echo "<li><a href='#'>&raquo;</a></li>";
+    if ($page != $pagemax) {
+        $apres = $page + 1;
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$pagemax'>&raquo;</a></li>";//on avance au dernier
     }
     echo "</ul>" . PHP_EOL . "</nav>";
 }

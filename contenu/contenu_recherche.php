@@ -1,12 +1,20 @@
 <?php
 require_once 'utilities/search/search.php';
-$listevideos = videoListFromQuery($query,0); //on récupère les résultats sous forme d'un tableau contenant des tableaux dont le seul champ non vide est video et qui contient l'id de la vidéo
-?>
-<div class="container-fluid" id="content"><!-- cette page gère l'affichage des vidéos sur la page du site.-->
-    <?php
-    require_once 'utilities/display/display.php';
-    $nombre = count($listevideos);
-    if ($nombre == 0) {
+
+$numeropage=$_GET['numero'];
+if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête demandée a déjà été faite et que ses résultats sont déjà enregistrés, alors on ne les recalcule pas.
+    $resultats = $_SESSION['resultats'];
+} else {
+    $_SESSION['query'] = $query; //on enregistre la requête qui vient d'être faite
+    $_SESSION['resultats'] = videoListFromQuery($query); //on récupère les résultats
+    $resultats = $_SESSION['resultats'];
+}
+
+
+echo "<div class='container-fluid' id='content'>";//on ouvre le container des vidéos
+require_once 'utilities/display/display.php';
+$nombre = count($resultats);
+if ($nombre == 0) {
     echo <<<EOF
         <div class='col-xs-offset-3 col-xs-6'>
         <div class="alert alert-danger" role="warining" style='text-align: center'>
@@ -16,13 +24,15 @@ $listevideos = videoListFromQuery($query,0); //on récupère les résultats sous
         </div>
     </div>
 EOF;
+} else {
+    $offset=($numeropage-1)*$itemsparpage;//$offset est le numéro de la ligne SQL du résultat à partir de laquelle on part
+    for ($i=$offset; $i <= min(count($resultats)-1,$offset+$itemsparpage-1) ; $i++ ) {//attention les pages commencent à 1 mais le tableau des résltats est indexé à partir de 0.
+        $item = $resultats[$i] ;
+        videoligne($item['video']); //$item['video'] est l'id de la vidéo.
     }
-    if ($nombre <= 5) {
-        foreach ($listevideos as $item) {
-            videoligne($item['video']); //$item['video'] est l'id de la vidéo.
-        }
-        echo "</div>";
-    }
+    echo "</div>";//on ferme le container des vidéos
 
-    //navigationpages(1, 5, 5);
+    navigationpages($_GET['numero'], 5, count($resultats), $query);
+}
+
     
