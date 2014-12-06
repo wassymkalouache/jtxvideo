@@ -9,12 +9,7 @@ if (!isset($_SESSION['initiated'])) {
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
 
-function secure($tab){//transforme les caractères spéciaux de PHP et HTML en des expressions innofensives.
-    foreach ($tab as $cle => $valeur){
-        $tab[$cle]=  htmlspecialchars($valeur);
-    }
-    return $tab;
-}
+require_once 'utilities/misc.php';//contient la fonction secure
 $_GET = secure($_GET);//sécurise les inputs dans GET et POST.
 $_POST = secure($_POST);
 
@@ -54,7 +49,7 @@ if ($authorized) {
 
 <?php
 require 'utilities/display/display.php';
-if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte") {//si l'on veut la page de login, le style est différent.
+if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte" || $askedPage=="ajout") {//si l'on veut la page de login, le style est différent.
     generateHTMLHeader($pageTitle, "css/signin.css");
 } else {
     generateHTMLHeader($pageTitle, "css/perso.css");
@@ -75,6 +70,9 @@ if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "co
         if ($askedPage == "video") {
             $video = $_GET['video'];//la variable $video est réutilisée dans contenu_video
             require "contenu/contenu_video.php";
+        } elseif ($askedPage == "recherche") {
+            $query = $_GET['query'];
+            require "contenu/contenu_recherche.php";
         } else {
             require "contenu/contenu_{$askedPage}.php";
         }

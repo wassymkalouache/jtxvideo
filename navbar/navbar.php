@@ -5,9 +5,16 @@
             <a class="navbar-brand" href="http://www.binet-jtx.com">Site du JTX</a>
         </div>
 
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" method="get" action="index.php">
             <div class="form-group">
-                <input style="width:360px;" type="text" class="form-control" placeholder="Musical JTX 2010">
+                <input type='hidden' name='page' value='recherche' /><!-- Champ caché qui permet de dire qu'il faut aller sur la page de recherche-->
+                <?php
+                if (isset($_GET['query'])) {//si l'on a fait une recherche, elle s'affiche en haut
+                    echo "<input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query' value='{$_GET['query']}'>";
+                } else {
+                    echo "<input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query'>";
+                }
+                ?>
             </div>
             <button type="submit" class="btn btn-default">Rechercher</button>
         </form>
