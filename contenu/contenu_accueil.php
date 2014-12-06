@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3" id="boutonsrecherche">
                 <button class="btn btn-default" type="submit" role="button">Recherche sur JtxVidéo</button>
-                <a href="index.php?page=video&video=1" class="btn btn-default" role="button">J'ai de la chance</a>
+                <a href="" class="btn btn-default" role="button">Options avancées</a>
             </div>
         </div>
     </form>

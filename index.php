@@ -9,12 +9,7 @@ if (!isset($_SESSION['initiated'])) {
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
 
-function secure($tab){//transforme les caractères spéciaux de PHP et HTML en des expressions innofensives.
-    foreach ($tab as $cle => $valeur){
-        $tab[$cle]=  htmlspecialchars($valeur);
-    }
-    return $tab;
-}
+require_once 'utilities/misc.php';//contient la fonction secure
 $_GET = secure($_GET);//sécurise les inputs dans GET et POST.
 $_POST = secure($_POST);
 
