@@ -20,6 +20,8 @@ function generateHTMLHeader($titre, $css) {//génère l'en-tête HTML commun à 
         <link href="css/bootstrap.css" rel="stylesheet">
         <!-- Javascript de Bootstrap -->
         <script src="js/bootstrap.js"></script>
+        <!-- Javascript perso -->
+        <script scr="js/code.js"></script>
         <!-- CSS Perso -->
         <link href="$css" rel="stylesheet">
         <!-- Custom styles for sticky footer -->
@@ -33,7 +35,7 @@ function generatePageFooter() {//génère le pied de la page visible
     echo <<<EOF
     <div class="footer">
             <div  class="container" id="pied">
-                <p class="text-muted">© Denis Merigoux – Respo archives du JTX 2013</p>        
+                <p class="text-muted">© Denis Merigoux & Wassym Kalouache – JTX 2013</p>        
             </div>
     </div>
 EOF;
@@ -120,7 +122,7 @@ EOF;
             </div>
         </div>
     </div>
-    <hr>
+    <hr class="separationvideo">
 EOF;
 }
 

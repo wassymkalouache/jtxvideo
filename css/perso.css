@@ -27,6 +27,13 @@
     margin : 0px ;
 }/*les deux id précédents permettent de mettre le logo jtxvidéo en haut à droite dans la barre de navigation*/
 
+#cadreoptions {
+    margin-top: 20px;/*paramètres s'appliquant à l'ensemble du cadre des options avancées sur la page d'accueil'*/
+    padding-top: 10px;
+    background-color: #eee;
+    border-radius: 10px;
+}
+
 .descriptionvideo {
     width:100%;
 }/*grâce à cette classe, la description d'une vidéo prend toute la place
@@ -44,7 +51,7 @@
     color:#D62222;
 }
 
-hr { 
+hr.separationvideo { 
     border: 0;
     height: 0; 
     border-top: 1px solid rgba(0, 0, 0, 0.1);

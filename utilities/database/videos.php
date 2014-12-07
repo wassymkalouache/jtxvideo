@@ -57,5 +57,15 @@ class Video {
             return $video;
         }
     }
+    
+    public static function titreAleatoire() {
+        $dbh = Database::connect();
+        $query = "SELECT titre FROM videos ORDER BY RAND() LIMIT 1";
+        $sth = $dbh->prepare($query);
+        $sth->execute();
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $titre= $sth->fetch();
+        echo $titre['titre']; 
+    }
 
 }
