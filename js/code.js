@@ -16,3 +16,11 @@ $(document).ready(function () {
       $("#requete").val($("#requete").val()+" "+$("#listedates").val()); 
    });
 });
+
+$(document).ready(function () {
+   $("#formrecherche").submit(function() {
+      if ($("#requete").val() === "") {
+          $("#requete").val($("#requete").attr('placeholder'));
+      } 
+   });
+});

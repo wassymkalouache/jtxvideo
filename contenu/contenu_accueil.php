@@ -3,7 +3,7 @@
     <img alt="Logo de JtxVidéo" width="400" src="media/logojtxvideo.svg">
 </header>
 <div class="container-fluid" id="cadrebarre">
-    <form role="search" method="get" action="index.php">
+    <form role="search" method="get" action="index.php" id="formrecherche">
         <div class="row" id="barrerecherche">
             <div class="col-md-6 col-md-offset-3">
                 <div class="input-group">
