@@ -13,6 +13,7 @@
 
 #boutonsrecherche {
     text-align:center ;
+    margin-bottom : 20px;
 }/* s'applique uniquement aux boutons en dessous de la bare de recherche*/
 
 #pied {
@@ -28,7 +29,7 @@
 }/*les deux id précédents permettent de mettre le logo jtxvidéo en haut à droite dans la barre de navigation*/
 
 #cadreoptions {
-    margin-top: 20px;/*paramètres s'appliquant à l'ensemble du cadre des options avancées sur la page d'accueil'*/
+    margin-bottom:20px;/*paramètres s'appliquant à l'ensemble du cadre des options avancées sur la page d'accueil'*/
     padding-top: 10px;
     background-color: #EEEEEE;
     border-radius: 10px;

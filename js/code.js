@@ -1,10 +1,6 @@
 $(document).ready(function () {
-    $("#cadreoptions").hide();
+    $("#cadreoptions").toggle();
     $("#boutonoptions").click(function () {
-        $("#cadreotions").toggle();
+        $("#cadreoptions").slideToggle("slow");
     });
-});
-
-$(document).ready(function () {
-    $("a").css("color", "red");
 });
