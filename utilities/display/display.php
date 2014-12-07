@@ -28,6 +28,8 @@ function generateHTMLHeader($titre, $css) {//génère l'en-tête HTML commun à 
         <link href="$css" rel="stylesheet">
         <!-- Custom styles for sticky footer -->
         <link href="css/sticky-footer.css" rel="stylesheet">
+        <!-- Lien vers le favicon -->
+        <link rel="shortcut icon" href="favicon.ico" />
         <title>$titre</title>
     </head>        
 EOF;
@@ -128,7 +130,7 @@ EOF;
 EOF;
 }
 
-function videopage($id,$format) {
+function videopage($id, $format) {
     $video = Video::getVideoFromId($id); //charge la base de données
     $tags = Tag::getTagsFromVideo($id);
     $categories = Categorie::getCategoriesFromVideo($id);
@@ -210,10 +212,10 @@ EOF;
 }
 
 function navigationpages($page, $nombre, $max, $query) {
-    $pagemax=ceil($max/$_SESSION['itemsparpage']);//variable $itemsparpage initialisée dans search.php normalement.
+    $pagemax = ceil($max / $_SESSION['itemsparpage']); //variable $itemsparpage initialisée dans search.php normalement.
     echo "<nav style='text-align: center'><!--bloc pour naviguer entre les pages-->" . PHP_EOL . "<ul class='pagination'>" . PHP_EOL;
     if ($page > $page - $nombre / 2 && $page != 1) {
-        echo "<li><a href='index.php?page=recherche&query=$query&numero=1'>&laquo;</a></li>";//on revient au premier
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=1'>&laquo;</a></li>"; //on revient au premier
     }
     for ($j = max(floor($page - $nombre / 2), 1); $j < $page; $j++) {
         echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
@@ -224,7 +226,7 @@ function navigationpages($page, $nombre, $max, $query) {
     }
     if ($page != $pagemax) {
         $apres = $page + 1;
-        echo "<li><a href='index.php?page=recherche&query=$query&numero=$pagemax'>&raquo;</a></li>";//on avance au dernier
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$pagemax'>&raquo;</a></li>"; //on avance au dernier
     }
     echo "</ul>" . PHP_EOL . "</nav>";
 }
