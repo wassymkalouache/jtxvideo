@@ -10,7 +10,7 @@
                     <input type='hidden' name='page' value='recherche' /><!-- Champ caché qui permet de dire qu'il faut aller sur la page de recherche-->
                     <input type='hidden' name='numero' value='1' /><!-- Champ caché qui permet de dire qu'on veut afficher la première page des résultats-->
                     <span class="input-group-addon glyphicon glyphicon-film"></span>
-                    <input type="text" class="form-control" name="query" placeholder="<?php Video::titreAleatoire() ?>">
+                    <input type="text" class="form-control" id="requete" name="query" placeholder="<?php Video::titreAleatoire() ?>">
                 </div>
             </div>
         </div>
@@ -26,18 +26,18 @@
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">Tags</span>
-                <input type="text" class="form-control" placeholder="truc machin bidule">
+                <input type="text" class="form-control" id="listetags" placeholder="truc machin bidule">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Ajouter</button>
+                    <button class="btn btn-default" id="boutonajouttags" type="button">Ajouter</button>
                 </span>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">Datation</span>
-                <input type="text" class="form-control" placeholder="X2010, JTX 2010 ou 2012">
+                <input type="text" class="form-control" id="listedates" placeholder="X2010 JTX 2010 2012">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Ajouter</button>
+                    <button class="btn btn-default" id="boutonajoutdates" type="button">Ajouter</button>
                 </span>
             </div>
         </div>
