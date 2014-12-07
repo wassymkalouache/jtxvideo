@@ -128,7 +128,7 @@ EOF;
 EOF;
 }
 
-function videopage($id) {
+function videopage($id,$format) {
     $video = Video::getVideoFromId($id); //charge la base de données
     $tags = Tag::getTagsFromVideo($id);
     $categories = Categorie::getCategoriesFromVideo($id);
@@ -141,7 +141,7 @@ function videopage($id) {
     echo <<<EOF
     <div class="jumbotron" style="text-align:center">
         <video id="spammemaybe" class="video-js vjs-default-skin" controls preload="metadata" width="800" poster="$video->poster">
-            <source src="$video->adresse" type="video/webm" />
+            <source src="$video->adresse" type="video/$format" />
         </video>
     </div>
     <div class="container-fluid">

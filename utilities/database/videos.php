@@ -9,7 +9,8 @@ class Video {
     public $proj;
     public $description;
     public $jtx;
-    public $annee; //les hcamps correspondent à cexu de la base de données utilisateurs.
+    public $annee;
+    public $format;//les hcamps correspondent à cexu de la base de données utilisateurs.
 
     public function __toString() {
         return $this->titre;

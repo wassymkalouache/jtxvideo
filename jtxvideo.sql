@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Sam 29 Novembre 2014 à 19:48
+-- Généré le :  Dim 07 Décembre 2014 à 19:22
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -145,6 +145,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`login`, `mdp`, `nom`, `prenom`, `email`, `promo`, `admin`) VALUES
+('camille.masset', '6ba64cace4fc2b9ddef62cab8ee095ab4863c6c6', 'Masset', 'Camille', 'camille.masset@polytechnique.edu', 2013, 0),
 ('denis.merigoux', '33dda71348a6b91d9c19504a1c473da27a640f8f', 'Merigoux', 'Denis', 'denis.merigoux@polytechnique.edu', 2013, 1),
 ('wassym.kalouache', '39dfa55283318d31afe5a3ff4a0e3253e2045e43', 'Kalouache', 'Wassym', 'wassym.kalouache@polytechnique.edu', 2013, 1);
 
@@ -162,18 +163,19 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `poster` varchar(256) NOT NULL,
   `description` longtext NOT NULL,
   `jtx` int(11) DEFAULT NULL,
-  `annee` int(11) DEFAULT NULL
+  `annee` int(11) DEFAULT NULL,
+  `format` varchar(16) NOT NULL DEFAULT 'webm'
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=5 ;
 
 --
 -- Contenu de la table `videos`
 --
 
-INSERT INTO `videos` (`video`, `titre`, `adresse`, `proj`, `poster`, `description`, `jtx`, `annee`) VALUES
-(1, 'Spam me maybe', 'videosjtx/spammemaybe.webm', 'http://binet-jtx.com/blog/?p=1110', 'videosjtx/spammemaybe.png', 'Considéré par certains comme le meilleur clip musical du JTX de tous les temps, Spam me maybe est une reprise de Call me maybe sur le thème du spam intensif qui est le quotidien de tous les polytechniciens. Le charme de l''actrice principale n''est sans doute pas étranger au succès du clip.\r\n        ', 2010, NULL),
-(2, 'Elle me dit pougne', 'videosjtx/ellemeditpougne.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/ellemeditpougne.png', 'Reprise de Elle me dit de Mika, ce clip très rythmé et entraînant est idéal pour tuer toute culpabilité lors d''une séance de moule intensive.', 2010, NULL),
-(3, 'Nous on subit', 'videosjtx/nousonsubit.webm', 'http://binet-jtx.com/blog/?p=1025', 'videosjtx/nousonsubit.png', 'Ce clip est l''hymne officiel du binet Subaïsse. Pâles, cours, DE, binets, sports ; tout la vie à l''X est résumée dans ce clip à l''humour noir. C''est une des premières reprises des chansons de Stromae qui seront très prisées des JTX 2011 et 2012.', 2010, NULL),
-(4, 'RAS RAS tea bag', 'videosjtx/rasrasteabag.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/rasrasteabag.png', 'Ce clip semble avoir acquis un incontestable renommée, puisqu''il a été passé en pré-proj'' par le JTX 2011 en mars, et de l''avis général, résume assez bien la vie d''une promotion, avec toute la mélancolie convenable, mélancolie qui lui a malheureusement valu un accueil mitigé au sein de la promotion 2009, puisque projeté à quelques semaines de son départ, sonnait pour certains comme un adieu avant l''heure.     ', 2010, NULL);
+INSERT INTO `videos` (`video`, `titre`, `adresse`, `proj`, `poster`, `description`, `jtx`, `annee`, `format`) VALUES
+(1, 'Spam me maybe', 'videosjtx/spammemaybe.webm', 'http://binet-jtx.com/blog/?p=1110', 'videosjtx/spammemaybe.png', 'Considéré par certains comme le meilleur clip musical du JTX de tous les temps, Spam me maybe est une reprise de Call me maybe sur le thème du spam intensif qui est le quotidien de tous les polytechniciens. Le charme de l''actrice principale n''est sans doute pas étranger au succès du clip.\r\n        ', 2010, NULL, 'webm'),
+(2, 'Elle me dit pougne', 'videosjtx/ellemeditpougne.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/ellemeditpougne.png', 'Reprise de Elle me dit de Mika, ce clip très rythmé et entraînant est idéal pour tuer toute culpabilité lors d''une séance de moule intensive.', 2010, NULL, 'webm'),
+(3, 'Nous on subit', 'videosjtx/nousonsubit.webm', 'http://binet-jtx.com/blog/?p=1025', 'videosjtx/nousonsubit.png', 'Ce clip est l''hymne officiel du binet Subaïsse. Pâles, cours, DE, binets, sports ; tout la vie à l''X est résumée dans ce clip à l''humour noir. C''est une des premières reprises des chansons de Stromae qui seront très prisées des JTX 2011 et 2012.', 2010, NULL, 'webm'),
+(4, 'RAS RAS tea bag', 'videosjtx/rasrasteabag.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/rasrasteabag.png', 'Ce clip semble avoir acquis un incontestable renommée, puisqu''il a été passé en pré-proj'' par le JTX 2011 en mars, et de l''avis général, résume assez bien la vie d''une promotion, avec toute la mélancolie convenable, mélancolie qui lui a malheureusement valu un accueil mitigé au sein de la promotion 2009, puisque projeté à quelques semaines de son départ, sonnait pour certains comme un adieu avant l''heure.     ', 2010, NULL, 'webm');
 
 --
 -- Index pour les tables exportées
