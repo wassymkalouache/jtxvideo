@@ -18,10 +18,12 @@ function generateHTMLHeader($titre, $css) {//génère l'en-tête HTML commun à 
         <meta name="description" content="Le moteur de recherche de la base de données de vidéos du JTX"/>
         <!-- CSS Bootstrap -->
         <link href="css/bootstrap.css" rel="stylesheet">
+        <!-- On charge jQuery -->
+        <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
         <!-- Javascript de Bootstrap -->
         <script src="js/bootstrap.js"></script>
         <!-- Javascript perso -->
-        <script scr="js/code.js"></script>
+        <script type="text/javascript" scr="js/code.js"></script>
         <!-- CSS Perso -->
         <link href="$css" rel="stylesheet">
         <!-- Custom styles for sticky footer -->
