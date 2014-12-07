@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Dim 07 Décembre 2014 à 19:22
+-- Généré le :  Dim 07 Décembre 2014 à 19:50
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `categorie` varchar(256) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient la catégorisation de toutes les vidéos' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient la catégorisation de toutes les vidéos' AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `categories`
@@ -40,7 +40,9 @@ INSERT INTO `categories` (`id`, `video`, `categorie`) VALUES
 (1, 1, 'Musical'),
 (2, 2, 'Musical'),
 (3, 3, 'Musical'),
-(4, 4, 'Musical');
+(4, 4, 'Musical'),
+(5, 5, 'Humoristique'),
+(6, 6, 'Humoristique');
 
 -- --------------------------------------------------------
 
@@ -72,14 +74,16 @@ CREATE TABLE IF NOT EXISTS `similaires` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `similaire` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Associe des vidéos similaires à une vidéos' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Associe des vidéos similaires à une vidéos' AUTO_INCREMENT=4 ;
 
 --
 -- Contenu de la table `similaires`
 --
 
 INSERT INTO `similaires` (`id`, `video`, `similaire`) VALUES
-(1, 1, 3);
+(1, 1, 3),
+(2, 5, 6),
+(3, 6, 5);
 
 -- --------------------------------------------------------
 
@@ -91,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `tag` varchar(256) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient tous les tags des vidéos (table d''association)' AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient tous les tags des vidéos (table d''association)' AUTO_INCREMENT=61 ;
 
 --
 -- Contenu de la table `tags`
@@ -122,7 +126,40 @@ INSERT INTO `tags` (`id`, `video`, `tag`) VALUES
 (22, 4, 'promotion'),
 (23, 4, 'stage'),
 (24, 4, 'mili'),
-(25, 4, 'soiree');
+(25, 4, 'soiree'),
+(26, 5, 'conference'),
+(27, 5, 'conf'),
+(30, 5, 'dfhm'),
+(31, 5, 'aluminium'),
+(32, 5, 'alu'),
+(33, 5, 'chapeau'),
+(34, 5, 'merdass'),
+(35, 5, 'software'),
+(36, 5, 'personnages'),
+(37, 5, 'militaire'),
+(38, 5, 'montebourg'),
+(39, 5, 'thon'),
+(40, 5, 'pin'),
+(41, 5, 'sanselme'),
+(42, 6, 'merdass'),
+(43, 6, 'software'),
+(44, 6, 'merdass'),
+(45, 6, 'software'),
+(46, 6, 'veneneux'),
+(47, 6, 'agressif'),
+(48, 6, 'dominantes'),
+(49, 6, 'perturbateurs'),
+(50, 6, 'manager'),
+(51, 6, 'sanselme'),
+(52, 6, 'mintzberg'),
+(53, 6, 'hss311'),
+(54, 6, 'posture'),
+(55, 6, 'software'),
+(56, 6, 'animaux'),
+(57, 6, 'autorite'),
+(58, 6, 'hibou'),
+(59, 6, 'deconnade'),
+(60, 6, 'regression');
 
 -- --------------------------------------------------------
 
@@ -165,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `jtx` int(11) DEFAULT NULL,
   `annee` int(11) DEFAULT NULL,
   `format` varchar(16) NOT NULL DEFAULT 'webm'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `videos`
@@ -175,7 +212,9 @@ INSERT INTO `videos` (`video`, `titre`, `adresse`, `proj`, `poster`, `descriptio
 (1, 'Spam me maybe', 'videosjtx/spammemaybe.webm', 'http://binet-jtx.com/blog/?p=1110', 'videosjtx/spammemaybe.png', 'Considéré par certains comme le meilleur clip musical du JTX de tous les temps, Spam me maybe est une reprise de Call me maybe sur le thème du spam intensif qui est le quotidien de tous les polytechniciens. Le charme de l''actrice principale n''est sans doute pas étranger au succès du clip.\r\n        ', 2010, NULL, 'webm'),
 (2, 'Elle me dit pougne', 'videosjtx/ellemeditpougne.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/ellemeditpougne.png', 'Reprise de Elle me dit de Mika, ce clip très rythmé et entraînant est idéal pour tuer toute culpabilité lors d''une séance de moule intensive.', 2010, NULL, 'webm'),
 (3, 'Nous on subit', 'videosjtx/nousonsubit.webm', 'http://binet-jtx.com/blog/?p=1025', 'videosjtx/nousonsubit.png', 'Ce clip est l''hymne officiel du binet Subaïsse. Pâles, cours, DE, binets, sports ; tout la vie à l''X est résumée dans ce clip à l''humour noir. C''est une des premières reprises des chansons de Stromae qui seront très prisées des JTX 2011 et 2012.', 2010, NULL, 'webm'),
-(4, 'RAS RAS tea bag', 'videosjtx/rasrasteabag.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/rasrasteabag.png', 'Ce clip semble avoir acquis un incontestable renommée, puisqu''il a été passé en pré-proj'' par le JTX 2011 en mars, et de l''avis général, résume assez bien la vie d''une promotion, avec toute la mélancolie convenable, mélancolie qui lui a malheureusement valu un accueil mitigé au sein de la promotion 2009, puisque projeté à quelques semaines de son départ, sonnait pour certains comme un adieu avant l''heure.     ', 2010, NULL, 'webm');
+(4, 'RAS RAS tea bag', 'videosjtx/rasrasteabag.webm', 'http://binet-jtx.com/blog/?p=940', 'videosjtx/rasrasteabag.png', 'Ce clip semble avoir acquis un incontestable renommée, puisqu''il a été passé en pré-proj'' par le JTX 2011 en mars, et de l''avis général, résume assez bien la vie d''une promotion, avec toute la mélancolie convenable, mélancolie qui lui a malheureusement valu un accueil mitigé au sein de la promotion 2009, puisque projeté à quelques semaines de son départ, sonnait pour certains comme un adieu avant l''heure.     ', 2010, NULL, 'webm'),
+(5, 'S''amuser en conférence  DFHM', 'videosjtx/29-s''amuser en conf DFHM.webm', 'http://binet-jtx.com/blog/?p=1496', 'videosjtx/29-s''amuser en conf DFHM.webm_snapshot_00.29_[2014.12.07_19.27.15].jpg', 'Ce clip présente le nouveau CD-ROM de Merdass'' Software intitulé « Comment s''amuser seul en conférence DFHM ». Production phare du JTX 2012, ce clip minimaliste ne contenant que des images fixe commenté par Marc Sanselme est à l''origine de la maxime « N''oublie pas ton papier d''alu en conf'' DFHM ! ».', 2012, NULL, 'webm'),
+(6, 'Devenir un grand manager gratuitement', 'videosjtx/32_Merdass_software_Manager.webm', 'http://binet-jtx.com/blog/?p=1559', 'videosjtx/Merdass_Manager.jpg', 'Deuxième production de Merdass'' Software qui nous présente cette fois-ci les dessous de l''ascension sociale. « Repérer les éléments pertubateurs aux postures agresso-dominantes », « Imiter les animaux vénéneux » et « Pas trop de déconnades » seront les maître-mots de votre carrière.', 2012, NULL, 'webm');
 
 --
 -- Index pour les tables exportées
@@ -225,7 +264,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT pour la table `promotions`
 --
@@ -235,17 +274,17 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT pour la table `similaires`
 --
 ALTER TABLE `similaires`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `tags`
 --
 ALTER TABLE `tags`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT pour la table `videos`
 --
 ALTER TABLE `videos`
-MODIFY `video` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `video` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Contraintes pour les tables exportées
 --

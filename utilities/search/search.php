@@ -22,7 +22,7 @@ function CreerRequete($query) {//cette fonction généère la requête à envoye
     unset($matches);
     preg_match_all("/" . $pattern_promotion . "/i", $query, $matches); //ensuite les promotions
     foreach ($matches[1] as $promotion) {
-        $requetedate .= "promotions.promotion = $promotion OR ";
+        $requetedate .= "promotions.promotion = $promotion OR videos.jtx = $promotion";//quand quelqu'un entre X2012 ça veut peut-être dire JTX 2012...
     }
     unset($matches);
     preg_match_all("/" . $pattern_annee . "/i", $query, $matches); //et enfin les annees
