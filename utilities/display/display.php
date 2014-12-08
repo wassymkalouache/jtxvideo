@@ -88,7 +88,7 @@ EOF;
 EOF;
     if (!empty($categories)) {
         foreach ($categories as $categorie) {//on liste les catégories les unes après les autres sous forme de boutons
-            echo "<a type='button' class='btn btn-sm btn-warning' href='#'>$categorie->categorie</a>";
+            echo "<a type='button' class='btn btn-sm btn-warning' href='#'>$categorie->categorie</a> ";
         }
     }
     echo <<<EOF
@@ -170,7 +170,7 @@ EOF;
 EOF;
     if (!empty($categories)) {
         foreach ($categories as $categorie) {//on liste les catégories les unes après les autres sous forme de boutons
-            echo "<a type='button' class='btn btn-sm btn-warning' href='#'>$categorie->categorie</a>";
+            echo "<a type='button' class='btn btn-sm btn-warning' href='#'>$categorie->categorie</a> ";
         }
     }
     echo <<<EOF
