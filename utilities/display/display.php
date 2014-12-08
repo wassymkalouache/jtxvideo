@@ -103,7 +103,7 @@ EOF;
     }
     if (!empty($promotions)) {
         foreach ($promotions as $promotion) {//pour la ligne « datation », on met d'abord le JTX créateur, puis les promotions concernées et enfin l'année (s'il y en a).
-            echo "<a type='button' class='btn btn-sm btn-success' href='#'>$promotion->promotion</a> ";
+            echo "<a type='button' class='btn btn-sm btn-success' href='#'>X$promotion->promotion</a> ";
         }
     }
     if (!empty($video->annee)) {
@@ -185,7 +185,7 @@ EOF;
     }
     if (!empty($promotions)) {
         foreach ($promotions as $promotion) {//pour la ligne « datation », on met d'abord le JTX créateur, puis les promotions concernées et enfin l'année (s'il y en a).
-            echo "<a type='button' class='btn btn-sm btn-success' href='#'>$promotion->promotion</a> ";
+            echo "<a type='button' class='btn btn-sm btn-success' href='#'>X$promotion->promotion</a> ";
         }
     }
     if (!empty($video->annee)) {
