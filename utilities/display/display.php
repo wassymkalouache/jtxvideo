@@ -59,39 +59,33 @@ function videoligne($id) {
         return;
     }
     echo <<<EOF
-    <div class="media videoligne">
-        <a href="index.php?page=video&video=$video->video" class="media-left media-middle">
-            <img src="$video->poster" alt="$video->titre" width="200"></img>
+    <div class="col-md-2 videoligne">
+        <a href="index.php?page=video&video=$video->video">
+            <img src="$video->poster" alt="$video->titre" width="100%"></img>
         </a>
-        <div class="media-body descriptionvideo">
-            <div class="btn-group boutonsvideo" role="group" aria-label="Actions video">
-                <a type="button" class="btn btn-primary" href="index.php?page=video&video=$video->video">Voir la vidéo</a>
-                <a type="button" class="btn btn-info" href="$video->proj">Page de la proj'</a>
-                <a type="button" class="btn btn-default" href="$video->adresse" target="_blank">Télécharger la vidéo</a>
-            </div>
-            <h1 class="media-heading">$video->titre</h1>
-            <div class="row" style="margin-top:15px">
-                <div class="col-xs-3 ">
-                    <p class="text-muted">
-                        <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp; 
+        <h4><a href="index.php?page=video&video=$video->video">$video->titre</a></h4>
+        <p class="text-muted">
+            <span class="glyphicon glyphicon glyphicon-facetime-video"></span>&nbsp;&nbsp;&nbsp;
+            <a type="button" class="btn btn-xs btn-info" href="$video->proj">Page de la proj'</a>
+        </p>
+        <p class="text-muted">
+            <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp; 
 EOF;
     if (!empty($video->jtx)) {
-        echo "<a type='button' class='btn btn-sm btn-success' href='#'>JTX $video->jtx</a> ";
+        echo "<a type='button' class='btn btn-xs btn-success' href='#'>JTX $video->jtx</a> ";
     }
     if (!empty($promotions)) {
         foreach ($promotions as $promotion) {//pour la ligne « datation », on met d'abord le JTX créateur, puis les promotions concernées et enfin l'année (s'il y en a).
-            echo "<a type='button' class='btn btn-sm btn-success' href='#'>X$promotion->promotion</a> ";
+            echo "<a type='button' class='btn btn-xs btn-success' href='#'>X$promotion->promotion</a> ";
         }
     }
     if (!empty($video->annee)) {
-        echo "<a type='button' class='btn btn-sm btn-success' href='#'>$video->annee</a> ";
+        echo "<a type='button' class='btn btn-xs btn-success' href='#'>$video->annee</a> ";
     }
     echo <<<EOF
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <p class="text-muted">
-                        <span class="glyphicon glyphicon-fast-forward"></span>&nbsp;&nbsp;&nbsp;  
+        </p>
+        <p class="text-muted">
+            <span class="glyphicon glyphicon-fast-forward"></span>&nbsp;&nbsp;&nbsp;  
 EOF;
     if (!empty($similaires)) {
         foreach ($similaires as $similaire) {//on liste les catégories les unes après les autres sous forme de boutons
@@ -100,11 +94,9 @@ EOF;
         }
     }
     echo <<<EOF
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <p class="text-muted">
-                        <span class="glyphicon glyphicon-folder-open"> </span>&nbsp;&nbsp;&nbsp;  
+        </p>
+        <p class="text-muted">
+            <span class="glyphicon glyphicon-folder-open"> </span>&nbsp;&nbsp;&nbsp;  
 EOF;
     if (!empty($categories)) {
         foreach ($categories as $categorie) {//on liste les catégories les unes après les autres sous forme de boutons
@@ -112,10 +104,8 @@ EOF;
         }
     }
     echo <<<EOF
-                    </p>
-                </div>
-                <div class="col-xs-3">
-                    <p class="text-muted">
+        </p>
+        <p class="text-muted">
                         <span class="glyphicon glyphicon-tags"> </span>&nbsp;&nbsp;
 EOF;
     if (!empty($tags)) {
@@ -124,10 +114,7 @@ EOF;
         }
     }
     echo <<<EOF
-                    </p>
-                </div>
-            </div>
-        </div>
+        </p>
     </div>
 
 EOF;

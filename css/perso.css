@@ -41,7 +41,6 @@
  à droite de l'écran (problème quand le texte de description faisait moins d'une ligne)*/
 
 .boutonsvideo {
-    float:right;
 }/* les boutons d'action pour une vidéo s'affichent à droite de l'écran*/
 
 .videoligne {/*affecte les boutons catégorie, tags, similaire et datation en dessous du titre dans videoligne*/
