@@ -29,7 +29,7 @@
 }/*les deux id précédents permettent de mettre le logo jtxvidéo en haut à droite dans la barre de navigation*/
 
 #cadreoptions {
-    margin-bottom:20px;/*paramètres s'appliquant à l'ensemble du cadre des options avancées sur la page d'accueil'*/
+    margin-bottom:20px;/*paramètres s'appliquant à l'ensemble du cadre contenant une video en ligne*/
     padding-top: 10px;
     background-color: #EEEEEE;
     border-radius: 10px;
@@ -44,6 +44,12 @@
     float:right;
 }/* les boutons d'action pour une vidéo s'affichent à droite de l'écran*/
 
+.videoligne {/*affecte les boutons catégorie, tags, similaire et datation en dessous du titre dans videoligne*/
+    background-color: #EEEEEE;
+    border-radius:10px;
+    padding:10px;
+}
+
 .jaune {
     color:#F2E52E;
 }
@@ -53,6 +59,7 @@
 }
 
 hr.separationvideo { 
+    margin:5px;
     border: 0;
     height: 0; 
     border-top: 1px solid rgba(0, 0, 0, 0.1);

@@ -6,15 +6,15 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
     $resultats = $_SESSION['resultats'];
 } else {
     $_SESSION['query'] = $query; //on enregistre la requête qui vient d'être faite
-    $resultatstitre = videoListFromQuerySQL(CreerRequeteTitre($query)); //on récupère les résultats de la recherche sur le titre
-    $resultattstagstmp = videoListFromQuerySQL(CreerRequeteTags($query)); //et ceux de la recherche sur les tags
+    $resultatstitre = RequeteTitre($query); //on récupère les résultats de la recherche sur le titre
+    $resultattstagstmp = RequeteTags($query); //et ceux de la recherche sur les tags
     $resultatstags = array();
     foreach ($resultattstagstmp as $item) {//la boucle sert à enlever les résultats « tags » qui sont déjà dans les résultats « titre »
         if (!in_array($item, $resultatstitre)) {
             $resultatstags[] = $item;
         }
     }
-    $resultats = array_merge($resultatstitre, $resultatstags); //puis on fisionne
+    $resultats = array_merge($resultatstitre, $resultatstags); //puis on fusionne
     $_SESSION['resultats'] = $resultats; //on stocke les résultats comme ça il les recalcule pas quand on change de page.
 }
 

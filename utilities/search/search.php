@@ -60,25 +60,34 @@ function CreerRequeteCategorie($query) {
     return $requetecategorie;
 }
 
-function CreerRequeteTitre($query) {
+function RequeteTitre($query) {
     global $pattern_jtx, $pattern_annee, $pattern_promotion, $pattern_tags, $pattern_categorie;
     //Cherchons maintenant les correspondances dans les titres
     $querytitre = preg_replace("/(\s*$pattern_tags\s*|\s*$pattern_jtx\s*|\s*$pattern_annee\s*|\s*$pattern_promotion\s*|\s*$pattern_categorie\s*)/i", '', $query);
     //il faut enlever de la recherche sur le titre tout ce qui sert aux tags et à la datation, et qui est donné par la regexp ci-dessus.
-    //if ($querytitre == "") {
-    //si pas de requête sur le titre on enlève ce critère de recherche
-    //  $requetetitre = "SELECT videos.video FROM videos WHERE false";
-    //} else {
     $requetedate = CreerRequeteDate($query);
     $requetecategorie = CreerRequeteCategorie($query);
-    $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
-            . " WHERE ((videos.titre LIKE '%$querytitre%') AND ($requetedate) AND ($requetecategorie))";
-    //la requete doit tenir compte de la table videos et promotions; LEFT JOIN pour ne pas exclure les vidéos ne possédant pas d'entrée dans la table promotion.
-    //}
-    return $requetetitre;
+    if ($querytitre == "") {
+        //si pas de requête sur le titre on enlève ce critère de recherche
+        $requetetitre = "SELECT videos.video FROM videos WHERE false";
+    } elseif ($querytitre == "*") {
+        //si étoile on prend tout
+        $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
+                . " WHERE (($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
+    } else {
+        $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
+                . " WHERE ((videos.titre LIKE ?) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
+        //la requete doit tenir compte de la table videos et promotions; LEFT JOIN pour ne pas exclure les vidéos ne possédant pas d'entrée dans la table promotion.
+    }//Maintenant que la requête est construite, on la soumet à la base de données
+    $dbh = Database::connect();
+    $sth = $dbh->prepare($requetetitre);
+    $sth->execute(array('%'.$querytitre.'%'));
+    $results = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $dbh = null;
+    return $results;
 }
 
-function CreerRequeteTags($query) {
+function RequeteTags($query) {
     global $pattern_jtx, $pattern_annee, $pattern_promotion, $pattern_tags, $pattern_categorie;
     //là on fait la partie de la requête concernant les tags
     $querytitre = preg_replace("/(\s*$pattern_tags\s*|\s*$pattern_jtx\s*|\s*$pattern_annee\s*|\s*$pattern_promotion\s*|\s*$pattern_categorie\s*)/i", '', $query);
@@ -100,14 +109,8 @@ function CreerRequeteTags($query) {
     $requetecategorie = CreerRequeteCategorie($query);
     $requetetags .= "false) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video ORDER BY COUNT(tags.tag) DESC"; //on regroupe les résultats par vidéo (une vidéo n'appparaît
     // qu'une seule fois et on trie par le nombre de tags associé à chaque vidéo
-    return $requetetags;
-}
-
-function videoListFromQuerySQL($requete) {//cette fonction exécute la requête et en limite les résultats pour une affichage par pages.
-    global $itemsparpage;
-    print_r($requete);
-    $dbh = Database::connect();
-    $sth = $dbh->prepare($requete);
+    $dbh = Database::connect();//maintenant on soumet la requête à la BDD. Comme les tags sont en ASCII et que $_GET a été sécurisé, pas de risques d'injection SQL.
+    $sth = $dbh->prepare($requetetags);
     $sth->execute();
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     $dbh = null;

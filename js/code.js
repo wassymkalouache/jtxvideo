@@ -15,7 +15,14 @@ $(document).ready(function () {//permet l'ajout de tags via la barre des options
 $(document).ready(function () {
     $("#boutonajoutdates").click(function () {//permet l'ajout d'options de datations via la barre des options de recherche avancée.
         $("#requete").val($("#requete").val() + " " + $("#listedates").val());
-        $("#listetags").val("");
+        $("#listedates").val("");
+    });
+});
+
+$(document).ready(function () {
+    $("#boutonajoutcategories").click(function () {//permet l'ajout d'options de categories via la barre des options de recherche avancée.
+        $("#requete").val($("#requete").val() + " " + $("#listecategories").val());
+        $("#listecategories").val("");
     });
 });
 

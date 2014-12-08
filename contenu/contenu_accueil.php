@@ -23,6 +23,7 @@
     </form>
     <div class="col-md-4 col-md-offset-4" id="cadreoptions">
         <p class="text-muted">La recherche porte par défaut sur le titre des vidéos. Néanmoins tu peux ajouter des résultats en recherchant des tags, et les filtrer avec des conditions temporelles.</p>
+        <p class="text-muted">* permet de rechercher toutes les vidéos avec les filtres sur les dates, les tags ou les catégories.</p>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">Tags</span>
@@ -38,6 +39,15 @@
                 <input type="text" class="form-control" id="listedates" placeholder="X2010 JTX 2010 2012">
                 <span class="input-group-btn">
                     <button class="btn btn-default" id="boutonajoutdates" type="button">Ajouter</button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon">Catégories</span>
+                <input type="text" class="form-control" id="listecategories" placeholder="Musical, Humoristique">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="boutonajoutcategories" type="button">Ajouter</button>
                 </span>
             </div>
         </div>

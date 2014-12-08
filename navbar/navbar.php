@@ -10,8 +10,10 @@
                 <input type='hidden' name='page' value='recherche' /><!-- Champ caché qui permet de dire qu'il faut aller sur la page de recherche-->
                 <input type='hidden' name='numero' value='1' /><!-- Champ caché qui permet de dire qu'on veut afficher la première page des résultats-->
                 <?php
-                if (isset($_GET['query'])) {//si l'on a fait une recherche, elle s'affiche en haut
-                    echo "<input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query' value='{$_GET['query']}'>";
+                if (isset($_GET['query'])) {//si l'on a fait une recherche, elle s'affiche en haut;
+                    echo <<<EOF
+                    <input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query' value="{$_GET['query']}">
+EOF;
                 } else {
                     echo "<input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query'>";
                 }
