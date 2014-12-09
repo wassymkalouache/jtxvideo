@@ -8,7 +8,7 @@ if (!isset($_SESSION['initiated'])) {
 }
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
-$_SESSION['itemsparpage']=12;//variable globale définie ici.
+$_SESSION['itemsparpage']=10;//variable globale définie ici.
 
 require_once 'utilities/misc.php';//contient la fonction secure
 $_GET = secure($_GET);//sécurise les inputs dans GET et POST.
@@ -55,8 +55,13 @@ if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "co
 } else {
     generateHTMLHeader($pageTitle, "css/perso.css");
 }
+
+if ($askedPage=='recherche') {//pour une page qui affiche des résultats de recherche le css de body est différent
+    echo "<body class='pagerecherche'>";
+} else {
+    echo "<body>";
+}
 ?>
-<body>
     <div id="header">
         <?php
         if ($authorized && ($askedPage == "accueil")) {
