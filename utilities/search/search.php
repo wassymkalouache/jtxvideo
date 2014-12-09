@@ -78,7 +78,7 @@ function RequeteTitre($query) {
         $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
                 . " WHERE ((videos.titre LIKE ?) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
         //la requete doit tenir compte de la table videos et promotions; LEFT JOIN pour ne pas exclure les vidéos ne possédant pas d'entrée dans la table promotion.
-    }//Maintenant que la requête est construite, on la soumet à la base de données
+    }//Maintenant que la requête est construite, on la soumet à la base de donnée
     $dbh = Database::connect();
     $sth = $dbh->prepare($requetetitre);
     $sth->execute(array('%'.$querytitre.'%'));

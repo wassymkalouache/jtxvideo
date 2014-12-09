@@ -1,3 +1,6 @@
+/*-----------------------------------------------*/
+/*---------------Page d'accueil------------------*/
+
 #logoaccueil {
     text-align:center ; 
     margin:150px 10px 40px ;
@@ -14,11 +17,21 @@
 #boutonsrecherche {
     text-align:center ;
     margin-bottom : 20px;
-}/* s'applique uniquement aux boutons en dessous de la bare de recherche*/
+}/* s'applique uniquement aux boutons en dessous de la bare de recherche sur la page d'accueil*/
 
-#pied {
-    text-align:right ;
-}/*règle la position du texte dans le pied de page*/
+#cadreoptions {/*s'applique au cadre contenant les options avancées sur la page d'accueil*/
+    margin-bottom:20px;
+    padding-top: 10px;
+    background-color: #EEEEEE;
+    border-radius: 10px;
+}
+
+/*-----------------------------------------------*/
+/*---------------Page de recherche---------------*/
+
+body.pagerecherche {
+    background-color:#EEEEEE;
+}
 
 #logocoincadre {
     margin: -5px 10px ;
@@ -28,39 +41,39 @@
     margin : 0px ;
 }/*les deux id précédents permettent de mettre le logo jtxvidéo en haut à droite dans la barre de navigation*/
 
-#cadreoptions {
-    margin-bottom:20px;/*paramètres s'appliquant à l'ensemble du cadre contenant une video en ligne*/
-    padding-top: 10px;
-    background-color: #EEEEEE;
-    border-radius: 10px;
-}
-
 .descriptionvideo {
     width:100%;
 }/*grâce à cette classe, la description d'une vidéo prend toute la place
  à droite de l'écran (problème quand le texte de description faisait moins d'une ligne)*/
 
-.boutonsvideo {
-}/* les boutons d'action pour une vidéo s'affichent à droite de l'écran*/
-
-.videoligne {/*affecte les boutons catégorie, tags, similaire et datation en dessous du titre dans videoligne*/
-    background-color: #EEEEEE;
-    border-radius:10px;
-    padding:10px;
+#conteneurvideos {/*s'applique au conteneur qui contient les vidéos sur une page de recherche*/
+    max-width:800px;
 }
 
-.jaune {
+.videoligne {/*affecte les boutons catégorie, tags, similaire et datation en dessous du titre dans videoligne*/
+    margin-top:0px;
+    padding: 10px;
+    background-color: #FFFFFF;
+}
+
+/*-----------------------------------------------*/
+/*----------Page d'affichage d'une vidéo---------*/
+
+.boutonsvideo {
+    float:right;
+}
+
+/*-----------------------------------------------*/
+/*---------------Divers--------------------------*/
+
+.jaune {/*pour le formattage du nom d'utilisateur*/
     color:#F2E52E;
 }
 
-.rouge {
+.rouge {/*pour le formattage du nom d'utilisateur*/
     color:#D62222;
 }
 
-hr.separationvideo { 
-    margin:5px;
-    border: 0;
-    height: 0; 
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+#pied {/*règle la position du texte dans le pied de page, s'applique sur toutes les pages'*/
+    text-align:right ;
 }

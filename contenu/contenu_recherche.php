@@ -19,7 +19,7 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
 }
 
 
-echo "<div class='container-fluid' id='content'>"; //on ouvre le container des vidéos
+echo "<div class='container-fluid' id='conteneurvideos'>"; //on ouvre le container des vidéos
 require_once 'utilities/display/display.php';
 $nombre = count($resultats);
 if ($nombre == 0) {
@@ -33,7 +33,11 @@ if ($nombre == 0) {
     </div>
 EOF;
 } else {
-    $numeropage = $_GET['numero'];
+    if (!isset($_GET['numero'])) {//si jamais le numéro page est pas défini (ce qui ne devrait pas arriver sauf bidouille) on le met à 1
+        $numeropage = 1;
+    } else {
+        $numeropage = $_GET['numero'];
+    }
     $offset = ($numeropage - 1) * $itemsparpage; //$offset est le numéro de la ligne SQL du résultat à partir de laquelle on part
     for ($i = $offset; $i <= min(count($resultats) - 1, $offset + $itemsparpage - 1); $i++) {//attention les pages commencent à 1 mais le tableau des résltats est indexé à partir de 0.
         if (isset($resultats[$i])) {//a cause du dédoublonnage qui supprime des entrées,
