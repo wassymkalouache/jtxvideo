@@ -79,7 +79,7 @@ EOF;
     if (!empty($promotions)) {
         foreach ($promotions as $promotion) {//pour la ligne « datation », on met d'abord le JTX créateur, puis les promotions concernées et enfin l'année (s'il y en a).
             $nouvellerequete = $_GET['query'] . " X$promotion->promotion";
-            $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1";//quand on clique sur le bouton ça renvoie une nouvelle requête avec le filtre correzspondant.
+            $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1"; //quand on clique sur le bouton ça renvoie une nouvelle requête avec le filtre correzspondant.
             echo "<a type='button' class='btn btn-xs btn-default' href='$lien'>X$promotion->promotion</a> ";
         }
     }
@@ -117,6 +117,10 @@ function videopage($id, $format) {
     $categories = Categorie::getCategoriesFromVideo($id);
     $promotions = Promotion::getPromotionsFromVideo($id);
     $similaires = Similaire::getSimilairesFromVideo($id);
+    if (!isset($_SESSION['query'])) {//Si on arrive sur la vidéo sans recherche, j'initialise
+       //quand même la variable qui contient la recherche précédente pour que les liens sur la page marchent.
+        $_SESSION['query'] = "$video->titre";
+    }
     if ($video === null) {
         echo "La vidéo que vous voulez afficher n'existe pas !";
         return; //n'affiche rien si la video n'existe pas.   
@@ -151,7 +155,9 @@ EOF;
 EOF;
     if (!empty($categories)) {
         foreach ($categories as $categorie) {//on liste les catégories les unes après les autres sous forme de boutons
-            echo "<a type='button' class='btn btn-sm btn-warning' href='#'>$categorie->categorie</a> ";
+            $nouvellerequete = $_SESSION['query'] . " cat:($categorie->categorie)";
+            $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1";
+            echo "<a type='button' class='btn btn-sm btn-warning' href='$lien'>$categorie->categorie</a> ";
         }
     }
     echo <<<EOF
@@ -162,29 +168,37 @@ EOF;
                         <span class="glyphicon glyphicon-time"></span>&nbsp;&nbsp;&nbsp; 
 EOF;
     if (!empty($video->jtx)) {
-        echo "<a type='button' class='btn btn-sm btn-success' href='#'>JTX $video->jtx</a> ";
+        $nouvellerequete = $_SESSION['query'] . " JTX $video->jtx";
+        $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1";
+        echo "<a type='button' class='btn btn-sm btn-success' href='$lien'>JTX $video->jtx</a> ";
     }
     if (!empty($promotions)) {
         foreach ($promotions as $promotion) {//pour la ligne « datation », on met d'abord le JTX créateur, puis les promotions concernées et enfin l'année (s'il y en a).
-            echo "<a type='button' class='btn btn-sm btn-success' href='#'>X$promotion->promotion</a> ";
+            $nouvellerequete = $_SESSION['query'] . " X$promotion->promotion";
+            $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1"; //quand on clique sur le bouton ça renvoie une nouvelle requête avec le filtre correzspondant.
+            echo "<a type='button' class='btn btn-sm btn-success' href='$lien'>X$promotion->promotion</a> ";
         }
     }
     if (!empty($video->annee)) {
-        echo "<a type='button' class='btn btn-sm btn-success' href='#'>$video->annee</a> ";
+        $nouvellerequete = $_SESSION['query'] . " $video->annee";
+        $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1";
+        echo "<a type='button' class='btn btn-sm btn-success' href='$lien'>$video->annee</a> ";
     }
     echo <<<EOF
                     </p>
+EOF;
+    if (!empty($similaires)) {
+        echo<<<EOF
                     <p class="text-muted">
                         <span class="glyphicon glyphicon-fast-forward"></span>&nbsp;&nbsp;&nbsp;  
 EOF;
-    if (!empty($similaires)) {
         foreach ($similaires as $similaire) {//on liste les catégories les unes après les autres sous forme de boutons
             $similaire = Video::getVideoFromId($similaire->similaire);
             echo "<a type='button' class='btn btn-sm btn-primary' href='index.php?page=video&video=$similaire->video'>$similaire</a> ";
         }
+        echo "</p>";
     }
     echo <<<EOF
-                    </p>
                 </div>
             </div>
         </div>
