@@ -24,7 +24,6 @@ require_once 'utilities/display/display.php';
 $nombre = count($resultats);
 if ($nombre == 0) {
     echo <<<EOF
-        <div class='col-xs-offset-3 col-xs-6'>
         <div class="alert alert-danger" role="warining" style='text-align: center'>
             <span class="glyphicon glyphicon-ban-circle"></span>
             <span class="sr-only">Attention :</span>

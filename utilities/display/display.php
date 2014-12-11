@@ -39,7 +39,7 @@ function generatePageFooter() {//génère le pied de la page visible
     echo <<<EOF
     <div class="footer">
             <div  class="container" id="pied">
-                <p class="text-muted">© Denis Merigoux & Wassym Kalouache – JTX 2013</p>        
+                <p class="text-muted"><small>© Denis Merigoux & Wassym Kalouache – JTX 2013</small></p>        
             </div>
     </div>
 EOF;
@@ -67,7 +67,7 @@ function videoligne($id) {
             <h4 class="media-heading"><a href="index.php?page=video&video=$video->video">$video->titre</a></h4>
             <p class="text-muted">
                 <a type="button" class="btn btn-xs btn-default" href="$video->proj">Page de la proj'</a>
-                <small><span class="glyphicon glyphicon-time"></span></small>&nbsp;
+                &nbsp;<small><span class="glyphicon glyphicon-time"></span></small>
 
 EOF;
     if (!empty($video->jtx)) {
