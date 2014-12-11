@@ -12,10 +12,18 @@
                 <?php
                 if (isset($_GET['query'])) {//si l'on a fait une recherche, elle s'affiche en haut;
                     echo <<<EOF
-                    <input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query' value="{$_GET['query']}">
+                    <input style='width:360px;' type='text' class='form-control' name='query' value="{$_GET['query']}">
 EOF;
-                } else {
-                    echo "<input style='width:360px;' type='text' class='form-control' placeholder='Musical JTX 2010' name='query'>";
+                } elseif (isset($_SESSION['query'])) {//si l'on a fait une recherche avant, elle s'affiche en haut;
+                    echo <<<EOF
+                    <input style='width:360px;' type='text' class='form-control' name='query' value="{$_SESSION['query']}">
+EOF;
+                } else    {
+                    //ça afficheça
+                    $videoalea = Video::titreAleatoire();
+                    echo <<<EOF
+                    <input style="width:360px;" type="text" class="form-control" placeholder="$videoalea" name="query">
+EOF;
                 }
                 ?>
             </div>
