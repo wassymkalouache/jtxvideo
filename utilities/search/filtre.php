@@ -9,7 +9,10 @@ function tableauFiltresJtx($query) {//permet de créer le tableau des filtres li
     foreach ($matches[1] as $jtx) {
         $filtresjtx[] = "JTX $jtx";
     }
-    return $filtresjtx;
+    if (!empty($filtresjtx)) {
+        return array_unique($filtresjtx);
+    }
+    return null;
 }
 
 function tableauFiltresPromotion($query) {//permet de créer le tableau des filtres liés aux promotions à partir de la requête
@@ -19,7 +22,10 @@ function tableauFiltresPromotion($query) {//permet de créer le tableau des filt
     foreach ($matches[1] as $promotion) {
         $filtrespromotion[] = "X$promotion";
     }
-    return $filtrespromotion;
+    if (!empty($filtrespromotion)) {
+        return array_unique($filtrespromotion);
+    }
+    return null;
 }
 
 function tableauFiltresAnnee($query) {//permet de créer le tableau des filtres liés aux années à partir de la requête
@@ -29,7 +35,10 @@ function tableauFiltresAnnee($query) {//permet de créer le tableau des filtres 
     foreach ($matches[1] as $annee) {
         $filtresannee[] = $annee;
     }
-    return $filtresannee;
+    if (!empty($filtresannee)) {
+        return array_unique($filtresannee);
+    }
+    return null;
 }
 
 function tableauFiltresCategorie($query) {//permet de créer le tableau des filtres liés aux années à partir de la requête
@@ -42,5 +51,8 @@ function tableauFiltresCategorie($query) {//permet de créer le tableau des filt
             $filtrescategorie[] = $categorie;
         }
     }
-    return $filtrescategorie;
+    if (!empty($filtrescategorie)) {
+        return array_unique($filtrescategorie);
+    }
+    return null;
 }

@@ -22,19 +22,19 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
     require_once 'utilities/search/filtre.php'; //là on va construire le menu évolutif des filtres en cours sur la reqûete
     $tableaufiltresjtx = tableauFiltresJtx($query);
     if (!empty($tableaufiltresjtx)) {
-        categorieFiltres("JTX", $tableaufiltresjtx );
+        categorieFiltres("JTX", $tableaufiltresjtx);
     }
     $tableaufiltrespromotion = tableauFiltresPromotion($query);
     if (!empty($tableaufiltrespromotion)) {
-        categorieFiltres("Promotions", $tableaufiltrespromotion );
+        categorieFiltres("Promotions", $tableaufiltrespromotion);
     }
     $tableaufiltresannee = tableauFiltresAnnee($query);
     if (!empty($tableaufiltresannee)) {
-        categorieFiltres("Annees", $tableaufiltresannee );
+        categorieFiltres("Annees", $tableaufiltresannee);
     }
     $tableaufiltrescategorie = tableauFiltresCategorie($query);
     if (!empty($tableaufiltrescategorie)) {
-        categorieFiltres("Categories", $tableaufiltrescategorie );
+        categorieFiltres("Categories", $tableaufiltrescategorie);
     }
     ?>
 </div>

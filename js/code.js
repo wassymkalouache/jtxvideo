@@ -73,3 +73,9 @@ $(document).ready(function () {//pour tronquer les boutons dont le texte est tro
         }
     });
 });
+
+//---------------------Menu de filtrage------------------------------------
+
+function appendfilter(texte,categorie) {
+    
+};

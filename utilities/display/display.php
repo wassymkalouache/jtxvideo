@@ -140,15 +140,15 @@ function navigationpages($page, $nombre, $max, $query) {
 }
 
 //Fonctions d'affichage pour le menu de filtrage à droite
-function itemFiltre($id, $texte) {
-    echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' type='checkbox' id='$id' checked></small></li>";
+function itemFiltre($texte,$categorie) {
+    echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' onclick='appendfilter($texte,$categorie)' type='checkbox' checked></small></li>";
 }
 
 function categorieFiltres($categorie, $filtres) {
     echo "<p class='text-muted categoriefiltre'>$categorie :</p>";
     echo "<ul class='categoriefiltre'>";
     foreach ($filtres as $filtre) {
-        itemFiltre("truc", $filtre);
+        itemFiltre($filtre,$categorie);
     }
     echo "</ul>";
 }

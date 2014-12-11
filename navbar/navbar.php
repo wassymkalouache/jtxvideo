@@ -22,7 +22,7 @@ EOF;
                     //ça afficheça
                     $videoalea = Video::titreAleatoire();
                     echo <<<EOF
-                    <input style="width:360px;" type="text" class="form-control" placeholder="$videoalea" name="query">
+                    <input style="width:360px;" type="text" id="barrerecherche" class="form-control" placeholder="$videoalea" name="query">
 EOF;
                 }
                 ?>
