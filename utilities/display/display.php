@@ -6,6 +6,10 @@ require_once 'utilities/database/categories.php';
 require_once 'utilities/database/promotions.php';
 require_once 'utilities/database/similaires.php';
 
+//==========================================
+//===============Toutes les pages===========
+//==========================================
+
 function generateHTMLHeader($titre, $css) {//génère l'en-tête HTML commun à toutes les pages  du site
     echo <<<EOF
 <!DOCTYPE html>
@@ -48,6 +52,10 @@ EOF;
 function generateHTMLFooter() {//génère le pied de page html présent sur toutes les pages du site
     echo "</html>";
 }
+
+//==========================================
+//===============Page de recherche===========
+//==========================================
 
 function videoligne($id) {
     $video = Video::getVideoFromId($id); //charge la base de données
@@ -111,6 +119,44 @@ EOF;
 EOF;
 }
 
+function navigationpages($page, $nombre, $max, $query) {
+    $pagemax = ceil($max / $_SESSION['itemsparpage']); //variable $itemsparpage initialisée dans search.php normalement.
+    echo "<nav style='text-align: center'><!--bloc pour naviguer entre les pages-->" . PHP_EOL . "<ul class='pagination'>" . PHP_EOL;
+    if ($page > $page - $nombre / 2 && $page != 1) {
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=1'>&laquo;</a></li>"; //on revient au premier
+    }
+    for ($j = max(floor($page - $nombre / 2), 1); $j < $page; $j++) {
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
+    }
+    echo "<li class='active'><a>$page</a></li>";
+    for ($j = $page + 1; $j <= min($page + $nombre / 2, $pagemax); $j++) {
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
+    }
+    if ($page != $pagemax) {
+        $apres = $page + 1;
+        echo "<li><a href='index.php?page=recherche&query=$query&numero=$pagemax'>&raquo;</a></li>"; //on avance au dernier
+    }
+    echo "</ul>" . PHP_EOL . "</nav>";
+}
+
+//Fonctions d'affichage pour le menu de filtrage à droite
+function itemFiltre($id, $texte) {
+    echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' type='checkbox' id='$id'></small></li>";
+}
+
+function categorieFiltres($categorie, $filtres) {
+    echo "<p class='text-muted categoriefiltre'>$categorie :</p>";
+    echo "<ul class='categoriefiltre'>";
+    foreach ($filtres as $filtre) {
+        itemFiltre("truc", $filtre);
+    }
+    echo "</ul>";
+}
+
+//==========================================
+//===============Page d'une vidéo===========
+//==========================================
+
 function videopage($id, $format) {
     $video = Video::getVideoFromId($id); //charge la base de données
     $tags = Tag::getTagsFromVideo($id);
@@ -118,7 +164,7 @@ function videopage($id, $format) {
     $promotions = Promotion::getPromotionsFromVideo($id);
     $similaires = Similaire::getSimilairesFromVideo($id);
     if (!isset($_SESSION['query'])) {//Si on arrive sur la vidéo sans recherche, j'initialise
-       //quand même la variable qui contient la recherche précédente pour que les liens sur la page marchent.
+        //quand même la variable qui contient la recherche précédente pour que les liens sur la page marchent.
         $_SESSION['query'] = "$video->titre";
     }
     if ($video === null) {
@@ -205,24 +251,4 @@ EOF;
         </div>
     </div>
 EOF;
-}
-
-function navigationpages($page, $nombre, $max, $query) {
-    $pagemax = ceil($max / $_SESSION['itemsparpage']); //variable $itemsparpage initialisée dans search.php normalement.
-    echo "<nav style='text-align: center'><!--bloc pour naviguer entre les pages-->" . PHP_EOL . "<ul class='pagination'>" . PHP_EOL;
-    if ($page > $page - $nombre / 2 && $page != 1) {
-        echo "<li><a href='index.php?page=recherche&query=$query&numero=1'>&laquo;</a></li>"; //on revient au premier
-    }
-    for ($j = max(floor($page - $nombre / 2), 1); $j < $page; $j++) {
-        echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
-    }
-    echo "<li class='active'><a>$page</a></li>";
-    for ($j = $page + 1; $j <= min($page + $nombre / 2, $pagemax); $j++) {
-        echo "<li><a href='index.php?page=recherche&query=$query&numero=$j'>$j</a></li>";
-    }
-    if ($page != $pagemax) {
-        $apres = $page + 1;
-        echo "<li><a href='index.php?page=recherche&query=$query&numero=$pagemax'>&raquo;</a></li>"; //on avance au dernier
-    }
-    echo "</ul>" . PHP_EOL . "</nav>";
 }

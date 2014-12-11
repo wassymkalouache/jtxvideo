@@ -30,7 +30,7 @@ function CreerRequeteDate($query) {
     unset($matches);
     preg_match_all("/" . $pattern_annee . "/i", $query, $matches); //et enfin les annees
     foreach ($matches[1] as $annee) {
-        $requetedate .= "video.annee = $annee OR ";
+        $requetedate .= "videos.annee = $annee OR ";
     }
     if ($requetedate == "") {//Cette chaîne de OR va être utilisée avec un AND ;
         $requetedate .= "true"; //si elle est vide, pour ne pas influer sur le AND, on la remplit avec true

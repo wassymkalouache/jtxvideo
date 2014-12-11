@@ -56,6 +56,33 @@ body.pagerecherche {
     background-color: #FFFFFF;
 }
 
+/*Ce qui suit concerne le petit menu de filtrage à gauche*/
+
+.menufiltre {
+    float:left;
+    border: solid black 0px; 
+    position:fixed;
+    z-index:10;
+    border-radius:5px; 
+    width:150px;
+    margin-left:30px;
+    background-color: #FFFFFF;
+}
+
+input.itemfiltre {
+    vertical-align: top;
+}
+
+ul.categoriefiltre {
+    list-style-type: none; 
+    padding-left:10px; 
+    margin:0px;
+}
+
+p.categoriefiltre {
+    margin: 0px;
+}
+
 /*-----------------------------------------------*/
 /*----------Page d'affichage d'une vidéo---------*/
 
