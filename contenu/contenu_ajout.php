@@ -1,13 +1,17 @@
  <div class="container-fluid">
-            <div class="page-header">
+     <div class="container-fluid" id="cadrebarre">       
+     <div class="page-header">
                 <h1>Ajouter une vidéo</h1>
                 <p>Tu peux ajouter ici une vidéo présente sur les serveurs du JTX à la base de données du moteur de recherche.</p>
             </div>
-
+    
             <ul class="list-group">
                 <li class="list-group-item">
                     <div class="input-group">
+                        
                         <span class="input-group-addon">Adresse sur le serveur</span>
+                        <script  src="js/jqueryFileTree.js">
+                        </script>
                         <input type="text" class="form-control" placeholder="ftp/Projections_JTX/JTX2012_18-06-14">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Parcourir</button>
@@ -35,9 +39,14 @@
                         <input type="text" class="form-control" placeholder="Random platal jtx">
                     </div>
                 </li>
-                <li class="list-group-item disabled" style="text-align: center">
-                    Datation
-                </li>
+                
+      
+                <li class="list-group-item" style="text-align: center">
+                    
+                        <center>Datation</center>
+                    
+                
+                
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-md-4">
@@ -69,8 +78,11 @@
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item disabled" style="text-align: center">
+                
+                <li class="list-group-item" style="text-align: center" >
+                    
                     Divers
+                   
                 </li>
                 <li class="list-group-item">
                     <div class="row">
@@ -95,7 +107,7 @@
                     </div>
                 </li>
             </ul>
-
+    
              <div class="row">
                 <div class="col-md-6 col-md-offset-3" id="boutonsrecherche">
                     <a href="#" class="btn btn-success" role="button">Enregistrer la vidéo dans la base de données</a>
@@ -108,3 +120,5 @@
                 <p class="text-muted">© JTX – 2014</p>        
             </div>
         </div>
+     </div>
+ 
