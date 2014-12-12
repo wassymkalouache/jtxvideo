@@ -12,11 +12,11 @@
                 <?php
                 if (isset($_GET['query'])) {//si l'on a fait une recherche, elle s'affiche en haut;
                     echo <<<EOF
-                    <input style='width:360px;' type='text' class='form-control' name='query' value="{$_GET['query']}">
+                    <input style='width:360px;' type='text' id="barrerecherche" class='form-control' name='query' value="{$_GET['query']}">
 EOF;
                 } elseif (isset($_SESSION['query'])) {//si l'on a fait une recherche avant, elle s'affiche en haut;
                     echo <<<EOF
-                    <input style='width:360px;' type='text' class='form-control' name='query' value="{$_SESSION['query']}">
+                    <input style='width:360px;' type='text' id="barrerecherche" class='form-control' name='query' value="{$_SESSION['query']}">
 EOF;
                 } else    {
                     //ça afficheça

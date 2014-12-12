@@ -18,7 +18,7 @@ $(document).ready(function () {//permet l'ajout de tags via la barre des options
 $(document).ready(function () {
     $("#boutonajoutdates").click(function () {//permet l'ajout d'options de datations via la barre des options de recherche avancée.
         if (!$("#requete").val().trim()) {//si la requete est vide ou remplie d'espace, on rajoute *
-             $("#requete").val($("#requete").val() + "*");
+            $("#requete").val($("#requete").val() + "*");
         }
         $("#requete").val($("#requete").val() + " " + $("#listedates").val());
         $("#listedates").val("");
@@ -28,7 +28,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#boutonajoutcategories").click(function () {//permet l'ajout d'options de categories via la barre des options de recherche avancée.
         if (!$("#requete").val().trim()) {//si la requete est vide ou remplie d'espace, on rajoute *
-             $("#requete").val($("#requete").val() + "*");
+            $("#requete").val($("#requete").val() + "*");
         }
         $("#requete").val($("#requete").val() + " cat:(" + $("#listecategories").val() + ")");
         $("#listecategories").val("");
@@ -76,6 +76,14 @@ $(document).ready(function () {//pour tronquer les boutons dont le texte est tro
 
 //---------------------Menu de filtrage------------------------------------
 
-function appendfilter(texte,categorie) {
-    
-};
+$(document).ready(function () {
+    $(".itemfiltre").change(function () {
+        if ($(this).is(":checked")) {//la partie suivante se déclenche quand on coche la case
+            if (!isEmptyObject($("#barrerecherche").val().match("/" + $(this).attr("id") + "/i"))) {
+                $("#barrerecherche").val($("#barrerecherche").val() + " " + $(this).attr('id'));
+            }
+        } else {//la partie suivante se déclenche quand on déchoche la case
+
+        }
+    });
+});

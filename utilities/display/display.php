@@ -141,7 +141,7 @@ function navigationpages($page, $nombre, $max, $query) {
 
 //Fonctions d'affichage pour le menu de filtrage à droite
 function itemFiltre($texte,$categorie) {
-    echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' onclick='appendfilter($texte,$categorie)' type='checkbox' checked></small></li>";
+    echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' id='$texte' type='checkbox' checked></small></li>";
 }
 
 function categorieFiltres($categorie, $filtres) {
