@@ -141,7 +141,12 @@ function navigationpages($page, $nombre, $max, $query) {
 
 //Fonctions d'affichage pour le menu de filtrage à droite
 function itemFiltre($texte,$categorie) {
+    if ($categorie="Categories") {//l'id à mettre pour que quand on coche ça mette bien cat:(truc) change,
+    //pour les promotions et jtx c'est plus facile
+        echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' id='cat:($texte)' type='checkbox' checked></small></li>";
+    } else {
     echo "<li><small>$texte&nbsp;&nbsp;<input class='itemfiltre' id='$texte' type='checkbox' checked></small></li>";
+    }
 }
 
 function categorieFiltres($categorie, $filtres) {

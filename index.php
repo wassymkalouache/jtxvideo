@@ -8,11 +8,18 @@ if (!isset($_SESSION['initiated'])) {
 }
 // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
 // print_r($_SESSION);
-$_SESSION['itemsparpage']=10;//variable globale définie ici.
+$_SESSION['itemsparpage'] = 10; //variable globale définie ici.
 
-require_once 'utilities/misc.php';//contient la fonction secure
-$_GET = secure($_GET);//sécurise les inputs dans GET et POST.
+require_once 'utilities/misc.php'; //contient la fonction secure
+require_once 'utilities/search/search.php';
+$_GET = secure($_GET); //sécurise les inputs dans GET et POST.
 $_POST = secure($_POST);
+if (isset($_GET['query'])) {
+    $_GET['query'] = cleanQuery($_GET['query']); //nettoie la syntaxe de la requete
+}
+if (isset($_SESSION['query'])) {
+    $_SESSION['query'] = cleanQuery($_SESSION['query']); //nettoie la syntaxe de la requete
+}
 
 require_once 'utilities/connexion/logInOut.php';
 if (isset($_GET['todo']) && $_GET['todo'] == "login") {//si l'on vient sur index.php depuis la page de connexion, ce paramtre est vrai. Sinon on ignore.
@@ -50,45 +57,45 @@ if ($authorized) {
 
 <?php
 require 'utilities/display/display.php';
-if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte" || $askedPage=="ajout") {//si l'on veut la page de login, le style est différent.
+if ($askedPage == "login" || $askedPage == "enregistrement" || $askedPage == "compte" || $askedPage == "ajout") {//si l'on veut la page de login, le style est différent.
     generateHTMLHeader($pageTitle, "css/signin.css");
 } else {
     generateHTMLHeader($pageTitle, "css/perso.css");
 }
 
-if ($askedPage=='recherche') {//pour une page qui affiche des résultats de recherche le css de body est différent
+if ($askedPage == 'recherche') {//pour une page qui affiche des résultats de recherche le css de body est différent
     echo "<body class='pagerecherche'>";
 } else {
     echo "<body>";
 }
 ?>
-    <div id="header">
-        <?php
-        if ($authorized && ($askedPage == "accueil")) {
-            require 'navbar/navbar_accueil.php';
-        } else {
-            require 'navbar/navbar.php';
-        }//pour afficher la barre de navigation en haut.
-        ?>
-    </div>
-    <?php        require_once 'utilities/search/search.php';
-    if ($authorized) {
-        if ($askedPage == "video") {
-            $video = $_GET['video'];//la variable $video est réutilisée dans contenu_video
-            require "contenu/contenu_video.php";
-        } elseif ($askedPage == "recherche") {
-            $query = cleanQuery($_GET['query']);//pour éviter d'avoir à se traîner le $_GET partout
-            require "contenu/contenu_recherche.php";
-        } else {
-            require "contenu/contenu_{$askedPage}.php";
-        }
-    } else {
-        require "contenu/contenu_erreur.php";
-    }
-    ?>
+<div id="header">
     <?php
-    generatePageFooter();
+    if ($authorized && ($askedPage == "accueil")) {
+        require 'navbar/navbar_accueil.php';
+    } else {
+        require 'navbar/navbar.php';
+    }//pour afficher la barre de navigation en haut.
     ?>
+</div>
+<?php
+if ($authorized) {
+    if ($askedPage == "video") {
+        $video = $_GET['video']; //la variable $video est réutilisée dans contenu_video
+        require "contenu/contenu_video.php";
+    } elseif ($askedPage == "recherche") {
+        $query = $_GET['query']; //pour éviter d'avoir à se traîner le $_GET partout
+        require "contenu/contenu_recherche.php";
+    } else {
+        require "contenu/contenu_{$askedPage}.php";
+    }
+} else {
+    require "contenu/contenu_erreur.php";
+}
+?>
+<?php
+generatePageFooter();
+?>
 </body>
 <?php
 require_once 'utilities/display/display.php';

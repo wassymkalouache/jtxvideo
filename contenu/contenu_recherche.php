@@ -30,11 +30,11 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
     }
     $tableaufiltresannee = tableauFiltresAnnee($query);
     if (!empty($tableaufiltresannee)) {
-        categorieFiltres("Annees", $tableaufiltresannee);
+        categorieFiltres("Années", $tableaufiltresannee);
     }
     $tableaufiltrescategorie = tableauFiltresCategorie($query);
     if (!empty($tableaufiltrescategorie)) {
-        categorieFiltres("Categories", $tableaufiltrescategorie);
+        categorieFiltres("Catégories", $tableaufiltrescategorie);
     }
     ?>
 </div>

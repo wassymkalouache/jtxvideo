@@ -41,14 +41,16 @@ function tableauFiltresAnnee($query) {//permet de créer le tableau des filtres 
     return null;
 }
 
-function tableauFiltresCategorie($query) {//permet de créer le tableau des filtres liés aux années à partir de la requête
+function tableauFiltresCategorie($query) {//permet de créer le tableau des filtres liés aux catégories à partir de la requête
     global $pattern_categorie;
     $filtrescategorie = null;
     preg_match_all("/" . $pattern_categorie . "/i", $query, $matches);
     foreach ($matches[1] as $chaine) {
         $categories = explode(', ', $chaine); //on récupère tous les catégories à l'intérieur de chaque bloc sous forme d'un tableau
         foreach ($categories as $categorie) {
+            if (trim($categorie)) {//si la catégorie n'est pas une chaîne vide
             $filtrescategorie[] = $categorie;
+            }
         }
     }
     if (!empty($filtrescategorie)) {

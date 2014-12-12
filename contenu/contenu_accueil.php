@@ -4,7 +4,7 @@
 </header>
 <div class="container-fluid" id="cadrebarre">
     <form role="search" method="get" action="index.php" id="formrecherche">
-        <div class="row" id="barrerecherche">
+        <div class="row" id="barrerechercheaccueil">
             <div class="col-md-6 col-md-offset-3">
                 <div class="input-group">
                     <input type='hidden' name='page' value='recherche' /><!-- Champ caché qui permet de dire qu'il faut aller sur la page de recherche-->

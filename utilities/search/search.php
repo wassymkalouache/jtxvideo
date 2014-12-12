@@ -5,13 +5,18 @@ require_once 'utilities/database/database.php';
 $itemsparpage = $_SESSION['itemsparpage']; //Attention définition globale, peut-être à mettre à un autre endroit pour modification par exemple dans $_SESSION.
 //définissons d'abord les patterns des expressions régulières utilisées
 $pattern_tags = "\&quot;(((?!\&quot;).)*)(\&quot;|$)"; //les tags sont délimités par des ""
-$pattern_jtx = "JTX(?:\s|)([0-9]{4})"; //JTX 2013 ou JTX2013
-$pattern_promotion = "(?:^|[^T])(?:X|X\s)([0-9]{4})"; //X2013 ou X 2013 mais pas JTX2013 ou JTX 2013
+$pattern_jtx = "JTX\s{0,1}([0-9]{4})"; //JTX 2013 ou JTX2013
+$pattern_promotion = "(?<=^|[^T])(?:X|X\s)([0-9]{4})"; //X2013 ou X 2013 mais pas JTX2013 ou JTX 2013
 $pattern_annee = "(?:^|[^X\s]|[^X]\s)([0-9]{4})"; //série de 4 chiffres mais ni X2013 ni X 2013 ni JTX 2013 ni JTX2013
 $pattern_categorie = "cat\:\(([^\)]*)(\)|$)"; //un truc du genre cat:(machin truc).
 
 function cleanQuery ($query) {//uniformise le contenu de la query par rapport aux filtres temporels, de catégorie, etc.
-    
+    global $pattern_jtx, $pattern_annee, $pattern_promotion;
+    $result = preg_replace("/".$pattern_jtx."/i","JTX $1",$query);//corrige les JTX
+    $result = preg_replace("/".$pattern_promotion."/i","X$1",$result);//corrige les promotions
+    $result = preg_replace("/cat\:\(\s*(.*)\s*\)/i","cat:($1)",$result);//corrige les categories
+    $result = preg_replace("/cat\:\((.*),\s*(.*)\)/i","cat:($1, $2)",$result);//corrige les categories
+    return $result;
 }
 
 function CreerRequeteDate($query) {
