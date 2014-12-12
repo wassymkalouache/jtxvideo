@@ -71,13 +71,13 @@ if ($askedPage=='recherche') {//pour une page qui affiche des résultats de rech
         }//pour afficher la barre de navigation en haut.
         ?>
     </div>
-    <?php
+    <?php        require_once 'utilities/search/search.php';
     if ($authorized) {
         if ($askedPage == "video") {
             $video = $_GET['video'];//la variable $video est réutilisée dans contenu_video
             require "contenu/contenu_video.php";
         } elseif ($askedPage == "recherche") {
-            $query = $_GET['query'];//pour éviter d'avoir à se traîner le $_GET partout
+            $query = cleanQuery($_GET['query']);//pour éviter d'avoir à se traîner le $_GET partout
             require "contenu/contenu_recherche.php";
         } else {
             require "contenu/contenu_{$askedPage}.php";

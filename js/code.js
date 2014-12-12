@@ -76,14 +76,16 @@ $(document).ready(function () {//pour tronquer les boutons dont le texte est tro
 
 //---------------------Menu de filtrage------------------------------------
 
-$(document).ready(function () {
+$(document).ready(function () {//fonction permettant d'ajouter et d'enelver les filtres de promotion
     $(".itemfiltre").change(function () {
+        var pattern = new RegExp("\\s*" + $(this).attr("id"), "i");
         if ($(this).is(":checked")) {//la partie suivante se déclenche quand on coche la case
-            if (!isEmptyObject($("#barrerecherche").val().match("/" + $(this).attr("id") + "/i"))) {
-                $("#barrerecherche").val($("#barrerecherche").val() + " " + $(this).attr('id'));
+            if (!pattern.test($("#barrerecherche").val())) {//teste si la requête de la barre de recherche contient le pattern
+                $("#barrerecherche").val($("#barrerecherche").val() + " " + $(this).attr("id"));
             }
         } else {//la partie suivante se déclenche quand on déchoche la case
-
+            //$("body").html("Blah !");
+            $("#barrerecherche").val($("#barrerecherche").val().replace(pattern, ""));
         }
     });
 });

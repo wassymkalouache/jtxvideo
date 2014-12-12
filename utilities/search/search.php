@@ -10,6 +10,10 @@ $pattern_promotion = "(?:^|[^T])(?:X|X\s)([0-9]{4})"; //X2013 ou X 2013 mais pas
 $pattern_annee = "(?:^|[^X\s]|[^X]\s)([0-9]{4})"; //série de 4 chiffres mais ni X2013 ni X 2013 ni JTX 2013 ni JTX2013
 $pattern_categorie = "cat\:\(([^\)]*)(\)|$)"; //un truc du genre cat:(machin truc).
 
+function cleanQuery ($query) {//uniformise le contenu de la query par rapport aux filtres temporels, de catégorie, etc.
+    
+}
+
 function CreerRequeteDate($query) {
     global $pattern_jtx, $pattern_annee, $pattern_promotion;
     //cette fonction généère les conditions temporelles utilisées dans les autres requêtes MySQL. $query a été préalablement sécurisé.
