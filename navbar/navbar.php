@@ -19,7 +19,7 @@ EOF;
                     <input style='width:360px;' type='text' id="barrerecherche" class='form-control' name='query' value="{$_SESSION['query']}">
 EOF;
                 } else    {
-                    //ça afficheça
+                    //ça affiche une vidéo aléatoire en placeholder
                     $videoalea = Video::titreAleatoire();
                     echo <<<EOF
                     <input style="width:360px;" type="text" id="barrerecherche" class="form-control" placeholder="$videoalea" name="query">

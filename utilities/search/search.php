@@ -16,6 +16,8 @@ function cleanQuery ($query) {//uniformise le contenu de la query par rapport au
     $result = preg_replace("/".$pattern_promotion."/i","X$1",$result);//corrige les promotions
     $result = preg_replace("/cat\:\(\s*(.*)\s*\)/i","cat:($1)",$result);//corrige les categories
     $result = preg_replace("/cat\:\((.*),\s*(.*)\)/i","cat:($1, $2)",$result);//corrige les categories
+    $result = preg_replace("/cat\:\([\s\,]*\)/i","",$result);//supprime les trucs genre cat:() de la requête.
+    $result = preg_replace("/\s{2,}/i"," ",$result);//remplace les doubles espaces par des espaces simples
     return $result;
 }
 
