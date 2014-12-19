@@ -87,6 +87,16 @@ p.categoriefiltre {
     margin: 0px;
 }
 
+#selectajoutfiltre {
+    margin-bottom:5px;
+    width:100%;
+}
+
+.ajoutfiltre {
+    margin-top:0px; 
+    margin-bottom:5px;
+}
+
 /*-----------------------------------------------*/
 /*----------Page d'affichage d'une vidéo---------*/
 

@@ -96,3 +96,59 @@ $(document).ready(function () {//fonction permettant d'ajouter et d'enelver les 
         }
     });
 });
+
+$(document).ready(function () {//affiche un input pour 
+//ajouter un filtre avec le formattage qui va bien selon la catégories de filtres demandée.
+    $(".divfiltrage").hide();
+    $("#selectajoutfiltre").change(function () {
+        if ($("#selectajoutfiltre").val() === "JTX") {
+            $("#inputajoutfiltre").attr({
+                placeholder: "2013",
+                type: "number"
+            });
+        }
+        if ($("#selectajoutfiltre").val() === "Catégorie") {
+            $("#inputajoutfiltre").attr({
+                placeholder: "Musical",
+                type: "text"
+            });
+        }
+        if ($("#selectajoutfiltre").val() === "Année") {
+            $("#inputajoutfiltre").attr({
+                placeholder: "2015",
+                type: "number"
+            });
+        }
+        if ($("#selectajoutfiltre").val() === "Promotion") {
+            $("#inputajoutfiltre").attr({
+                placeholder: "2013",
+                title: "number"
+            });
+        }
+        $(".divfiltrage").show();
+    });
+
+});
+
+$(document).ready(function () {//fonction qui ajoute le filtre à la query quand on clique sur le bouton d'ajout de filtre
+    $("#boutonajoutfiltre").click(function() {
+        var addquery;
+        if ($("#selectajoutfiltre").val() === "JTX") {
+            addquery = " JTX "+$("#inputajoutfiltre").val(); 
+        }
+        if ($("#selectajoutfiltre").val() === "Catégorie") {
+            addquery = " cat:("+$("#inputajoutfiltre").val()+")";
+        }
+        if ($("#selectajoutfiltre").val() === "Année") {
+            addquery = " "+$("#inputajoutfiltre").val();
+        }
+        if ($("#selectajoutfiltre").val() === "Promotion") {
+            addquery = " X"+$("#inputajoutfiltre").val();
+        }
+        var pattern = new RegExp("\\s*" + addquery, "i");//ensuite on définit le pattern pour tester si la requete contient déjà le filtre
+        if (!pattern.test($("#barrerecherche").val())) {//teste si la requête de la barre de recherche contient le pattern
+                 $("#barrerecherche").val($("#barrerecherche").val()+ addquery);
+                //onrajoute 
+            }
+    });
+});
