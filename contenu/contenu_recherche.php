@@ -18,6 +18,16 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
 }
 ?>
 <div class="container-fluid menufiltre">
+    <p class="text-muted" style="margin-top:10px; margin-bottom:10px">Ajouter un filtre :</p>
+    <select style="width:100%">
+        <option>JTX</option>
+        <option>Année</option>
+        <option>Promotion</option>
+        <option>Catégorie</option>
+    </select>
+    <div class="input-group-sm" style="margin-top:10px; margin-bottom:5px;">
+        <input type="text" class="form-control" placeholder="Filtre">
+    </div>
     <?php
     require_once 'utilities/search/filtre.php'; //là on va construire le menu évolutif des filtres en cours sur la reqûete
     $tableaufiltresjtx = tableauFiltresJtx($query);

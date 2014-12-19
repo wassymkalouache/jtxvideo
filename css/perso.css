@@ -33,6 +33,10 @@ body.pagerecherche {
     background-color:#EEEEEE;
 }
 
+#barrenavigation {
+    /*position:fixed;*/
+}
+
 #logocoincadre {
     margin: -5px 10px ;
 }
