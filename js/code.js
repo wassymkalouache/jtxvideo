@@ -152,3 +152,11 @@ $(document).ready(function () {//fonction qui ajoute le filtre à la query quand
             }
     });
 });
+
+$(document).ready(function() {//quand la requête change dans la barre de recherche, on recharge contenu_recherche.php
+    $("#barrerecherche").val().keyup(function() {
+       alert('Hello !');
+       $('body').html('Coucou !');
+       $("#main").$get('conteu/contenu_recherche.php', {query : $("#barrerecherche").val()}); 
+    });
+});

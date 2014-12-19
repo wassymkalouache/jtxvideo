@@ -1,5 +1,14 @@
 <?php
 require_once 'utilities/search/search.php';
+require_once 'utilities/misc.php'; //contient la fonction secure
+$_GET = secure($_GET); //sécurise les inputs dans GET et POST.
+$_POST = secure($_POST);
+
+if (isset($_GET['query'])) {
+            $query = $_GET['query']; //pour éviter d'avoir à se traîner le $_GET partout
+        } else {
+            $query = Video::titreAleatoire(); //si le mec a magouillé et a supprimé le query= de l'URL on balance une vidéo aléatoire.
+        }
 
 if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête demandée a déjà été faite et que ses résultats sont déjà enregistrés, alors on ne les recalcule pas.
     $resultats = $_SESSION['resultats'];
