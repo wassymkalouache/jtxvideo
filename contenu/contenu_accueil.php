@@ -6,18 +6,15 @@
     <form role="search" method="get" action="index.php" id="formrecherche">
         <div class="row" id="barrerechercheaccueil">
             <div class="col-md-6 col-md-offset-3">
-                <div class="input-group">
-                    <input type='hidden' name='page' value='recherche' /><!-- Champ caché qui permet de dire qu'il faut aller sur la page de recherche-->
-                    <input type='hidden' name='numero' value='1' /><!-- Champ caché qui permet de dire qu'on veut afficher la première page des résultats-->
-                    <span class="input-group-addon glyphicon glyphicon-film"></span>
-                    <input type="text" class="form-control" id="requete" name="query" placeholder="<?php Video::titreAleatoire() ?>">
-                </div>
+                <input type='hidden' name='page' value='recherche' /><!-- Champ caché qui permet de dire qu'il faut aller sur la page de recherche-->
+                <input type='hidden' name='numero' value='1' /><!-- Champ caché qui permet de dire qu'on veut afficher la première page des résultats-->
+                <input type="text" class="form-control" id="requete" name="query" placeholder="<?php Video::titreAleatoire() ?>">
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 col-md-offset-3" id="boutonsrecherche">
-                <button class="btn btn-default" type="submit" role="button">Recherche sur JtxVidéo</button>
-                <a class="btn btn-default" role="button" id="boutonoptions">Aide</a>
+                <button class="btn btn-default" type="submit" role="button"><span class="glyphicon glyphicon-search"></span>&nbsp;Recherche sur JtxVidéo</button>
+                <a class="btn btn-default" role="button" id="boutonoptions"><span class="glyphicon glyphicon-question-sign"></span>&nbsp;Aide</a>
             </div>
         </div>
     </form>
