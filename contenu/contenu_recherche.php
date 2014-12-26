@@ -54,7 +54,7 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
         categorieFiltres("Catégories", $tableaufiltrescategorie);
     }
     ?>
-    <div style='text-align:center; margin-top:5px;margin-bottom:5px' id="divsuppressionfiltrage">
+    <div id="divsuppressionfiltrage">
         <button class='btn btn-primary btn-xs' type='submit' id="boutonsuppressionfiltre">Filtrer</button>
     </div>
 </div>

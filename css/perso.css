@@ -97,6 +97,12 @@ p.categoriefiltre {
     margin-bottom:5px;
 }
 
+#divsuppressionfiltrage {
+    text-align:center;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
 /*-----------------------------------------------*/
 /*----------Page d'affichage d'une vidéo---------*/
 
