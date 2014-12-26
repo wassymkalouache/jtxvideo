@@ -74,9 +74,14 @@ $(document).ready(function () {//pour tronquer les boutons dont le texte est tro
     });
 });
 
-//---------------------Menu de filtrage------------------------------------
+//---------------------Menu de filtrage------------------------------------//
+//-------------------------------------------------------------------------//
+
+//---------------------Gestion des filtres existants----------------------
 
 $(document).ready(function () {//fonction permettant d'ajouter et d'enelver les filtres de promotion
+    //gère aussi l'affichage du bouton filtrer en dessous de la liste des filtres
+    $("#divsuppressionfiltrage").hide();
     $(".itemfiltre").change(function () {
         var testcat = /cat\:\((.*)\)/i;//on teste d'abord si l'élément à filtrer estune catégorie
         if (testcat.test($(this).attr("id"))) {//si c'est le cas, le truc à enlever ou ajouter est la chaine à 
@@ -94,12 +99,21 @@ $(document).ready(function () {//fonction permettant d'ajouter et d'enelver les 
         } else {//la partie suivante se déclenche quand on déchoche la case
             $("#barrerecherche").val($("#barrerecherche").val().replace(pattern, ""));
         }
+        $("#divsuppressionfiltrage").show();
     });
 });
 
+$(document).ready(function () {//fonctionnement du bouton filtrer en dessous de la liste des filtres
+    $("#boutonsuppressionfiltre").click(function(){
+        window.location.href = encodeURI('index.php?page=recherche&query=' + $("#barrerecherche").val());//recharge la page avec la requête actualisée
+    });
+});
+
+//-------------------------------Ajout de filtres-----------------------------------------
+
 $(document).ready(function () {//affiche un input pour 
 //ajouter un filtre avec le formattage qui va bien selon la catégories de filtres demandée.
-    $(".divfiltrage").hide();
+    $(".divajoutfiltrage").hide();
     $("#selectajoutfiltre").change(function () {
         if ($("#selectajoutfiltre").val() === "JTX") {
             $("#inputajoutfiltre").attr({
@@ -125,38 +139,31 @@ $(document).ready(function () {//affiche un input pour
                 title: "number"
             });
         }
-        $(".divfiltrage").show();
+        $(".divajoutfiltrage").show();
     });
 
 });
 
-$(document).ready(function () {//fonction qui ajoute le filtre à la query quand on clique sur le bouton d'ajout de filtre
-    $("#boutonajoutfiltre").click(function() {
+$(document).ready(function () {//fonction qui ajoute le filtre à la query quand on clique sur le bouton d'ajout de filtres
+    $("#boutonajoutfiltre").click(function () {
         var addquery;
         if ($("#selectajoutfiltre").val() === "JTX") {
-            addquery = " JTX "+$("#inputajoutfiltre").val(); 
+            addquery = " JTX " + $("#inputajoutfiltre").val();
         }
         if ($("#selectajoutfiltre").val() === "Catégorie") {
-            addquery = " cat:("+$("#inputajoutfiltre").val()+")";
+            addquery = " cat:(" + $("#inputajoutfiltre").val() + ")";
         }
         if ($("#selectajoutfiltre").val() === "Année") {
-            addquery = " "+$("#inputajoutfiltre").val();
+            addquery = " " + $("#inputajoutfiltre").val();
         }
         if ($("#selectajoutfiltre").val() === "Promotion") {
-            addquery = " X"+$("#inputajoutfiltre").val();
+            addquery = " X" + $("#inputajoutfiltre").val();
         }
         var pattern = new RegExp("\\s*" + addquery, "i");//ensuite on définit le pattern pour tester si la requete contient déjà le filtre
         if (!pattern.test($("#barrerecherche").val())) {//teste si la requête de la barre de recherche contient le pattern
-                 $("#barrerecherche").val($("#barrerecherche").val()+ addquery);
-                //onrajoute 
-            }
-    });
-});
-
-$(document).ready(function() {//quand la requête change dans la barre de recherche, on recharge contenu_recherche.php
-    $("#barrerecherche").val().keyup(function() {
-       alert('Hello !');
-       $('body').html('Coucou !');
-       $("#main").$get('conteu/contenu_recherche.php', {query : $("#barrerecherche").val()}); 
+            $("#barrerecherche").val($("#barrerecherche").val() + addquery);
+            //onrajoute 
+        }
+        window.location.href = encodeURI('index.php?page=recherche&query=' + $("#barrerecherche").val());//recharge la page avec la requête actualisée
     });
 });
