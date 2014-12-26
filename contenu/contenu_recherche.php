@@ -5,10 +5,10 @@ $_GET = secure($_GET); //sécurise les inputs dans GET et POST.
 $_POST = secure($_POST);
 
 if (isset($_GET['query'])) {
-            $query = $_GET['query']; //pour éviter d'avoir à se traîner le $_GET partout
-        } else {
-            $query = Video::titreAleatoire(); //si le mec a magouillé et a supprimé le query= de l'URL on balance une vidéo aléatoire.
-        }
+    $query = $_GET['query']; //pour éviter d'avoir à se traîner le $_GET partout
+} else {
+    $query = Video::titreAleatoire(); //si le mec a magouillé et a supprimé le query= de l'URL on balance une vidéo aléatoire.
+}
 
 if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête demandée a déjà été faite et que ses résultats sont déjà enregistrés, alors on ne les recalcule pas.
     $resultats = $_SESSION['resultats'];
@@ -29,16 +29,16 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
 <div class="container-fluid menufiltre">
     <p class="text-muted" style="margin-top:10px; margin-bottom:10px;">Ajouter un filtre :</p>
     <select id="selectajoutfiltre">
-        <option disabled selected>Type</option>
+        <option disabled selected value="Type">Type</option>
         <option value="Catégorie">Catégorie</option>
         <option value="JTX">JTX</option>
         <option value="Promotion">Promotion</option>
         <option value="Année">Année</option>
     </select>
-    <div class='input-group-sm ajoutfiltre divfiltrage'>
+    <div class='input-group-sm ajoutfiltre divajoutfiltrage'>
         <input class='form-control' id="inputajoutfiltre"><!--Div modifié par une fonction javascript présente dans code.js-->
     </div>
-    <div style='text-align:center' class="divfiltrage">
+    <div style='text-align:center' class="divajoutfiltrage">
         <button class='btn btn-primary btn-xs' type='submit' id="boutonajoutfiltre">Filtrer</button>
     </div>
     <hr style="margin-top:10px;margin-bottom:10px;">
@@ -62,6 +62,9 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
         categorieFiltres("Catégories", $tableaufiltrescategorie);
     }
     ?>
+    <div style='text-align:center; margin-top:5px;margin-bottom:5px' id="divsuppressionfiltrage">
+        <button class='btn btn-primary btn-xs' type='submit' id="boutonsuppressionfiltre">Filtrer</button>
+    </div>
 </div>
 
 <?php
