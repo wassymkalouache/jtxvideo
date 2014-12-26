@@ -1,5 +1,6 @@
 <?php
 require_once 'utilities/search/search.php';
+require_once 'utilities/misc.php'; //contient la fonction secure
 
 if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête demandée a déjà été faite et que ses résultats sont déjà enregistrés, alors on ne les recalcule pas.
     $resultats = $_SESSION['resultats'];
@@ -18,18 +19,24 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
 }
 ?>
 <div class="container-fluid menufiltre">
-    <p class="text-muted" style="margin-top:10px; margin-bottom:10px">Ajouter un filtre :</p>
-    <select style="width:100%">
-        <option>JTX</option>
-        <option>Année</option>
-        <option>Promotion</option>
-        <option>Catégorie</option>
+    <p class="text-muted" style="margin-top:10px; margin-bottom:10px;">Ajouter un filtre :</p>
+    <select id="selectajoutfiltre">
+        <option disabled selected value="Type">Type</option>
+        <option value="Catégorie">Catégorie</option>
+        <option value="JTX">JTX</option>
+        <option value="Promotion">Promotion</option>
+        <option value="Année">Année</option>
     </select>
-    <div class="input-group-sm" style="margin-top:10px; margin-bottom:5px;">
-        <input type="text" class="form-control" placeholder="Filtre">
+    <div class='input-group-sm ajoutfiltre divajoutfiltrage'>
+        <input class='form-control' id="inputajoutfiltre"><!--Div modifié par une fonction javascript présente dans code.js-->
     </div>
+    <div style='text-align:center' class="divajoutfiltrage">
+        <button class='btn btn-primary btn-xs' type='submit' id="boutonajoutfiltre">Filtrer</button>
+    </div>
+    <hr style="margin-top:10px;margin-bottom:10px;">
     <?php
     require_once 'utilities/search/filtre.php'; //là on va construire le menu évolutif des filtres en cours sur la reqûete
+
     $tableaufiltresjtx = tableauFiltresJtx($query);
     if (!empty($tableaufiltresjtx)) {
         categorieFiltres("JTX", $tableaufiltresjtx);
@@ -47,6 +54,9 @@ if (isset($_SESSION['query']) && $_SESSION['query'] == $query) {//si la requête
         categorieFiltres("Catégories", $tableaufiltrescategorie);
     }
     ?>
+    <div style='text-align:center; margin-top:5px;margin-bottom:5px' id="divsuppressionfiltrage">
+        <button class='btn btn-primary btn-xs' type='submit' id="boutonsuppressionfiltre">Filtrer</button>
+    </div>
 </div>
 
 <?php

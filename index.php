@@ -78,17 +78,13 @@ if ($askedPage == 'recherche') {//pour une page qui affiche des résultats de re
     }//pour afficher la barre de navigation en haut.
     ?>
 </div>
+<div id="main">
 <?php
 if ($authorized) {
     if ($askedPage == "video") {
         $video = $_GET['video']; //la variable $video est réutilisée dans contenu_video
         require "contenu/contenu_video.php";
     } elseif ($askedPage == "recherche") {
-        if (isset($_GET['query'])) {
-            $query = $_GET['query']; //pour éviter d'avoir à se traîner le $_GET partout
-        } else {
-            $query = Video::titreAleatoire(); //si le mec a magouillé et a supprimé le query= de l'URL on balance une vidéo aléatoire.
-        }
         require "contenu/contenu_recherche.php";
     } else {
         require "contenu/contenu_{$askedPage}.php";
@@ -97,6 +93,7 @@ if ($authorized) {
     require "contenu/contenu_erreur.php";
 }
 ?>
+</div>
 <?php
 generatePageFooter();
 ?>
