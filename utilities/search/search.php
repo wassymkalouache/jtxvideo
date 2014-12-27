@@ -83,18 +83,27 @@ function RequeteTitre($query) {
     if ($querytitre == "") {
         //si pas de requête sur le titre on enlève ce critère de recherche
         $requetetitre = "SELECT videos.video FROM videos WHERE false";
+        $tableauparametresrequete = array();
     } elseif ($querytitre == "*") {
         //si étoile on prend tout
         $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
                 . " WHERE (($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
+        $tableauparametresrequete = array();
     } else {
+        $querytitre = explode(' ',$querytitre); //on découpe la requête titre sous forme de mots.
         $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
-                . " WHERE ((videos.titre LIKE ?) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
+                . " WHERE ((";//première partie de la requête
+        foreach ($querytitre as $cle => $mottitre) {//pour chaque mot on rajoute des % autour et on prévoit un emplacement avec ? dans la requête
+            $querytitre[$cle] = '%' . $mottitre . '%';
+            $requetetitre .= "(videos.titre LIKE ?) AND ";
+        }
+        $requetetitre .= "true) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video";//on termine d'écrire la requête.
+        $tableauparametresrequete = $querytitre;
         //la requete doit tenir compte de la table videos et promotions; LEFT JOIN pour ne pas exclure les vidéos ne possédant pas d'entrée dans la table promotion.
     }//Maintenant que la requête est construite, on la soumet à la base de donnée
     $dbh = Database::connect();
     $sth = $dbh->prepare($requetetitre);
-    $sth->execute(array('%' . $querytitre . '%'));
+    $sth->execute($tableauparametresrequete);
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     $dbh = null;
     return $results;
