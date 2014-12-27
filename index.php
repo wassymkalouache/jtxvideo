@@ -41,7 +41,7 @@ if (isset($_GET['todo']) && $_GET['todo'] == "deleteuser") {//cette fonction s'Ã
     SupprimerCompte();
 }
 
-require 'utilities/pages.php';
+require 'utilities/pages/pages.php';
 if (array_key_exists('page', $_GET)) {//il faut que la page existe et que l'utilisateur soit connectÃ©
     $askedPage = $_GET['page'];
 } else {
@@ -90,6 +90,7 @@ if ($authorized) {
         require "contenu/contenu_{$askedPage}.php";
     }
 } else {
+    $_GET['error'] = 'inexistent';
     require "contenu/contenu_erreur.php";
 }
 ?>

@@ -20,18 +20,25 @@ function generateHTMLHeader($titre, $css) {//génère l'en-tête HTML commun à 
         <meta name="author" content="Denis Merigoux"/>
         <meta name="keywords" content="JTX search clips"/>
         <meta name="description" content="Le moteur de recherche de la base de données de vidéos du JTX"/>
-        <!-- CSS Bootstrap -->
-        <link href="css/bootstrap.css" rel="stylesheet">
+       
         <!-- On charge jQuery -->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
         <!-- Javascript de Bootstrap -->
-        <script src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <!-- Javascript de jQueryFileTree -->
+        <script type="text/javascript" src="js/jqueryFileTree.js"></script>
         <!-- Javascript perso -->
         <script type="text/javascript" src="js/code.js"></script>
+    
+        <!-- CSS Bootstrap -->
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
         <!-- CSS Perso -->
-        <link href="$css" rel="stylesheet">
+        <link href="$css" rel="stylesheet" type="text/css">
         <!-- Custom styles for sticky footer -->
-        <link href="css/sticky-footer.css" rel="stylesheet">
+        <link href="css/sticky-footer.css" rel="stylesheet" type="text/css">
+        <!-- CSS de jQueryFileTree -->
+        <link href="css/jQueryFileTree.css" rel="stylesheet" type="text/css">
+        
         <!-- Lien vers le favicon -->
         <link rel="shortcut icon" href="favicon.ico" />
         <title>$titre</title>

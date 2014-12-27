@@ -1,5 +1,6 @@
 //-------------------------------------------------------------------
 //-------------------------Page d'accueil----------------------------
+//-------------------------------------------------------------------
 
 $(document).ready(function () {//sur la page d'accueil, affiche ou masque le panneau des options avancée
     $("#cadreoptions").toggle();
@@ -44,7 +45,8 @@ $(document).ready(function () {//lorsque la requête est vide, on la remplace pa
 });
 
 //-------------------------------------------------------------------
-//-------------------------Page de recherche---------------------------
+//-------------------------Page de recherche-------------------------
+//-------------------------------------------------------------------
 
 $(document).ready(function () {//pour tronquer les descriptions trop longues
     // on sélectionne tous les div avec la classe zoneTexte et on les parcourt
@@ -74,10 +76,11 @@ $(document).ready(function () {//pour tronquer les boutons dont le texte est tro
     });
 });
 
-//---------------------Menu de filtrage------------------------------------//
-//-------------------------------------------------------------------------//
+//-------------------------------------------------------------------
+//---------------------Menu de filtrage------------------------------
+//-------------------------------------------------------------------
 
-//---------------------Gestion des filtres existants----------------------
+//---------------------Gestion des filtres existants-----------------
 
 $(document).ready(function () {//fonction permettant d'ajouter et d'enelver les filtres de promotion
     //gère aussi l'affichage du bouton filtrer en dessous de la liste des filtres
@@ -166,4 +169,14 @@ $(document).ready(function () {//fonction qui ajoute le filtre à la query quand
         }
         window.location.href = encodeURI('index.php?page=recherche&query=' + $("#barrerecherche").val());//recharge la page avec la requête actualisée
     });
+});
+
+//-------------------------------------------------------------------
+//------------------------Page d'ajout des vidéos--------------------
+//-------------------------------------------------------------------
+
+$(document).ready(function() {//active l'arborescence des fichiers
+    $('#arborescenceserveur').fileTree({ root: '../jtxvideo/videosjtx/', script: 'jqueryFileTree.php', loadMessage:'Ça charge.' }, function(file) {
+					alert(file);
+				});
 });
