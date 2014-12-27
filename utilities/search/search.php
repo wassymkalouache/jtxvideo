@@ -7,17 +7,18 @@ $itemsparpage = $_SESSION['itemsparpage']; //Attention définition globale, peut
 $pattern_tags = "\&quot;(((?!\&quot;).)*)(\&quot;|$)"; //les tags sont délimités par des ""
 $pattern_jtx = "JTX\s{0,1}([0-9]{4})"; //JTX 2013 ou JTX2013
 $pattern_promotion = "(?<=^|[^T])(?:X|X\s)([0-9]{4})"; //X2013 ou X 2013 mais pas JTX2013 ou JTX 2013
-$pattern_annee = "(?:^|[^X\s]|[^X]\s)([0-9]{4})"; //série de 4 chiffres mais ni X2013 ni X 2013 ni JTX 2013 ni JTX2013
+$pattern_annee = "(?<!^|X\s|X)([0-9]{4})"; //série de 4 chiffres mais ni X2013 ni X 2013 ni JTX 2013 ni JTX2013
 $pattern_categorie = "cat\:\(([^\)]*)(\)|$)"; //un truc du genre cat:(machin truc).
 
-function cleanQuery ($query) {//uniformise le contenu de la query par rapport aux filtres temporels, de catégorie, etc.
+function cleanQuery($query) {//uniformise le contenu de la query par rapport aux filtres temporels, de catégorie, etc.
     global $pattern_jtx, $pattern_annee, $pattern_promotion;
-    $result = preg_replace("/".$pattern_jtx."/i","JTX $1",$query);//corrige les JTX
-    $result = preg_replace("/".$pattern_promotion."/i","X$1",$result);//corrige les promotions
-    $result = preg_replace("/cat\:\(\s*(.*)\s*\)/i","cat:($1)",$result);//corrige les categories
-    $result = preg_replace("/cat\:\((.*),\s*(.*)\)/i","cat:($1, $2)",$result);//corrige les categories
-    $result = preg_replace("/cat\:\([\s\,]*\)/i","",$result);//supprime les trucs genre cat:() de la requête.
-    $result = preg_replace("/\s{2,}/i"," ",$result);//remplace les doubles espaces par des espaces simples
+    $result = preg_replace("/" . $pattern_jtx . "/i", "JTX $1", $query); //corrige les JTX
+    $result = preg_replace("/" . $pattern_promotion . "/i", "X$1", $result); //corrige les promotions
+    $result = preg_replace("/cat\:\(\s*(.*)\s*\)/i", "cat:($1)", $result); //corrige les categories
+    $result = preg_replace("/cat\:\((.*),\s*(.*)\)/i", "cat:($1, $2)", $result); //corrige les categories
+    $result = preg_replace("/cat\:\([\s\,]*\)/i", "", $result); //supprime les trucs genre cat:() de la requête.
+    $result = preg_replace("/\s{2,}/i", " ", $result); //remplace les doubles espaces par des espaces simples
+    $result = preg_replace("/(^\s+|\s+$)/i", "", $result); //enlève les espaces au début et à la fin de la requête.
     return $result;
 }
 
@@ -75,6 +76,7 @@ function RequeteTitre($query) {
     global $pattern_jtx, $pattern_annee, $pattern_promotion, $pattern_tags, $pattern_categorie;
     //Cherchons maintenant les correspondances dans les titres
     $querytitre = preg_replace("/(\s*$pattern_tags|\s*$pattern_jtx|\s*$pattern_annee|\s*$pattern_promotion|\s*$pattern_categorie)/i", '', $query);
+    var_dump($querytitre);
     //il faut enlever de la recherche sur le titre tout ce qui sert aux tags et à la datation, et qui est donné par la regexp ci-dessus.
     $requetedate = CreerRequeteDate($query);
     $requetecategorie = CreerRequeteCategorie($query);
@@ -92,7 +94,7 @@ function RequeteTitre($query) {
     }//Maintenant que la requête est construite, on la soumet à la base de donnée
     $dbh = Database::connect();
     $sth = $dbh->prepare($requetetitre);
-    $sth->execute(array('%'.$querytitre.'%'));
+    $sth->execute(array('%' . $querytitre . '%'));
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
     $dbh = null;
     return $results;
@@ -120,7 +122,7 @@ function RequeteTags($query) {
     $requetecategorie = CreerRequeteCategorie($query);
     $requetetags .= "false) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video ORDER BY COUNT(tags.tag) DESC"; //on regroupe les résultats par vidéo (une vidéo n'appparaît
     // qu'une seule fois et on trie par le nombre de tags associé à chaque vidéo
-    $dbh = Database::connect();//maintenant on soumet la requête à la BDD. Comme les tags sont en ASCII et que $_GET a été sécurisé, pas de risques d'injection SQL.
+    $dbh = Database::connect(); //maintenant on soumet la requête à la BDD. Comme les tags sont en ASCII et que $_GET a été sécurisé, pas de risques d'injection SQL.
     $sth = $dbh->prepare($requetetags);
     $sth->execute();
     $results = $sth->fetchAll(PDO::FETCH_ASSOC);
