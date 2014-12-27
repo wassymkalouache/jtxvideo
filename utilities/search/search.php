@@ -76,7 +76,6 @@ function RequeteTitre($query) {
     global $pattern_jtx, $pattern_annee, $pattern_promotion, $pattern_tags, $pattern_categorie;
     //Cherchons maintenant les correspondances dans les titres
     $querytitre = preg_replace("/(\s*$pattern_tags|\s*$pattern_jtx|\s*$pattern_annee|\s*$pattern_promotion|\s*$pattern_categorie)/i", '', $query);
-    var_dump($querytitre);
     //il faut enlever de la recherche sur le titre tout ce qui sert aux tags et à la datation, et qui est donné par la regexp ci-dessus.
     $requetedate = CreerRequeteDate($query);
     $requetecategorie = CreerRequeteCategorie($query);
