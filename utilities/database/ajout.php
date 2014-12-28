@@ -4,6 +4,7 @@ require_once 'videos.php';
 require_once 'tags.php';
 require_once 'promotions.php';
 require_once 'categories.php';
+require_once 'similaires.php';
 
 //ce script est exécuté après pression du bouton « AJouter une vidéo »
 // sur le formulaire d'ajout d'une vidéo. Il ajoute une vidéo dans la BDD à partir des paramètres passés en post qui ont été transformé en variable dans contenu_video :
@@ -18,8 +19,6 @@ require_once 'categories.php';
 //           tags
 //           description
 //           poster
-
-var_dump(Video::insererVideo($titre, $adresse, $proj, $poster, $description, $jtx, $annee));
 
 $video = Video::getVideoFromAdress($adresse);
 var_dump($video);
@@ -36,6 +35,13 @@ $categories = explode(';', $categories); //$categories contient un truc du genre
 foreach ($categories as $categorie) {
     if (!$categorie == '') {
         Categorie::insererCategorie($id, $categorie);
+    }
+}
+
+$similaires = explode(';', $similaires); //$categories contient un truc du genre Humoristique;Musical
+foreach ($similaires as $similaire) {
+    if (preg_match('/^[0-9]+$/',$similaire)) {
+        Similaire::insererSimilaire($id, $similaire);
     }
 }
 

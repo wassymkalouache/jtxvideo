@@ -3,7 +3,7 @@
 require_once 'utilities/display/display.php';
 require_once 'utilities/database/videos.php';
 
-if (isset($_GET['todo']) && $_GET['todo'] == 'ajout') {//la partie suvante s'éxecute si jamais on veut ajouter une vidéo
+if (isset($_GET['todo']) && $_GET['todo'] == 'insert') {//la partie suvante s'éxecute si jamais on veut ajouter une vidéo
     $inputcorrect = true; //il faut vérifier si tous les paramètres sont bien définis, on définit au passage des variables utilisées dans ajout.php
     if (isset($_POST['adresse'])) {
         $adresse = $_POST['adresse'];
@@ -42,6 +42,11 @@ if (isset($_GET['todo']) && $_GET['todo'] == 'ajout') {//la partie suvante s'éx
     }
     if (isset($_POST['categories'])) {
         $categories = $_POST['categories'];
+    } else {
+        $promotions = false;
+    }
+    if (isset($_POST['similaires'])) {
+        $similaires = $_POST['similaires'];
     } else {
         $promotions = false;
     }

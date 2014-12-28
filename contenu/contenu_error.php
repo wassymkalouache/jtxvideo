@@ -14,6 +14,8 @@
                 echo "Tu n'as pas spécifié de video à afficher. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
             } elseif (isset($_GET['error']) && $_GET['error'] == 'incorrectinput') {
                 echo "Tu n'as pas rempli correctement le formulaire. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
+            } elseif (isset($_GET['error']) && $_GET['error'] == 'updatenovideo') {
+                echo "Tu n'as pas spécifié quelle vidéo tu voulais mettre à jour. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
             } else {
                 echo "Une erreur est survenue. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
             }

@@ -16,12 +16,15 @@
 // Output a list of files for jQuery File Tree
 //
 
+require 'utilities/database/videos.php';//pour utiliser la fonction getVideoFromAdress pour savoir si une vidéo a été traitée ou pas.
+
 $_POST['dir'] = urldecode($_POST['dir']);
 $root = './';
 
 if( file_exists($root . $_POST['dir']) ) {
 	$files = scandir($root . $_POST['dir']);
 	natcasesort($files);
+        
         //La partie suivante sert à filtrer les fichiers ajoutés, en ne gardant que les dossiers et les vidéos.
         $filestmp = $files;
         unset($files);
@@ -31,6 +34,7 @@ if( file_exists($root . $_POST['dir']) ) {
             }
         }
         //Fin de la partie ajoutée
+        
 	if( count($files) > 2 ) { /* The 2 accounts for . and .. */
 		echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 		// All dirs
@@ -43,7 +47,14 @@ if( file_exists($root . $_POST['dir']) ) {
 		foreach( $files as $file ) {
 			if( file_exists($root . $_POST['dir'] . $file) && $file != '.' && $file != '..' && !is_dir($root . $_POST['dir'] . $file) ) {
 				$ext = preg_replace('/^.*\./', '', $file);
-				echo "<li class=\"file ext_$ext\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "\">" . htmlentities($file) . "</a></li>";
+                                $video= Video::getVideoFromAdress(htmlentities($_POST['dir'] . $file));
+                                if ($video == null) {//si la vidéo n'est pas encore dans la BDD
+                                    echo "<li class=\"file ext_missing\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "\">" . htmlentities($file) . "</a></li>";//alors on affiche son icône
+                                } else {
+                                    //sinon on affiche quand même mais avec une classe qui fera qu'elle n'aura pas de javascript associée, et le lien renvoie vers l'affichage de la vidéo
+                                    echo "<li class=\"file ext_check\"><a href=\"index.php?page=video&video={$video->video}\" target='_blank' rel='check'>" . htmlentities($file) . "</a></li>";
+                                } 
+				
 			}
 		}
 		echo "</ul>";	

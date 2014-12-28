@@ -100,7 +100,7 @@ if ($askedPage == 'recherche') {//pour une page qui affiche des résultats de re
         }
     } else {
         $_GET['error'] = 'inexistent';
-        require "contenu/contenu_erreur.php";
+        require "contenu/contenu_error.php";
     }
     ?>
 </div>

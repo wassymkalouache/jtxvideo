@@ -177,16 +177,18 @@ $(document).ready(function () {//fonction qui ajoute le filtre à la query quand
 
 $(document).ready(function () {//active l'arborescence des fichiers et déclenche l'affichage de la vidéo quand on clique dessus
     $('#arborescenceserveur').fileTree({root: 'videosjtx/', script: 'jqueryFileTree.php', multiFolder: false}, function (file) {
-        var extension = /[^.]+$/.exec(file);
-        $("#lecteurvideo source").attr({
-            "src": file,
-            "type": "video/" + extension//extrait l'extension de la vidéo.
-        });//on change la source
-        $("#lecteurvideo")[0].load();//on charge la nouvelle vidéo.
-        $("#adressevideo").html(file);//les trois lignes suivantes actualisent les informations du panel vidéo choisie
-        $("#extensionvideo").html(extension);
-        $("#panelvideochoisie").attr("class","panel panel-success");
-        $("#formulaireadresse").attr("value",file);//les deux lignes remplissent les champs du caché du formulaire sur la page d'ajout.
-        $("#formulaireextension").attr("value",extension);
+        if (!(file === 'check')) {
+            var extension = /[^.]+$/.exec(file);
+            $("#lecteurvideo source").attr({
+                "src": file,
+                "type": "video/" + extension//extrait l'extension de la vidéo.
+            });//on change la source
+            $("#lecteurvideo")[0].load();//on charge la nouvelle vidéo.
+            $("#adressevideo").html(file);//les trois lignes suivantes actualisent les informations du panel vidéo choisie
+            $("#extensionvideo").html(extension);
+            $("#panelvideochoisie").attr("class", "panel panel-success");
+            $("#formulaireadresse").attr("value", file);//les deux lignes remplissent les champs du caché du formulaire sur la page d'ajout.
+            $("#formulaireextension").attr("value", extension);
+        }
     });
 });
