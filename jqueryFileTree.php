@@ -22,6 +22,15 @@ $root = './';
 if( file_exists($root . $_POST['dir']) ) {
 	$files = scandir($root . $_POST['dir']);
 	natcasesort($files);
+        //La partie suivante sert à filtrer les fichiers ajoutés, en ne gardant que les dossiers et les vidéos.
+        $filestmp = $files;
+        unset($files);
+        foreach ($filestmp as $file) {
+            if (preg_match("/(.mkv|.webm|.avi)$/", $file)||preg_match("/^[^\.]+$/",$file)) {//on ne garde que les extensions d'une liste blanche et les dossiers (fichiers sans . dans leur nom).
+                $files[] = $file;
+            }
+        }
+        //Fin de la partie ajoutée
 	if( count($files) > 2 ) { /* The 2 accounts for . and .. */
 		echo "<ul class=\"jqueryFileTree\" style=\"display: none;\">";
 		// All dirs

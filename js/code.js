@@ -182,7 +182,8 @@ $(document).ready(function () {//active l'arborescence des fichiers et déclench
             "type": "video/" + /[^.]+$/.exec(file)//extrait l'extension de la vidéo.
         });//on change la source
         $("#lecteurvideo")[0].load();//on charge la nouvelle vidéo.
-        $("#adressevideo").html(file);
+        $("#adressevideo").html(file);//les trois lignes suivantes actualisent les informations du panel vidéo choisie
         $("#extensionvideo").html(/[^.]+$/.exec(file));
+        $("#panelvideochoisie").attr("class","panel panel-success");
     });
 });
