@@ -79,21 +79,30 @@ if ($askedPage == 'recherche') {//pour une page qui affiche des résultats de re
     ?>
 </div>
 <div id="main">
-<?php
-if ($authorized) {
-    if ($askedPage == "video") {
-        $video = $_GET['video']; //la variable $video est réutilisée dans contenu_video
-        require "contenu/contenu_video.php";
-    } elseif ($askedPage == "recherche") {
-        require "contenu/contenu_recherche.php";
+    <?php
+    if ($authorized) {
+        if ($askedPage == "video") {
+            if (isset($_GET['video'])) {
+                $video = $_GET['video']; //la variable $video est réutilisée dans contenu_video
+                require "contenu/contenu_video.php";
+            } else {
+                if (isset($_GET['todo'])) {
+                    require "contenu/contenu_video.php";
+                } else {
+                    header("Location:index.php?page=error&error=videonotspecified");
+                    exit();
+                }
+            }
+        } elseif ($askedPage == "recherche") {
+            require "contenu/contenu_recherche.php";
+        } else {
+            require "contenu/contenu_{$askedPage}.php";
+        }
     } else {
-        require "contenu/contenu_{$askedPage}.php";
+        $_GET['error'] = 'inexistent';
+        require "contenu/contenu_erreur.php";
     }
-} else {
-    $_GET['error'] = 'inexistent';
-    require "contenu/contenu_erreur.php";
-}
-?>
+    ?>
 </div>
 <?php
 generatePageFooter();

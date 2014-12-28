@@ -29,7 +29,7 @@
         <title>JtxVidéo - Mon compte</title>
     </page>
     <page>
-        <name>erreur</name>
-        <title>JtxVidéo – Erreur</title>
+        <name>error</name>
+        <title>JtxVidéo – Erreur !</title>
     </page>
 </pages>
