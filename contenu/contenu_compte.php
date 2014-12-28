@@ -10,6 +10,7 @@
                 <li class='list-group-item'>Prénom : <span style='float:right'><?php echo "$user->prenom" ?></span></li>
                 <li class='list-group-item'>Promotion : <span style='float:right'><?php echo "$user->promo" ?></span></li>
                 <li class='list-group-item'>E-mail : <span style='float:right'><?php echo "$user->email" ?></span></li>
+            </ul>
         </div>
     </div>
 </div>

@@ -185,7 +185,7 @@ function videopage($id, $format) {
     }
     echo <<<EOF
     <div class="jumbotron" style="text-align:center">
-        <video id="spammemaybe" class="video-js vjs-default-skin" controls preload="metadata" width="800" poster="$video->poster">
+        <video class="video-js vjs-default-skin" controls preload="metadata" width="800" poster="$video->poster">
             <source src="$video->adresse" type="video/$format" />
         </video>
     </div>
