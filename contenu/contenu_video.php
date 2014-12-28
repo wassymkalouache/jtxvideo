@@ -3,7 +3,7 @@
 require_once 'utilities/display/display.php';
 require_once 'utilities/database/videos.php';
 
-if (isset($_GET['todo']) && $_GET['todo'] == 'insert') {//la partie suvante s'éxecute si jamais on veut ajouter une vidéo
+if (isset($_GET['todo']) && ($_GET['todo'] == 'insert' | $_GET['todo'] == 'update')) {//la partie suvante s'éxecute si jamais on veut ajouter ou modifier une vidéo
     $inputcorrect = true; //il faut vérifier si tous les paramètres sont bien définis, on définit au passage des variables utilisées dans ajout.php
     if (isset($_POST['adresse'])) {
         $adresse = $_POST['adresse'];
@@ -66,7 +66,11 @@ if (isset($_GET['todo']) && $_GET['todo'] == 'insert') {//la partie suvante s'é
         $promotions = false;
     }
     if ($inputcorrect) {
-    require_once 'utilities/database/ajout.php';
+        if ($_GET['todo'] == 'insert') {
+            require_once 'utilities/database/ajout.php';
+        } elseif ($_GET['todo'] == 'update') {
+            require_once 'utilities/database/update.php';
+        }
     } else {
         header("Location:index.php?page=error&error=incorrectinput");
     }
