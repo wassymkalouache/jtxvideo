@@ -257,7 +257,7 @@ EOF;
                 <textarea name="description" class="form-control" row="3">
                     <?php
                     if ($updatemode) {
-echo $video->description;
+                    echo preg_replace("/^\s+(?>!\s)/i",'',$video->description);//enlève les espaces en trop au début de la description (bug ?);
                     }
                     ?>
                 </textarea>

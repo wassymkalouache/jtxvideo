@@ -38,32 +38,32 @@ if (isset($_GET['todo']) && ($_GET['todo'] == 'insert' | $_GET['todo'] == 'updat
     if (isset($_POST['promotions'])) {
         $promotions = $_POST['promotions'];
     } else {
-        $promotions = false;
+        $inputcorrect = false;
     }
     if (isset($_POST['categories'])) {
         $categories = $_POST['categories'];
     } else {
-        $promotions = false;
+        $inputcorrect = false;
     }
     if (isset($_POST['similaires'])) {
         $similaires = $_POST['similaires'];
     } else {
-        $promotions = false;
+        $inputcorrect = false;
     }
     if (isset($_POST['tags'])) {
         $tags = $_POST['tags'];
     } else {
-        $promotions = false;
+        $inputcorrect = false;
     }
     if (isset($_POST['description'])) {
         $description = $_POST['description'];
     } else {
-        $promotions = false;
+        $inputcorrect = false;
     }
     if (isset($_POST['poster'])) {
         $poster = $_POST['poster'];
     } else {
-        $promotions = false;
+        $inputcorrect = false;
     }
     if ($inputcorrect) {
         if ($_GET['todo'] == 'insert') {
