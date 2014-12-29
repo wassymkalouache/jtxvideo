@@ -89,14 +89,14 @@ function RequeteTitre($query) {
                 . " WHERE (($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
         $tableauparametresrequete = array();
     } else {
-        $querytitre = explode(' ',$querytitre); //on découpe la requête titre sous forme de mots.
+        $querytitre = explode(' ', $querytitre); //on découpe la requête titre sous forme de mots.
         $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
-                . " WHERE ((";//première partie de la requête
+                . " WHERE (("; //première partie de la requête
         foreach ($querytitre as $cle => $mottitre) {//pour chaque mot on rajoute des % autour et on prévoit un emplacement avec ? dans la requête
             $querytitre[$cle] = '%' . $mottitre . '%';
             $requetetitre .= "(videos.titre LIKE ?) AND ";
         }
-        $requetetitre .= "true) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video";//on termine d'écrire la requête.
+        $requetetitre .= "true) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video"; //on termine d'écrire la requête.
         $tableauparametresrequete = $querytitre;
         //la requete doit tenir compte de la table videos et promotions; LEFT JOIN pour ne pas exclure les vidéos ne possédant pas d'entrée dans la table promotion.
     }//Maintenant que la requête est construite, on la soumet à la base de donnée
@@ -111,13 +111,12 @@ function RequeteTitre($query) {
 function RequeteTags($query) {
     global $pattern_jtx, $pattern_annee, $pattern_promotion, $pattern_tags, $pattern_categorie;
     //là on fait la partie de la requête concernant les tags
-    $querytitre = preg_replace("/(\s*$pattern_tags\s*|\s*$pattern_jtx\s*|\s*$pattern_annee\s*|\s*$pattern_promotion\s*|\s*$pattern_categorie\s*)/i", '', $query);
-    //il faut enlever de la recherche sur le titre tout ce qui sert aux tags et à la datation, et qui est donné par la regexp ci-dessus.
     $requetetags = "SELECT videos.video FROM videos INNER JOIN tags ON videos.video = tags.video "
             . "LEFT JOIN promotions ON videos.video = promotions.video "
             . "LEFT JOIN categories ON categories.video = videos.video "
             . "WHERE (("; //on sélectionne la colonne vidéos depuis la jointure des tables tags et vidéos et promotions
-    preg_match_all("/" . $pattern_tags . "/i", $query, $matches, PREG_PATTERN_ORDER); //récupère toutes les listes de tags entre "".
+    $matches = array();
+    preg_match_all('/' . $pattern_tags . '/i', $query, $matches, PREG_PATTERN_ORDER); //récupère toutes les listes de tags entre "".
     foreach ($matches[1] as $listetags) {
         $termes = explode(' ', $listetags); //on prend séparément tous les mots de la requête
         foreach ($termes as $terme) {

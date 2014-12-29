@@ -18,52 +18,61 @@ if (isset($_GET['todo']) && ($_GET['todo'] == 'insert' | $_GET['todo'] == 'updat
     if (isset($_POST['titre'])) {
         $titre = $_POST['titre'];
     } else {
-        $inputcorrect = false;
+        $titre = '';
     }
     if (isset($_POST['proj'])) {
         $proj = $_POST['proj'];
     } else {
-        $inputcorrect = false;
+        $proj = '';
     }
     if (isset($_POST['jtx'])) {
         $jtx = $_POST['jtx'];
     } else {
-        $inputcorrect = false;
+        $jtx = NULL;
     }
     if (isset($_POST['annee'])) {
         $annee = $_POST['annee'];
     } else {
-        $inputcorrect = false;
+        $annee = NULL;
     }
     if (isset($_POST['promotions'])) {
         $promotions = $_POST['promotions'];
     } else {
-        $inputcorrect = false;
+        $promotions = 'null';
     }
     if (isset($_POST['categories'])) {
         $categories = $_POST['categories'];
     } else {
-        $inputcorrect = false;
+        $categories = '';
     }
     if (isset($_POST['similaires'])) {
         $similaires = $_POST['similaires'];
     } else {
-        $inputcorrect = false;
+        $similaires = '';
     }
     if (isset($_POST['tags'])) {
         $tags = $_POST['tags'];
     } else {
-        $inputcorrect = false;
+        $tags = '';
     }
     if (isset($_POST['description'])) {
         $description = $_POST['description'];
     } else {
-        $inputcorrect = false;
+        $description = '';
     }
     if (isset($_POST['poster'])) {
         $poster = $_POST['poster'];
     } else {
-        $inputcorrect = false;
+        $poster = '';
+    }
+    if ($_FILES['poster']['size'] === 0) {
+        $noposter = true;
+    } else {
+        //si on a bien envoyé une nouvelle image pour updater le poster.
+        $nomFichierOriginal = $_FILES['poster']['name'];
+        $nomFichierServeur = $_FILES['poster']['tmp_name'];
+        $typeFichier = $_FILES['poster']['type'];
+        $noposter = false;
     }
     if ($inputcorrect) {
         if ($_GET['todo'] == 'insert') {
