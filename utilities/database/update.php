@@ -22,7 +22,7 @@ require_once 'similaires.php';
 
 $video = Video::getVideoFromAdress($adresse);
 $id = $video->video;
-Video::updateVideo($id, $titre, $adresse, $proj, $description, $jtx, $annee);
+Video::updateVideo($id, $titre, $adresse, $proj, $description, $jtx, $annee, $_SESSION['login']);
 
 Promotion::deletePromotionsFromVideo($id); //on supprime toutes les références pour les recréer après, parce que il faut mettre à jour un ensemble de lignes
 $promotions = explode(';', $promotions); //$promotions contient un truc du genre X2012;X2013

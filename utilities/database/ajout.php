@@ -20,7 +20,7 @@ require_once 'similaires.php';
 //           description
 //           poster
 
-Video::insererVideo($titre, $adresse, $proj, $description, $jtx, $annee);
+Video::insererVideo($titre, $adresse, $proj, $description, $jtx, $annee,$_SESSION['login']);
 $video = Video::getVideoFromAdress($adresse);
 $id = $video->video;
 

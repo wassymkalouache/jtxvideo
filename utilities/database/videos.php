@@ -12,24 +12,25 @@ class Video {
     public $description;
     public $jtx;
     public $annee;
-    public $format; //les hcamps correspondent à cexu de la base de données utilisateurs.
+    public $format;
+    public $login; //les hcamps correspondent à cexu de la base de données utilisateurs.
 
     public function __toString() {
         return $this->titre;
     }
 
-    public static function insererVideo($titre, $adresse, $proj, $description, $jtx, $annee) {//inère la vidéo dans la base de données
+    public static function insererVideo($titre, $adresse, $proj, $description, $jtx, $annee, $login) {//inère la vidéo dans la base de données
         // opérations sur la base
         if (Video::getVideoFromAdress($adresse) === null) {//vérifie si la vidéo n'est déjà pas référencée.
             $dbh = Database::connect();
-            $sth = $dbh->prepare("INSERT INTO `videos` (titre, adresse, proj, poster, description, jtx, annee) VALUES(?,?,?,?,?,?,?)");
+            $sth = $dbh->prepare("INSERT INTO `videos` (titre, adresse, proj, poster, description, jtx, annee,login) VALUES(?,?,?,?,?,?,?;?)");
             if ($jtx == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL o'est NULL
                 $jtx = NULL;
             }
             if ($annee == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL c'est NULL
                 $annee = NULL;
             }
-            $sth->execute(array($titre, $adresse, $proj, '', $description, $jtx, $annee));
+            $sth->execute(array($titre, $adresse, $proj, '', $description, $jtx, $annee, $login));
             $dbh = null; // Déconnexion de MySQL
             return true;
         } else {
@@ -37,31 +38,31 @@ class Video {
         }
     }
 
-    public static function updateVideo($id, $titre, $adresse, $proj, $description, $jtx, $annee) {
+    public static function updateVideo($id, $titre, $adresse, $proj, $description, $jtx, $annee, $login) {
         // opérations sur la base
         if (!(Video::getVideoFromAdress($adresse) === null)) {//vérifie si la vidéo est bien référencée.
             $dbh = Database::connect();
-            $sth = $dbh->prepare("UPDATE `videos` SET titre=?, adresse=?, proj=?, description=?, jtx=?, annee=? WHERE video=?");
+            $sth = $dbh->prepare("UPDATE `videos` SET titre=?, adresse=?, proj=?, description=?, jtx=?, annee=?, login=? WHERE video=?");
             if ($jtx == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL o'est NULL
                 $jtx = NULL;
             }
             if ($annee == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL c'est NULL
                 $annee = NULL;
             }
-            $sth->execute(array($titre, $adresse, $proj, $description, $jtx, $annee,$id));
+            $sth->execute(array($titre, $adresse, $proj, $description, $jtx, $annee, $login, $id));
             $dbh = null; // Déconnexion de MySQL
             return true;
         } else {
             return false;
         }
     }
-    
-    public static function updatePoster($id,$poster) {
+
+    public static function updatePoster($id, $poster) {
         // opérations sur la base
-            $dbh = Database::connect();
-            $sth = $dbh->prepare("UPDATE `videos` SET poster=? WHERE video=?");
-            $sth->execute(array($poster,$id));
-            $dbh = null; // Déconnexion de MySQL
+        $dbh = Database::connect();
+        $sth = $dbh->prepare("UPDATE `videos` SET poster=? WHERE video=?");
+        $sth->execute(array($poster, $id));
+        $dbh = null; // Déconnexion de MySQL
     }
 
     public static function getVideoFromAdress($adresse) {//retourne la vidéo repéré par le $login

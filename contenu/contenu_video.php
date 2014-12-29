@@ -74,7 +74,8 @@ if (isset($_GET['todo']) && ($_GET['todo'] == 'insert' | $_GET['todo'] == 'updat
         $typeFichier = $_FILES['poster']['type'];
         $noposter = false;
     }
-    if ($inputcorrect) {
+    if ($inputcorrect&&isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin']) {
+    //il faut être admin et que l'input soit correct pour qaccéder à l'ajout et à la mise à jour de vidéos
         if ($_GET['todo'] == 'insert') {
             require_once 'utilities/database/ajout.php';
         } elseif ($_GET['todo'] == 'update') {

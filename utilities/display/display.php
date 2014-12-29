@@ -5,6 +5,7 @@ require_once 'utilities/database/tags.php';
 require_once 'utilities/database/categories.php';
 require_once 'utilities/database/promotions.php';
 require_once 'utilities/database/similaires.php';
+require_once 'utilities/database/users.php';
 
 //==========================================
 //===============Toutes les pages===========
@@ -201,7 +202,7 @@ EOF;
         </div>
         <h1 class="media-heading">$video->titre</h1>
         <p>$video->description</p>
-         <div class="row">
+        <div class="row">
                 <div class="col-xs-6">
                     <p class="text-muted">
                         <span class="glyphicon glyphicon-tags"> </span>&nbsp;&nbsp;
@@ -261,9 +262,11 @@ EOF;
         }
         echo "</p>";
     }
+    $lastUser = Utilisateur::getUtilisateur($video->login)->_toString();//dernier utilisateur à avoir modifié les informations de la vidéo
     echo <<<EOF
                 </div>
             </div>
+            <p class="text-muted"><span style="float:right">Dernière modification par $lastUser</span></p>
         </div>
     </div>
 EOF;
