@@ -2,9 +2,6 @@
 require_once 'utilities/search/search.php';
 require_once 'utilities/misc.php'; //contient la fonction secure
 
-$_GET = secure($_GET); //sécurise les inputs dans GET et POST.
-$_POST = secure($_POST);
-
 if (isset($_GET['query'])) {
             $query = $_GET['query']; //pour éviter d'avoir à se traîner le $_GET partout
         } else {

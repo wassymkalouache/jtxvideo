@@ -1,5 +1,5 @@
 <?php
-if (!(isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin'])) {//il faut être un admin conecté pour accéder à la page.
+if (!(isset($_SESSION['loggedIn']) && isset($_SESSION['admin']) && $_SESSION['admin'])) {//il faut être un admin conecté pour accéder à la page.
     header('Location:index.php?page=error&error=forbidden');
     exit();
 }
@@ -65,9 +65,9 @@ if ($updatemode) {
 <div class="container-fluid">
     <?php
     if ($updatemode) {
-        echo "<form method='POST' action='index.php?page=video&todo=update'>";
+        echo "<form  enctype='multipart/form-data' method='POST' action='index.php?page=video&todo=update'>";
     } else {
-        echo "<form method='POST' action='index.php?page=video&todo=insert'>"; //Les données du formulaire sont envoyées au script ci-mentionné
+        echo "<form  enctype='multipart/form-data' method='POST' action='index.php?page=video&todo=insert'>"; //Les données du formulaire sont envoyées au script ci-mentionné
     }
     ?>
     <div class='row'>
@@ -253,39 +253,31 @@ EOF;
                            placeholder="Listes de mots sans majuscules ni accents séparés par des espaces" aria-describedby="titrevideo">
                 </div>
                 <hr style='margin-top:10px;margin-bottom:10px'>
-                <p class="text-muted">Tu peux mettre en forme la description avec des balises HTML. Par exemple, on fait un lien avec <?php echo htmlspecialchars('<a href="URL du lien">Texte du lien</a>'); ?></p>
-                <textarea name="description" class="form-control" row="3">
-                    <?php
+                <p class="text-muted">Écris la description du clip en texte plein. N'éhsites pas à ajouter des informations comme la source de la bande son, des anecdotes sur le tournage, etc.</p>
+                <textarea name="description" class="form-control" row="3"><?php
                     if ($updatemode) {
-                    echo preg_replace("/^\s+(?>!\s)/i",'',$video->description);//enlève les espaces en trop au début de la description (bug ?);
+                        echo $video->description; //enlève les espaces en trop au début de la description (bug ?);
                     }
-                    ?>
-                </textarea>
+                    ?></textarea>
             </div>
         </div>
         <div id="panelposter" class="panel panel-primary">
             <div class="panel-heading"><center><h3 class=panel-title>Choix du poster</h3></center></div>
             <div class="panel-body">
-                <p class='text-muted'>Pour choisir l'image qui sera affichée pour représenter la vidéo, rentre le numéro d'une frame de
-                    la vidéo et l'image sera extraite automatiquement.</p>
+                <p class='text-muted'>Extrais une frame de la vidéo à l'aide du logiciel de ton choix puis uploade-là à l'aide du bouton « Parcourir » ci-dessous. L'image doit peser moins de 500 Ko et doit être dans une des extensions suivantes : <tt>.jpg</tt>, <tt>.png</tt>, <tt>.jpeg</tt>.</p>
                 <div class="media">
-                    <a class="media-left media-middle" href="#">
+                    <a class="media-left media-middle">
                         <?php
                         if ($updatemode) {
-                            echo "<img src=\"$video->poster\" alt='Visualisation du poster' width='400'>";
+                            echo "<img src=\"$video->poster\" alt='Visualisation du poster' width='200'>";
                         } else {
-                            echo "<img src='' alt='Visualisation du poster' width='400'>";
+                            echo "<img src='media/noimage.jpg' alt='Visualisation du poster' width='200'>";
                         }
                         ?>
                     </a>
                     <div class="media-body">
-                        <div class="input-group">
-                            <span class="input-group-addon" id="titrevideo">Frame</span>
-                            <input type="text" class="form-control" placeholder="<minutes>:<secondes>:<numéro frame>" aria-describedby="titrevideo">
-                        </div>
-                        <br />
-                        <button class='btn btn-primary'>Extraire la frame</button>
-                        <input type='hidden' name="poster" id="formulaireposter">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
+                        <input type="file" accept="image" name="poster">
                     </div>
                 </div>
             </div>
