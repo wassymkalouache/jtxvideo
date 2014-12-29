@@ -37,6 +37,25 @@ class Video {
         }
     }
 
+    public static function updateVideo($id, $titre, $adresse, $proj, $poster, $description, $jtx, $annee) {
+        // opérations sur la base
+        if (!(Video::getVideoFromAdress($adresse) === null)) {//vérifie si la vidéo est bien référencée.
+            $dbh = Database::connect();
+            $sth = $dbh->prepare("UPDATE `videos` SET titre=?, adresse=?, proj=?, poster=?, description=?, jtx=?, annee=? WHERE video=?");
+            if ($jtx == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL o'est NULL
+                $jtx = NULL;
+            }
+            if ($annee == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL c'est NULL
+                $annee = NULL;
+            }
+            $sth->execute(array($titre, $adresse, $proj, $poster, $description, $jtx, $annee,$id));
+            $dbh = null; // Déconnexion de MySQL
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function getVideoFromAdress($adresse) {//retourne la vidéo repéré par le $login
         $dbh = Database::connect();
         $query = "SELECT * FROM `videos` WHERE adresse='$adresse' ";

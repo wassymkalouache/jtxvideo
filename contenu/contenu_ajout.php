@@ -254,13 +254,13 @@ EOF;
                 </div>
                 <hr style='margin-top:10px;margin-bottom:10px'>
                 <p class="text-muted">Tu peux mettre en forme la description avec des balises HTML. Par exemple, on fait un lien avec <?php echo htmlspecialchars('<a href="URL du lien">Texte du lien</a>'); ?></p>
-                <textarea name="description" 
-                <?php
-                if ($updatemode) {
-                    echo "value=\"$video->description\"";
-                }
-                ?>
-                          class="form-control" row="3"></textarea>
+                <textarea name="description" class="form-control" row="3">
+                    <?php
+                    if ($updatemode) {
+echo $video->description;
+                    }
+                    ?>
+                </textarea>
             </div>
         </div>
         <div id="panelposter" class="panel panel-primary">
@@ -271,12 +271,12 @@ EOF;
                 <div class="media">
                     <a class="media-left media-middle" href="#">
                         <?php
-                    if ($updatemode) {
-                        echo "<img src=\"$video->poster\" alt='Visualisation du poster' width='400'>";
-                    } else {
-                        echo "<img src='' alt='Visualisation du poster' width='400'>";
-                    }
-                    ?>
+                        if ($updatemode) {
+                            echo "<img src=\"$video->poster\" alt='Visualisation du poster' width='400'>";
+                        } else {
+                            echo "<img src='' alt='Visualisation du poster' width='400'>";
+                        }
+                        ?>
                     </a>
                     <div class="media-body">
                         <div class="input-group">
@@ -285,7 +285,7 @@ EOF;
                         </div>
                         <br />
                         <button class='btn btn-primary'>Extraire la frame</button>
-                        <input hidden name="poster" id="formulaireposter">
+                        <input type='hidden' name="poster" id="formulaireposter">
                     </div>
                 </div>
             </div>

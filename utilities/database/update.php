@@ -20,10 +20,11 @@ require_once 'similaires.php';
 //           description
 //           poster
 
-Video::insererVideo($titre, $adresse, $proj, $poster, $description, $jtx, $annee);
 $video = Video::getVideoFromAdress($adresse);
 $id = $video->video;
+Video::updateVideo($id, $titre, $adresse, $proj, $poster, $description, $jtx, $annee);
 
+Promotion::deletePromotionsFromVideo($id);//on supprime toutes les références pour les recréer après, parce que il faut mettre à jour un ensemble de lignes
 $promotions = explode(';', $promotions); //$promotions contient un truc du genre X2012;X2013
 foreach ($promotions as $promotion) {
     if (preg_match("/^[0-9]{4}$/i", $promotion)) {//mais on s'en assure quand même
@@ -31,6 +32,7 @@ foreach ($promotions as $promotion) {
     }
 }
 
+Categorie::deleteCategoriesFromVideo($id);
 $categories = explode(';', $categories); //$categories contient un truc du genre Humoristique;Musical
 foreach ($categories as $categorie) {
     if (!$categorie == '') {
@@ -38,6 +40,7 @@ foreach ($categories as $categorie) {
     }
 }
 
+Similaire::deleteSimilairesFromVideo($id);
 $similaires = explode(';', $similaires); //$categories contient un truc du genre Humoristique;Musical
 foreach ($similaires as $similaire) {
     if (preg_match('/^[0-9]+$/',$similaire)) {
@@ -45,6 +48,7 @@ foreach ($similaires as $similaire) {
     }
 }
 
+Tag::deleteTagsFromVideo($id);
 $tags = explode(' ', $tags); //$tags contient un truc du genre bob moule fist
 var_dump($tags);
 foreach ($tags as $tag) {

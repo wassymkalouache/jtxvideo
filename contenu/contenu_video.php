@@ -73,6 +73,7 @@ if (isset($_GET['todo']) && ($_GET['todo'] == 'insert' | $_GET['todo'] == 'updat
         }
     } else {
         header("Location:index.php?page=error&error=incorrectinput");
+        exit();
     }
 }
 
