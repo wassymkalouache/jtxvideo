@@ -59,7 +59,7 @@ if (!$noposter && preg_match("/image/i", $typeFichier)) {
     Video::updatePoster($id, "media/" . $id . "." . $extension); //et on enregistre l'emplacement du poster dans la BDD;
 }
 
-
+unset($_SESSION['query']);//comme ça si la précédente requête devait afficher la nouvelle vidéo ça recalculer et ça la montre
 header("Location:index.php?page=video&video=$id"); //ensuite on redirige vers l'affichage de la vidéo !
 exit();
 

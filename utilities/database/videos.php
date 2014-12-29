@@ -23,7 +23,7 @@ class Video {
         // opérations sur la base
         if (Video::getVideoFromAdress($adresse) === null) {//vérifie si la vidéo n'est déjà pas référencée.
             $dbh = Database::connect();
-            $sth = $dbh->prepare("INSERT INTO `videos` (titre, adresse, proj, poster, description, jtx, annee,login) VALUES(?,?,?,?,?,?,?;?)");
+            $sth = $dbh->prepare("INSERT INTO `videos` (titre, adresse, proj, poster, description, jtx, annee, login) VALUES(?,?,?,?,?,?,?,?)");
             if ($jtx == "0") {//si jamais le paramètre est pas spécifié, POST met 0 mais en SQL o'est NULL
                 $jtx = NULL;
             }
