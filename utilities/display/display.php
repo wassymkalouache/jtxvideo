@@ -20,18 +20,25 @@ function generateHTMLHeader($titre, $css) {//génère l'en-tête HTML commun à 
         <meta name="author" content="Denis Merigoux"/>
         <meta name="keywords" content="JTX search clips"/>
         <meta name="description" content="Le moteur de recherche de la base de données de vidéos du JTX"/>
-        <!-- CSS Bootstrap -->
-        <link href="css/bootstrap.css" rel="stylesheet">
+       
         <!-- On charge jQuery -->
-        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
         <!-- Javascript de Bootstrap -->
-        <script src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        <!-- Javascript de jQueryFileTree -->
+        <script type="text/javascript" src="js/jqueryFileTree.js"></script>
         <!-- Javascript perso -->
         <script type="text/javascript" src="js/code.js"></script>
+    
+        <!-- CSS Bootstrap -->
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
         <!-- CSS Perso -->
-        <link href="$css" rel="stylesheet">
+        <link href="$css" rel="stylesheet" type="text/css">
         <!-- Custom styles for sticky footer -->
-        <link href="css/sticky-footer.css" rel="stylesheet">
+        <link href="css/sticky-footer.css" rel="stylesheet" type="text/css">
+        <!-- CSS de jQueryFileTree -->
+        <link href="css/jQueryFileTree.css" rel="stylesheet" type="text/css">
+        
         <!-- Lien vers le favicon -->
         <link rel="shortcut icon" href="favicon.ico" />
         <title>$titre</title>
@@ -178,7 +185,7 @@ function videopage($id, $format) {
     }
     echo <<<EOF
     <div class="jumbotron" style="text-align:center">
-        <video id="spammemaybe" class="video-js vjs-default-skin" controls preload="metadata" width="800" poster="$video->poster">
+        <video class="video-js vjs-default-skin" controls preload="metadata" width="800" poster="$video->poster">
             <source src="$video->adresse" type="video/$format" />
         </video>
     </div>
@@ -186,7 +193,11 @@ function videopage($id, $format) {
         <div class="btn-group boutonsvideo" role="group" aria-label="Actions video">
             <a type="button" class="btn btn-info" href="$video->proj">Page de la proj'</a>
             <a type="button" class="btn btn-default" href="$video->adresse" target="_blank">Télécharger la vidéo</a>
-            <a type="button" class="btn btn-danger" href="#">Modifier la description</a>
+EOF;
+    if (isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin']) {//option accessible aux admins loggués
+        echo "<a type=\"button\" class=\"btn btn-danger\" href=\"index.php?page=ajout&mode=update&video=$video->video\">Modifier la description</a>";
+    }
+    echo <<<EOF
         </div>
         <h1 class="media-heading">$video->titre</h1>
         <p>$video->description</p>

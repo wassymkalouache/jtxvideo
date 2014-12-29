@@ -35,10 +35,12 @@ EOF;
                 <?php
                 if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn']) {//les boutons diffèrent selon que l'on soit connecté ou pas.
                     echo "<li><a href='index.php?page=compte'>{$_SESSION['usertext']}</a></li>";
-                    echo "<li><a href='index.php?page=ajout'>Ajouter une vidéo</a></li>";
                     echo "<li><a href='index.php?page=accueil&todo=logout'>Se déconnecter</a></li>";
                 } else {
                     echo "<li><a href='index.php?page=login'>Se connecter</a></li>";
+                }
+                if (isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin']) {
+                    echo "<li><a href='index.php?page=ajout&mode=insert'>Ajouter une vidéo</a></li>";
                 }
                 ?>
                 <li><a href="index.php?page=accueil" id="logocoincadre"><img src="media/logojtxvideo.svg" height="30" id="logocoin" alt="Logo JtxVidéo"/></a></li>

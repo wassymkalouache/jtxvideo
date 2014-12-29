@@ -111,6 +111,21 @@ p.categoriefiltre {
 }
 
 /*-----------------------------------------------*/
+/*----------Page d'ajout d'une vidéo-------------*/
+
+#arborescenceserveur {
+    max-width: 300px;
+    max-height: 300px;
+    border-top: solid 4px #BBBBBB;
+    border-left: solid 4px #BBBBBB;
+    border-bottom: solid 4px #DDDDDD;
+    border-right: solid 4px #DDDDDD;
+    background: #EEEEEE;
+    overflow: auto;
+    padding: 5px;
+}
+
+/*-----------------------------------------------*/
 /*---------------Divers--------------------------*/
 
 .jaune {/*pour le formattage du nom d'utilisateur*/

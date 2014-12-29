@@ -1,5 +1,6 @@
 //-------------------------------------------------------------------
 //-------------------------Page d'accueil----------------------------
+//-------------------------------------------------------------------
 
 $(document).ready(function () {//sur la page d'accueil, affiche ou masque le panneau des options avancée
     $("#cadreoptions").toggle();
@@ -44,7 +45,8 @@ $(document).ready(function () {//lorsque la requête est vide, on la remplace pa
 });
 
 //-------------------------------------------------------------------
-//-------------------------Page de recherche---------------------------
+//-------------------------Page de recherche-------------------------
+//-------------------------------------------------------------------
 
 $(document).ready(function () {//pour tronquer les descriptions trop longues
     // on sélectionne tous les div avec la classe zoneTexte et on les parcourt
@@ -74,10 +76,11 @@ $(document).ready(function () {//pour tronquer les boutons dont le texte est tro
     });
 });
 
-//---------------------Menu de filtrage------------------------------------//
-//-------------------------------------------------------------------------//
+//-------------------------------------------------------------------
+//---------------------Menu de filtrage------------------------------
+//-------------------------------------------------------------------
 
-//---------------------Gestion des filtres existants----------------------
+//---------------------Gestion des filtres existants-----------------
 
 $(document).ready(function () {//fonction permettant d'ajouter et d'enelver les filtres de promotion
     //gère aussi l'affichage du bouton filtrer en dessous de la liste des filtres
@@ -104,7 +107,7 @@ $(document).ready(function () {//fonction permettant d'ajouter et d'enelver les 
 });
 
 $(document).ready(function () {//fonctionnement du bouton filtrer en dessous de la liste des filtres
-    $("#boutonsuppressionfiltre").click(function(){
+    $("#boutonsuppressionfiltre").click(function () {
         window.location.href = encodeURI('index.php?page=recherche&query=' + $("#barrerecherche").val());//recharge la page avec la requête actualisée
     });
 });
@@ -165,5 +168,27 @@ $(document).ready(function () {//fonction qui ajoute le filtre à la query quand
             //onrajoute 
         }
         window.location.href = encodeURI('index.php?page=recherche&query=' + $("#barrerecherche").val());//recharge la page avec la requête actualisée
+    });
+});
+
+//-------------------------------------------------------------------
+//------------------------Page d'ajout des vidéos--------------------
+//-------------------------------------------------------------------
+
+$(document).ready(function () {//active l'arborescence des fichiers et déclenche l'affichage de la vidéo quand on clique dessus
+    $('#arborescenceserveur').fileTree({root: 'videosjtx/', script: 'jqueryFileTree.php', multiFolder: false}, function (file) {
+        if (!(file === 'check')) {
+            var extension = /[^.]+$/.exec(file);
+            $("#lecteurvideo source").attr({
+                "src": file,
+                "type": "video/" + extension//extrait l'extension de la vidéo.
+            });//on change la source
+            $("#lecteurvideo")[0].load();//on charge la nouvelle vidéo.
+            $("#adressevideo").html(file);//les trois lignes suivantes actualisent les informations du panel vidéo choisie
+            $("#extensionvideo").html(extension);
+            $("#panelvideochoisie").attr("class", "panel panel-success");
+            $("#formulaireadresse").attr("value", file);//les deux lignes remplissent les champs du caché du formulaire sur la page d'ajout.
+            $("#formulaireextension").attr("value", extension);
+        }
     });
 });

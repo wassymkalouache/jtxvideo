@@ -1,4 +1,5 @@
 <?php
+//si jamais on retombe sur la page après une erreur, les paramètres sont déjà remplis.
 if (isset($_GET['error'])&&$_GET['error']&&isset($_GET['login'])&&isset($_GET['nom'])&&isset($_GET['prenom'])&&isset($_GET['promotion'])&&isset($_GET['email'])) {
     echo <<<EOF
     <div class="container">
@@ -16,7 +17,7 @@ if (isset($_GET['error'])&&$_GET['error']&&isset($_GET['login'])&&isset($_GET['n
         </form>
     </div>
 EOF;
-    
+//sinon on met des champs vides.    
 } else {
     echo <<<EOF
     <div class="container">

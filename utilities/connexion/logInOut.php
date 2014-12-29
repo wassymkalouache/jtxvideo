@@ -7,6 +7,7 @@ function LogIn() {//authentifie l'utilisateur et modifie la session en conséque
         $user = Utilisateur::getUtilisateur($_POST['login']);
         if (isset($user) && Utilisateur::testmdp($user, $_POST['mdp'])) {
             $_SESSION['loggedIn'] = true;
+            $_SESSION['admin'] = $user->admin;
             $_SESSION['login'] = $user->login;
             $_SESSION['usertext'] = $user->_toString();
         } else {
