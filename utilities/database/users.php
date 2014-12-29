@@ -31,10 +31,10 @@ class Utilisateur {
 
     public static function getUtilisateur($login) {//retourne l'utilisateur repéré par le $login
         $dbh = Database::connect();
-        $query = "SELECT * FROM `utilisateurs` WHERE login='$login' ";
+        $query = "SELECT * FROM `utilisateurs` WHERE login=? ";
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Utilisateur');
-        $sth->execute();
+        $sth->execute(array($login));
         $user = $sth->fetch();
         $sth->closeCursor();
         if (empty($user)) {
@@ -55,17 +55,27 @@ class Utilisateur {
     public static function changermdp($login, $new) {
         // opérations sur la base
         $dbh = Database::connect();
-        $sth = $dbh->prepare("UPDATE `utilisateurs` SET mdp=SHA1('$new') WHERE login='$login'");
-        $sth->execute();
+        $sth = $dbh->prepare("UPDATE `utilisateurs` SET mdp=SHA1(?) WHERE login=?");
+        $sth->execute(array($new,$login));
         $dbh = null; // Déconnexion de MySQL
     }
 
     public static function supprimercompte($login) {
         // opérations sur la base
         $dbh = Database::connect();
-        $sth = $dbh->prepare("DELETE FROM `utilisateurs` WHERE login='$login'");
-        $sth->execute();
+        $sth = $dbh->prepare("DELETE FROM `utilisateurs` WHERE login=");
+        $sth->execute(array($login));
         $dbh = null; // Déconnexion de MySQL
     }
-
+    
+    public static function isAdmin($login) {
+        $dbh = Database::connect();
+        $query = "SELECT admin FROM `utilisateurs` WHERE login=? ";
+        $sth = $dbh->prepare($query);
+        $sth->setFetchMode(PDO::FETCH_ASSOC);
+        $sth->execute(array($login));
+        $status = $sth->fetch();
+        $dbh=null;//deconnexion
+        return $status['admin'];
+    }
 }

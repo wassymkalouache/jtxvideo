@@ -193,7 +193,11 @@ function videopage($id, $format) {
         <div class="btn-group boutonsvideo" role="group" aria-label="Actions video">
             <a type="button" class="btn btn-info" href="$video->proj">Page de la proj'</a>
             <a type="button" class="btn btn-default" href="$video->adresse" target="_blank">Télécharger la vidéo</a>
-            <a type="button" class="btn btn-danger" href="index.php?page=ajout&mode=update&video=$video->video">Modifier la description</a>
+EOF;
+    if (isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin']) {//option accessible aux admins loggués
+        echo "<a type=\"button\" class=\"btn btn-danger\" href=\"index.php?page=ajout&mode=update&video=$video->video\">Modifier la description</a>";
+    }
+    echo <<<EOF
         </div>
         <h1 class="media-heading">$video->titre</h1>
         <p>$video->description</p>

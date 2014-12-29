@@ -20,7 +20,7 @@
     </form>
     <div class="col-md-4 col-md-offset-4" id="cadreoptions">
         <p class="text-muted">La recherche porte par défaut sur le titre des vidéos. Néanmoins tu peux ajouter des résultats en recherchant des tags, et les filtrer avec des conditions temporelles.</p>
-        <p class="text-muted">* permet de rechercher toutes les vidéos avec les filtres sur les dates, les tags ou les catégories.</p>
+        <p class="text-muted">* permet de rechercher toutes les vidéos avec les filtres sur les dates ou les catégories.</p>
         <div class="form-group">
             <div class="input-group">
                 <span class="input-group-addon">Tags</span>

@@ -1,4 +1,11 @@
-<?php require_once 'utilities/database/users.php'; ?>
+<?php
+require_once 'utilities/database/users.php';
+
+if (!isset($_SESSION['loggedIn'])) {//si l'utilisateur n'est pas connecté, erreur
+    header("Location:index.php?page=error&error=notloggedin");
+    exit();
+}
+?>
 <div class="container-fluid">
     <div class='row'>
         <div class='col-md-6 col-md-offset-3'>
@@ -10,6 +17,11 @@
                 <li class='list-group-item'>Prénom : <span style='float:right'><?php echo "$user->prenom" ?></span></li>
                 <li class='list-group-item'>Promotion : <span style='float:right'><?php echo "$user->promo" ?></span></li>
                 <li class='list-group-item'>E-mail : <span style='float:right'><?php echo "$user->email" ?></span></li>
+                <li class='list-group-item'>Administrateur : <span style='float:right'><?php if ($user->admin) {
+                    echo "Oui";
+                } else {
+                    echo "Non";
+                } ?></span></li>
             </ul>
         </div>
     </div>

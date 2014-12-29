@@ -16,7 +16,9 @@
                 echo "Tu n'as pas rempli correctement le formulaire. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
             } elseif (isset($_GET['error']) && $_GET['error'] == 'updatenovideo') {
                 echo "Tu n'as pas spécifié quelle vidéo tu voulais mettre à jour. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
-            } else {
+            }  elseif (isset($_GET['error']) && $_GET['error'] == 'notloggedin') {
+                echo "Il faut être connecté pour accéder à cette page. Clique sur le bouton en haut à droite pour ce faire.";
+            }else {
                 echo "Une erreur est survenue. Clique sur le logo en haut à droite pour revenir à la page d'accueil du site.";
             }
             ?>

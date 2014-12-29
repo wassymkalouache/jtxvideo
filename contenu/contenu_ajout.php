@@ -1,5 +1,5 @@
 <?php
-if (!isset($_SESSION['loggedIn'])) {
+if (!(isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin'])) {//il faut être un admin conecté pour accéder à la page.
     header('Location:index.php?page=error&error=forbidden');
     exit();
 }
