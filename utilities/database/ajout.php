@@ -54,7 +54,7 @@ foreach ($tags as $tag) {
 
 if (!$noposter && preg_match("/image/i", $typeFichier)) {
 //ce qui suit concerne le poster si un fichier a été uploadé.
-    $extension = preg_replace("/.*(?>[^\.]+$)/i", '', basename($nomFichierOriginal)); //on récupère l'extension du fichier uploadé pour le poster
+    $extension = preg_replace("/(.*)\.([^\.]+$)/i", '$2', basename($nomFichierOriginal)); //on récupère l'extension du fichier uploadé pour le poster
     move_uploaded_file($nomFichierServeur, "media/" . $id . "." . $extension); //on le déplace là où il faut
     Video::updatePoster($id, "media/" . $id . "." . $extension); //et on enregistre l'emplacement du poster dans la BDD;
 }
