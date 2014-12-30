@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 30 Décembre 2014 à 11:19
+-- Généré le :  Mar 30 Décembre 2014 à 15:37
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `categorie` varchar(256) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient la catégorisation de toutes les vidéos' AUTO_INCREMENT=142 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient la catégorisation de toutes les vidéos' AUTO_INCREMENT=153 ;
 
 --
 -- Contenu de la table `categories`
@@ -62,8 +62,12 @@ INSERT INTO `categories` (`id`, `video`, `categorie`) VALUES
 (135, 19, 'Khômiss'),
 (136, 20, 'Artistique'),
 (137, 17, 'Musical'),
-(140, 22, 'Court-métrage'),
-(141, 21, 'Court-métrage');
+(142, 23, 'Humoristique'),
+(145, 21, 'Série'),
+(146, 22, 'Série'),
+(150, 24, 'Série'),
+(151, 25, 'Série'),
+(152, 26, 'Série');
 
 -- --------------------------------------------------------
 
@@ -107,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `similaires` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `similaire` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Associe des vidéos similaires à une vidéos' AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Associe des vidéos similaires à une vidéos' AUTO_INCREMENT=37 ;
 
 --
 -- Contenu de la table `similaires`
@@ -121,8 +125,14 @@ INSERT INTO `similaires` (`id`, `video`, `similaire`) VALUES
 (17, 5, 6),
 (18, 6, 5),
 (20, 8, 7),
-(23, 22, 21),
-(24, 21, 22);
+(25, 21, 22),
+(26, 22, 21),
+(31, 24, 25),
+(32, 24, 26),
+(33, 25, 24),
+(34, 25, 26),
+(35, 26, 24),
+(36, 26, 25);
 
 -- --------------------------------------------------------
 
@@ -134,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `tag` varchar(256) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient tous les tags des vidéos (table d''association)' AUTO_INCREMENT=1847 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient tous les tags des vidéos (table d''association)' AUTO_INCREMENT=2000 ;
 
 --
 -- Contenu de la table `tags`
@@ -434,33 +444,91 @@ INSERT INTO `tags` (`id`, `video`, `tag`) VALUES
 (1797, 17, 'rois'),
 (1798, 17, 'terre'),
 (1799, 17, 'vaisselle'),
-(1820, 22, 'intrigue'),
-(1821, 22, 'rupture'),
-(1822, 22, 'infidelite'),
-(1823, 22, 'lobato'),
-(1824, 22, 'menace'),
-(1825, 22, 'cliff'),
-(1826, 22, 'hanger'),
-(1827, 21, 'amor'),
-(1828, 21, 'amour'),
-(1829, 21, 'antonio'),
-(1830, 21, 'delaunay'),
-(1831, 21, 'dolores'),
-(1832, 21, 'ernesto'),
-(1833, 21, 'espagol'),
-(1834, 21, 'feuilleton'),
-(1835, 21, 'fuerza'),
-(1836, 21, 'germain'),
-(1837, 21, 'hector'),
-(1838, 21, 'hispanique'),
-(1839, 21, 'intrigue'),
-(1840, 21, 'lobato'),
-(1841, 21, 'maribel'),
-(1842, 21, 'novela'),
-(1843, 21, 'poinsard'),
-(1844, 21, 'py'),
-(1845, 21, 'sonia'),
-(1846, 21, 'trahison');
+(1847, 23, 'facebook'),
+(1848, 23, 'x2012'),
+(1849, 23, 'gontier'),
+(1850, 23, 'lobato'),
+(1851, 23, 'azria'),
+(1852, 23, 'commentaires'),
+(1853, 23, 'carantino'),
+(1854, 23, 'post'),
+(1855, 23, 'cours'),
+(1876, 21, 'amor'),
+(1877, 21, 'amour'),
+(1878, 21, 'antonio'),
+(1879, 21, 'delaunay'),
+(1880, 21, 'dolores'),
+(1881, 21, 'ernesto'),
+(1882, 21, 'espagol'),
+(1883, 21, 'feuilleton'),
+(1884, 21, 'fuerza'),
+(1885, 21, 'germain'),
+(1886, 21, 'hector'),
+(1887, 21, 'hispanique'),
+(1888, 21, 'intrigue'),
+(1889, 21, 'lobato'),
+(1890, 21, 'maribel'),
+(1891, 21, 'novela'),
+(1892, 21, 'poinsard'),
+(1893, 21, 'py'),
+(1894, 21, 'sonia'),
+(1895, 21, 'trahison'),
+(1896, 22, 'cliff'),
+(1897, 22, 'hanger'),
+(1898, 22, 'infidelite'),
+(1899, 22, 'intrigue'),
+(1900, 22, 'lobato'),
+(1901, 22, 'menace'),
+(1902, 22, 'rupture'),
+(1951, 24, 'casert'),
+(1952, 24, 'censier'),
+(1953, 24, 'deteck'),
+(1954, 24, 'detective'),
+(1955, 24, 'enquete'),
+(1956, 24, 'gouhier'),
+(1957, 24, 'langues'),
+(1958, 24, 'nissaire'),
+(1959, 24, 'platal'),
+(1960, 24, 'sherlocx'),
+(1961, 24, 'shotgun'),
+(1962, 25, 'bataclan'),
+(1963, 25, 'bernache'),
+(1964, 25, 'bl'),
+(1965, 25, 'borne'),
+(1966, 25, 'branta'),
+(1967, 25, 'canadensis'),
+(1968, 25, 'casert'),
+(1969, 25, 'cassee'),
+(1970, 25, 'censier'),
+(1971, 25, 'corde'),
+(1972, 25, 'detective'),
+(1973, 25, 'enlevement'),
+(1974, 25, 'enquete'),
+(1975, 25, 'genek'),
+(1976, 25, 'gouhier'),
+(1977, 25, 'hache'),
+(1978, 25, 'kes'),
+(1979, 25, 'missaire'),
+(1980, 25, 'previously'),
+(1981, 25, 'sherlock'),
+(1982, 25, 'vitre'),
+(1983, 26, 'bas'),
+(1984, 26, 'bataclan'),
+(1985, 26, 'ca'),
+(1986, 26, 'detective'),
+(1987, 26, 'enquete'),
+(1988, 26, 'gouellec'),
+(1989, 26, 'gouhier'),
+(1990, 26, 'lobato'),
+(1991, 26, 'local'),
+(1992, 26, 'meurtre'),
+(1993, 26, 'missaire'),
+(1994, 26, 'moriarty'),
+(1995, 26, 'mycroft'),
+(1996, 26, 'piscine'),
+(1997, 26, 'sherlock'),
+(1998, 26, 'toit'),
+(1999, 26, 'censier');
 
 -- --------------------------------------------------------
 
@@ -505,7 +573,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `annee` int(11) DEFAULT NULL,
   `format` varchar(16) NOT NULL DEFAULT 'webm',
   `login` varchar(64) DEFAULT NULL COMMENT 'Login du dernier utilisateur à avoir modifié la description de la vidéo'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=27 ;
 
 --
 -- Contenu de la table `videos`
@@ -533,7 +601,11 @@ INSERT INTO `videos` (`video`, `titre`, `adresse`, `proj`, `poster`, `descriptio
 (19, 'Discours de dissolution de la Khômiss', 'videosjtx/30-dissolution khomiss.webm', 'http://binet-jtx.com/blog/?p=1290', 'media/19.jpg', 'Restrospective du discours du colonel Gontier annonçant la dissolution de la Khômiss le 29 juin 2013. La plupart des élèves étaient venus en tenue missaire sans cagoule sur demande du GénéK.', 2011, 2013, 'webm', 'denis.merigoux'),
 (20, 'Pacard ft. Vibes', 'videosjtx/16a_Pacard_Vibes.webm', 'http://binet-jtx.com/blog/?p=1559', 'media/20.jpg', 'Quoi de mieux pour planer sur la musique de Vibes que le cours de MAT311 ? Pacard est notre guide lors d''un voyage psychédélique vers la mystique des mathématiques illustrée à grand renfort de 3D et d''effets spéciaux...', 2012, 2014, 'webm', 'denis.merigoux'),
 (21, 'La fuerza del amor S01E01', 'videosjtx/La Fuerza del Amor S01E01.webm', 'http://binet-jtx.com/blog/?p=1610', 'media/21.jpg', 'Superproduction du JTX 2012 à destination des ménagères du plâtal, « La fuerza del amor » est sponsorisé par le département d''espagnol. Ce feuilleton digne des meilleurs novelas sudaméricaines saura vous faire voyager au pays de l''amour et des trahisons.', 2012, 2014, 'webm', 'denis.merigoux'),
-(22, 'La fuerza del amor S01E02', 'videosjtx/La Fuerza del Amor S01E02.webm', 'http://binet-jtx.com/blog/?p=1610', 'media/22.jpg', 'Le deuxième épisode de « La fuerza del amor » vous livrera son lot de ruptures, de menaces et d''infidélités dans le climat étouffant du plâtal. Ne pas manquer le superbe cliff hanger à la fin de l''épisode...', 2012, 2014, 'webm', 'denis.merigoux');
+(22, 'La fuerza del amor S01E02', 'videosjtx/La Fuerza del Amor S01E02.webm', 'http://binet-jtx.com/blog/?p=1610', 'media/22.jpg', 'Le deuxième épisode de « La fuerza del amor » vous livrera son lot de ruptures, de menaces et d''infidélités dans le climat étouffant du plâtal. Ne pas manquer le superbe cliff hanger à la fin de l''épisode...', 2012, 2014, 'webm', 'denis.merigoux'),
+(23, 'Facebook : groupe X2012', 'videosjtx/14-facebook X2012.webm', 'http://binet-jtx.com/blog/?p=1496', 'media/23.jpg', 'Facebook est devenu un moyen incontournable de communication pour les X, mais aussi une boîte à spam redoutable. Attention, ce clip est très proche de la réalité.', 2012, 2014, 'webm', 'denis.merigoux'),
+(24, 'SherlocX épisode 1', 'videosjtx/24-sherlocx episode 1.webm', 'http://binet-jtx.com/blog/?p=1496', 'media/24.jpg', 'Premier épisode de la série des SherlocX, adaptation plâtalienne de la série « Sherlock ». Quentin Censier joue le premier rôle et part à la chasse d''un mystérieux missaire...', 2012, 2014, 'webm', 'denis.merigoux'),
+(25, 'SherlocX épisode 2', 'videosjtx/10_SherlocX_Episode_2.webm', 'http://binet-jtx.com/blog/?p=1559', 'media/25.jpg', 'Pour le deuxième épisode de SherlockX, l''intrigue se complique : un faux missaire a détruit une borne du BL alors qu''un couple de bernaches détournait l''attention des kessiers. Watson est enlevé par une mystérieuse voiture à la fin de l''épisode...', 2012, 2014, 'webm', 'denis.merigoux'),
+(26, 'SherlocX épisode 3', 'videosjtx/19_SherlocX_Episode3.webm', 'http://binet-jtx.com/blog/?p=1559', 'media/26.jpg', 'Troisième épisode de la série SherlocX starring Quentin Censier as Sherlock and Aurélien Gouhier as Watson. C''est l''heure du combat final contre celui qui se cache derrière tout ça : Lobato-Moriarty. Ne manquez pas le suspense final !', 2012, 2014, 'webm', 'denis.merigoux');
 
 --
 -- Index pour les tables exportées
@@ -583,7 +655,7 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=142;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
 --
 -- AUTO_INCREMENT pour la table `promotions`
 --
@@ -593,17 +665,17 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
 -- AUTO_INCREMENT pour la table `similaires`
 --
 ALTER TABLE `similaires`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT pour la table `tags`
 --
 ALTER TABLE `tags`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1847;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2000;
 --
 -- AUTO_INCREMENT pour la table `videos`
 --
 ALTER TABLE `videos`
-MODIFY `video` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+MODIFY `video` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- Contraintes pour les tables exportées
 --

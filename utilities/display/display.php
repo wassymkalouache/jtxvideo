@@ -104,13 +104,13 @@ EOF;
         $lien = "index.php?page=recherche&query=$nouvellerequete&numero=1";
         echo "<a type='button' class='btn btn-xs btn-default' href='$lien'>$video->annee</a> ";
     }
-    if (!empty($similaires)) {
-        echo "&nbsp;<small><span class='glyphicon glyphicon-fast-forward'></span></small>&nbsp;";
-        foreach ($similaires as $similaire) {//on liste les catégories les unes après les autres sous forme de boutons
-            $similaire = Video::getVideoFromId($similaire->similaire);
-            echo "<a type='button' class='btn btn-xs btn-default boutontextearaccourcir' href='index.php?page=video&video=$similaire->video'>$similaire</a> ";
-        }
-    }
+//    if (!empty($similaires)) {//j'ai désactivé l'affichage des clips similaires sur la page de recherche.
+//        echo "&nbsp;<small><span class='glyphicon glyphicon-fast-forward'></span></small>&nbsp;";
+//        foreach ($similaires as $similaire) {//on liste les catégories les unes après les autres sous forme de boutons
+//            $similaire = Video::getVideoFromId($similaire->similaire);
+//            echo "<a type='button' class='btn btn-xs btn-default boutontextearaccourcir' href='index.php?page=video&video=$similaire->video'>$similaire</a> ";
+//        }
+//    }
     if (!empty($categories)) {
         echo "&nbsp;<small><span class='glyphicon glyphicon-folder-open'> </span></small>&nbsp;&nbsp;";
         foreach ($categories as $categorie) {//on liste les catégories les unes après les autres sous forme de boutons
