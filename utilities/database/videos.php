@@ -21,6 +21,8 @@ class Video {
 
     public static function insererVideo($titre, $adresse, $proj, $description, $jtx, $annee, $login) {//inère la vidéo dans la base de données
         // opérations sur la base
+        preg_replace("/(<script>|</script>)/i", '', $description); //la description peut contenir du HTML mais on enlève les balises script pour pas
+        //qu'il y ait trop de failles de sécurité.
         if (Video::getVideoFromAdress($adresse) === null) {//vérifie si la vidéo n'est déjà pas référencée.
             $dbh = Database::connect();
             $sth = $dbh->prepare("INSERT INTO `videos` (titre, adresse, proj, poster, description, jtx, annee, login) VALUES(?,?,?,?,?,?,?,?)");
@@ -40,6 +42,8 @@ class Video {
 
     public static function updateVideo($id, $titre, $adresse, $proj, $description, $jtx, $annee, $login) {
         // opérations sur la base
+        preg_replace("/(\<script\>|\<\/script\>)/i", '', $description); //la description peut contenir du HTML mais on enlève les balises script pour pas
+        //qu'il y ait trop de failles de sécurité.
         if (!(Video::getVideoFromAdress($adresse) === null)) {//vérifie si la vidéo est bien référencée.
             $dbh = Database::connect();
             $sth = $dbh->prepare("UPDATE `videos` SET titre=?, adresse=?, proj=?, description=?, jtx=?, annee=?, login=? WHERE video=?");
@@ -80,12 +84,12 @@ class Video {
         }
     }
 
-    public static function getVideoFromId($video) {//retourne la vidéo repéré par le $login
+    public static function getVideoFromId($id) {//retourne la vidéo repéré par le $login
         $dbh = Database::connect();
         $query = "SELECT * FROM `videos` WHERE video=? ";
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Video');
-        $sth->execute(array($video));
+        $sth->execute(array($id));
         $video = $sth->fetch();
         $sth->closeCursor();
         if (empty($video) || $sth->rowCount() != 1) {
@@ -93,6 +97,10 @@ class Video {
         } else {
             return $video;
         }
+    }
+
+    public static function exists($video) {
+        return (!(Video::getVideoFromId($video) === null));
     }
 
     public static function titreAleatoire() {

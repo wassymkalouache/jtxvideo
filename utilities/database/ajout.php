@@ -19,37 +19,31 @@ require_once 'similaires.php';
 //           tags
 //           description
 //           poster
+//Les filtres sur les inputs sont faits directement au niveau des fonctions d'ajout (voir fichiers correspondants).
 
-Video::insererVideo($titre, $adresse, $proj, $description, $jtx, $annee,$_SESSION['login']);
+
+Video::insererVideo($titre, $adresse, $proj, $description, $jtx, $annee, $_SESSION['login']);
 $video = Video::getVideoFromAdress($adresse);
 $id = $video->video;
 
 $promotions = explode(';', $promotions); //$promotions contient un truc du genre X2012;X2013
 foreach ($promotions as $promotion) {
-    if (preg_match("/^[0-9]{4}$/i", $promotion)) {//mais on s'en assure quand même
-        Promotion::insererPromotion($id, $promotion); //on récupère pas le X devant les chiffres
-    }
+    Promotion::insererPromotion($id, $promotion);
 }
 
 $categories = explode(';', $categories); //$categories contient un truc du genre Humoristique;Musical
 foreach ($categories as $categorie) {
-    if (!$categorie == '') {
-        Categorie::insererCategorie($id, $categorie);
-    }
+    Categorie::insererCategorie($id, $categorie);
 }
 
 $similaires = explode(';', $similaires); //$categories contient un truc du genre Humoristique;Musical
 foreach ($similaires as $similaire) {
-    if (preg_match('/^[0-9]+$/', $similaire)) {
-        Similaire::insererSimilaire($id, $similaire);
-    }
+    Similaire::insererSimilaire($id, $similaire);
 }
 
 $tags = explode(' ', $tags); //$tags contient un truc du genre bob moule fist
 foreach ($tags as $tag) {
-    if (preg_match("/^[0-9A-Z]+$/i", $tag)) {//mais on s'en assure quand même
-        Tag::insererTag($id, $tag);
-    }
+    Tag::insererTag($id, $tag);
 }
 
 if (!$noposter && preg_match("/image/i", $typeFichier)) {
@@ -59,7 +53,7 @@ if (!$noposter && preg_match("/image/i", $typeFichier)) {
     Video::updatePoster($id, "media/" . $id . "." . $extension); //et on enregistre l'emplacement du poster dans la BDD;
 }
 
-unset($_SESSION['query']);//comme ça si la précédente requête devait afficher la nouvelle vidéo ça recalculer et ça la montre
+unset($_SESSION['query']); //comme ça si la précédente requête devait afficher la nouvelle vidéo ça recalculer et ça la montre
 header("Location:index.php?page=video&video=$id"); //ensuite on redirige vers l'affichage de la vidéo !
 exit();
 

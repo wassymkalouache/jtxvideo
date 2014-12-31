@@ -1,6 +1,10 @@
-<?php require_once 'database.php';
+<?php
+
+require_once 'database.php';
+require_once 'videos.php';
 
 class Similaire {
+
     public $video;
     public $similaire;
 
@@ -8,14 +12,19 @@ class Similaire {
         return $this->similaire;
     }
 
-    public static function insererSimilaire($video,$similaire) {//insère un tag pour une vidéo dans la base de données
+    public static function insererSimilaire($video, $similaire) {//insère un tag pour une vidéo dans la base de données
         // opérations sur la base
-        $dbh = Database::connect();
-        $sth = $dbh->prepare("INSERT INTO `similaires` (video,similaire) VALUES(?,?)");
-        $sth->execute(array($video,$similaire));
-        $dbh = null; // Déconnexion de MySQL
+        if (Video::exists($video) && Video::exists($similaire)) {
+            $dbh = Database::connect();
+            $sth = $dbh->prepare("INSERT INTO `similaires` (video,similaire) VALUES(?,?)");
+            $sth->execute(array($video, $similaire));
+            $dbh = null; // Déconnexion de MySQL
+            return true;
+        } else {
+            return false;
+        }
     }
-    
+
     public static function deleteSimilairesFromVideo($video) {//supprime toutes les catégories associées à une vidéo (utile pour la mise à jour)
         // opérations sur la base
         $dbh = Database::connect();
@@ -30,9 +39,9 @@ class Similaire {
         $sth = $dbh->prepare($query);
         $sth->setFetchMode(PDO::FETCH_CLASS, 'Similaire');
         $sth->execute(array($video));
-        $i=0;
+        $i = 0;
         while ($similaire = $sth->fetch()) {
-            $similaires[$i] = $similaire ;
+            $similaires[$i] = $similaire;
             $i++;
         }
         $sth->closeCursor();
@@ -42,4 +51,5 @@ class Similaire {
             return $similaires;
         }
     }
+
 }

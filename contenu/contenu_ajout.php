@@ -253,7 +253,8 @@ EOF;
                            placeholder="Listes de mots sans majuscules ni accents séparés par des espaces" aria-describedby="titrevideo">
                 </div>
                 <hr style='margin-top:10px;margin-bottom:10px'>
-                <p class="text-muted">Écris la description du clip en texte plein. N'éhsites pas à ajouter des informations comme la source de la bande son, des anecdotes sur le tournage, etc.</p>
+                <p class="text-muted">Écris la description du clip en texte plein. N'hésite pas à ajouter des informations comme la source de la bande son, des anecdotes sur le tournage, etc.</p>
+                <p class='text-muted'>Tu peux inclure un lien vers une page internet (clip Youtube, site, etc.) avec la syntaxe [[URL|Texte du lien]].</p>
                 <textarea name="description" class="form-control" row="3"><?php
                     if ($updatemode) {
                         echo $video->description; //enlève les espaces en trop au début de la description (bug ?);

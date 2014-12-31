@@ -13,10 +13,15 @@ class Categorie {
 
     public static function insererCategorie($video, $categorie) {//insère un tag pour une vidéo dans la base de données
         // opérations sur la base
-        $dbh = Database::connect();
-        $sth = $dbh->prepare("INSERT INTO `categories` (video,categorie) VALUES(?,?)");
-        $sth->execute(array($video, $categorie));
-        $dbh = null; // Déconnexion de MySQL
+        if ($categorie != '') {
+            $dbh = Database::connect();
+            $sth = $dbh->prepare("INSERT INTO `categories` (video,categorie) VALUES(?,?)");
+            $sth->execute(array($video, $categorie));
+            $dbh = null; // Déconnexion de MySQL
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function deleteCategoriesFromVideo($video) {//supprime toutes les catégories associées à une vidéo (utile pour la mise à jour)

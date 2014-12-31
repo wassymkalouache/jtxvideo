@@ -119,9 +119,11 @@ EOF;
             echo "<a type='button' class='btn btn-xs btn-default boutontextearaccourcir' href='$lien'>$categorie->categorie</a> ";
         }
     }
+    $description = preg_replace("/\[\[([^\|\]]+)(?:\||)([^|]+|)\]\]/i", "<a href=\"$1\">$2</a>", $video->description); //on transforme la syntaxe wiki des liens
+    //en liens HTML
     echo <<<EOF
             </p>
-            <p class="description">$video->description</p>
+            <p class="description">$description</p>
         </div>
     </div>
 EOF;
@@ -195,13 +197,15 @@ function videopage($id, $format) {
             <a type="button" class="btn btn-info" href="$video->proj">Page de la proj'</a>
             <a type="button" class="btn btn-default" href="$video->adresse" target="_blank">Télécharger la vidéo</a>
 EOF;
-    if (isset($_SESSION['loggedIn'])&&isset($_SESSION['admin'])&&$_SESSION['admin']) {//option accessible aux admins loggués
+    if (isset($_SESSION['loggedIn']) && isset($_SESSION['admin']) && $_SESSION['admin']) {//option accessible aux admins loggués
         echo "<a type=\"button\" class=\"btn btn-danger\" href=\"index.php?page=ajout&mode=update&video=$video->video\">Modifier la description</a>";
     }
+    $description = preg_replace("/\[\[([^\|\]]+)(?:\||)([^|]+|)\]\]/i", "<a href=\"$1\">$2</a>", $video->description); //on transforme la syntaxe wiki des liens
+    //en liens HTML
     echo <<<EOF
         </div>
         <h1 class="media-heading">$video->titre</h1>
-        <p>$video->description</p>
+        <p>$description</p>
         <div class="row">
                 <div class="col-xs-6">
                     <p class="text-muted">
@@ -262,7 +266,7 @@ EOF;
         }
         echo "</p>";
     }
-    $lastUser = Utilisateur::getUtilisateur($video->login)->_toString();//dernier utilisateur à avoir modifié les informations de la vidéo
+    $lastUser = Utilisateur::getUtilisateur($video->login)->_toString(); //dernier utilisateur à avoir modifié les informations de la vidéo
     echo <<<EOF
                 </div>
             </div>
