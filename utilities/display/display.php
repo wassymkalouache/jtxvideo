@@ -119,7 +119,7 @@ EOF;
             echo "<a type='button' class='btn btn-xs btn-default boutontextearaccourcir' href='$lien'>$categorie->categorie</a> ";
         }
     }
-    $description = preg_replace("/\[\[([^\|\]]+)(?:\||)([^|]+|)\]\]/i", "<a href=\"$1\">$2</a>", $video->description); //on transforme la syntaxe wiki des liens
+    $description = preg_replace("/\[\[([^\|\]]+)(?:\||)([^|]+|)\]\]/i", "<a target=\"_blank\" href=\"$1\">$2</a>", $video->description); //on transforme la syntaxe wiki des liens
     //en liens HTML
     echo <<<EOF
             </p>
@@ -188,7 +188,7 @@ function videopage($id, $format) {
     }
     echo <<<EOF
     <div class="jumbotron" style="text-align:center">
-        <video class="video-js vjs-default-skin" controls preload="metadata" width="800" poster="$video->poster">
+        <video class="video-js vjs-default-skin" controls preload="metadata" width="800" autoplay poster="$video->poster">
             <source src="$video->adresse" type="video/$format" />
         </video>
     </div>
@@ -200,7 +200,7 @@ EOF;
     if (isset($_SESSION['loggedIn']) && isset($_SESSION['admin']) && $_SESSION['admin']) {//option accessible aux admins loggués
         echo "<a type=\"button\" class=\"btn btn-danger\" href=\"index.php?page=ajout&mode=update&video=$video->video\">Modifier la description</a>";
     }
-    $description = preg_replace("/\[\[([^\|\]]+)(?:\||)([^|]+|)\]\]/i", "<a href=\"$1\">$2</a>", $video->description); //on transforme la syntaxe wiki des liens
+    $description = preg_replace("/\[\[([^\|\]]+)(?:\||)([^|]+|)\]\]/i", "<a target=\"_blank\" href=\"$1\">$2</a>", $video->description); //on transforme la syntaxe wiki des liens
     //en liens HTML
     echo <<<EOF
         </div>
