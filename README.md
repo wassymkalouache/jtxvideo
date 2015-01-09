@@ -19,12 +19,11 @@ Pour naviguer sur le site, installez les fichiers source sur votre serveur et im
   - [x] année ;
   - [x] JTX ;
   - [x] catégorie.
-- [ ] Ajout de vidéos dans la base de données :
-  - [ ] affichage de la structure du serveur pour choisir la vidéo ;
-  - [ ] extraction d'une frame de la vidéo pour servir de poster.
-- [ ] Modification participative :
-  - [ ] page de modification de la descriptions des vidéos déjà cataloguées ;
-  - [ ] espace admin où l'on voit les propositions de description de vidéos par les utilisateurs.
+- [x] Ajout de vidéos dans la base de données :
+  - [x] affichage de la structure du serveur pour choisir la vidéo ;
+  - [ ] mise à jour des données des vidéos par les admins.
+- [ ] Autocomplétion
+- [ ] Gestion des admins.
   
 ##Comment ça marche
 
