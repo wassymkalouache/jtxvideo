@@ -77,7 +77,7 @@ if ($updatemode) {
             if (!$updatemode) {
                 echo <<<EOF
                 <div class="panel panel-primary">
-                    <div class="panel-heading"><center><h3 class=panel-title>Serveur JTX</h3></center></div>
+                    <div class="panel-heading" style="text-align:center"><h3 class=panel-title>Serveur JTX</h3></div>
                     <div class="panel-body">
                         <p class="text-muted">Localise la vidéo à ajouter sur le serveur du JTX. Tu ne peux pas sélectionner des vidéos déjà ajoutées. Pour modifier, clic droit puis « Ouvrir le lien dans un nouvel onglet » puis modifie la description.</p>
                         <div id='arborescenceserveur'></div><!-- div rempli par une fonction dans code.js-->
@@ -89,15 +89,15 @@ EOF;
                 echo "<div id='panelvideochoisie' class='panel panel-success'>";
             }
             ?>
-            <div class="panel-heading"><center><h3 class=panel-title>Vidéo choisie</h3></center></div>
+            <div class="panel-heading" style="text-align:center"><h3 class=panel-title>Vidéo choisie</h3></div>
             <div class="panel-body">
-                <p> Adresse : <tt><span id="adressevideo" style='float:right'>
+                <p> Adresse : <span id="adressevideo" style='float:right'>
                         <?php
                         if ($updatemode) {
                             echo $video->adresse;
                         }
                         ?>
-                    </span></tt></p>
+                    </span></p>
                 <input type='hidden' name='adresse' 
                 <?php
                 if ($updatemode) {
@@ -105,13 +105,13 @@ EOF;
                 }
                 ?>
                        id='formulaireadresse'/><!-- les inputs et les spans sont remplis par une fonction dans code.js en mode ajout des vidéos-->
-                <p>Extension : <tt><span id="extensionvideo" style='float:right'>
+                <p>Extension : <span id="extensionvideo" style='float:right'>
                         <?php
                         if ($updatemode) {
                             echo $video->format;
                         }
                         ?>
-                    </span></tt></p>
+                    </span></p>
                 <input type='hidden' name='extension'
                 <?php
                 if ($updatemode) {
@@ -122,7 +122,7 @@ EOF;
             </div>
         </div>  
         <div class="panel panel-default">
-            <div class="panel-heading"><center><h3 class=panel-title>Métadonnées</h3></center></div>
+            <div class="panel-heading" style="text-align:center"><h3 class=panel-title>Métadonnées</h3></div>
             <div class="panel-body">
                 <p class="text-muted">Inscris ici les métadonnées de la vidéo. Seul le titre est obligatoire, mais le mieux est de remplir le maximum de champs possibles.</p>
                 <div class="input-group">
@@ -208,42 +208,40 @@ EOF;
                         echo "value=\"$similaires\"";
                     }
                     ?>
-                           placeholder="1;256" aria-describedby="similairevideo">
+                           placeholder="1;256" aria-describedby="similairesvideo">
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-8">
         <div class="panel panel-primary">
-            <div class="panel-heading"><center><h3 class=panel-title>Lecteur vidéo</h3></center></div>
-            <div class="panel-body">
+            <div class="panel-heading" style="text-align:center"><h3 class=panel-title>Lecteur vidéo</h3></div>
+            <div class="panel-body" style="text-align:center">
                 <p class="text-muted">Vérifie si la vidéo correspond bien au fichier puis taggue la tout en la regardant.</p>
-                <center>
-                    <video id="lecteurvideo" class="video-js vjs-default-skin"
-                    <?php
-                    if ($updatemode) {
-                        echo "poster='$video->poster'";
-                    }
-                    ?>
-                           controls preload="none" height="350">
-                               <?php
-                               if ($updatemode) {
-                                   echo "<source src=\"$video->adresse\"/>";
-                               } else {
-                                   echo "<source src=''/>";
-                               }
-                               ?>
-                    </video>
-                </center>
+                <video id="lecteurvideo" class="video-js vjs-default-skin"
+                <?php
+                if ($updatemode) {
+                    echo "poster='$video->poster'";
+                }
+                ?>
+                       controls preload="none" height="350">
+                           <?php
+                           if ($updatemode) {
+                               echo "<source src=\"$video->adresse\"/>";
+                           } else {
+                               echo "";
+                           }
+                           ?>
+                </video>
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading"><center><h3 class=panel-title>Tags et description</h3></center></div>
+            <div class="panel-heading" style="text-align:center"><h3 class=panel-title>Tags et description</h3></div>
             <div class="panel-body">
                 <p class="text-muted">Aide toi du lecteur ci-dessus pour tagger la vidéo. Sont à inclure dans la mesure du possible :
                     les lieux montrés, les acteurs principaux, les thèmes de la vidéo, les binets ou associations impliqués, etc.</p>
                 <div class="input-group">
-                    <span class="input-group-addon" id="titrevideo">Tags</span>
+                    <span class="input-group-addon">Tags</span>
                     <input type="text" name="tags" class="form-control" 
                     <?php
                     if ($updatemode) {
@@ -254,8 +252,8 @@ EOF;
                 </div>
                 <hr style='margin-top:10px;margin-bottom:10px'>
                 <p class="text-muted">Écris la description du clip en texte plein. N'hésite pas à ajouter des informations comme la source de la bande son, des anecdotes sur le tournage, etc.</p>
-                <p class='text-muted'>Tu peux inclure un lien vers une page internet (clip Youtube, site, etc.) avec la syntaxe [[URL|Texte du lien]].</p>
-                <textarea name="description" class="form-control" row="3"><?php
+                <p class='text-muted'>Tu peux inclure un lien vers une page internet (clip Youtube, site, etc.) avec la syntaxe <code>[[URL|Texte du lien]]</code>.</p>
+                <textarea name="description" class="form-control" rows="3" spellcheck="true"><?php
                     if ($updatemode) {
                         echo $video->description; //enlève les espaces en trop au début de la description (bug ?);
                     }
@@ -263,9 +261,9 @@ EOF;
             </div>
         </div>
         <div id="panelposter" class="panel panel-primary">
-            <div class="panel-heading"><center><h3 class=panel-title>Choix du poster</h3></center></div>
+            <div class="panel-heading" style="text-aligne:center"><h3 class=panel-title>Choix du poster</h3></div>
             <div class="panel-body">
-                <p class='text-muted'>Extrais une frame de la vidéo à l'aide du logiciel de ton choix puis uploade-là à l'aide du bouton « Parcourir » ci-dessous. L'image doit peser moins de 500 Ko et doit être dans une des extensions suivantes : <tt>.jpg</tt>, <tt>.png</tt>, <tt>.jpeg</tt>.</p>
+                <p class='text-muted'>Extrais une frame de la vidéo à l'aide du logiciel de ton choix puis uploade-là à l'aide du bouton « Parcourir » ci-dessous. L'image doit peser moins de 500 Ko et doit être dans une des extensions suivantes : <code>.jpg</code>, <code>.png</code>, <code>.jpeg</code>.</p>
                 <div class="media">
                     <a class="media-left media-middle">
                         <?php
@@ -278,7 +276,7 @@ EOF;
                     </a>
                     <div class="media-body">
                         <input type="hidden" name="MAX_FILE_SIZE" value="500000" />
-                        <input type="file" accept="image" name="poster">
+                        <input type="file" accept="image/*" name="poster">
                     </div>
                 </div>
             </div>

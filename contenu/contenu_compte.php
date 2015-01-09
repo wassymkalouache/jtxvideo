@@ -28,7 +28,7 @@ if (!isset($_SESSION['loggedIn'])) {//si l'utilisateur n'est pas connecté, erre
 </div>
 
 
-<form class="form-signup" role="form" method="post" action="index.php?todo=changemdp" oninput="up2.setCustomValidity(new.value != new2.value ? 'Les mots de passe diffèrent.' : '')">
+<form class="form-signup" role="form" method="post" action="index.php?todo=changemdp">
     <h2 class="form-signin-heading">Changer le mot de passe</h2>
     <p>Si tu as perdu ton mot de passe, <a href="mailto:denis.merigoux@polytechnique.edu">envoie un mail</a>.</p>
     <?php

@@ -77,7 +77,7 @@ function videoligne($id) {
     echo <<<EOF
    <div class="media videoligne">
         <a class="media-left media-middle" href="index.php?page=video&video=$video->video">
-            <img src="$video->poster" alt="$video->titre" width="200"></img>
+            <img src="$video->poster" alt="$video->titre" width="200" />
         </a>
         <div class="media-body descriptionvideo">
             <h4 class="media-heading"><a href="index.php?page=video&video=$video->video">$video->titre</a></h4>
