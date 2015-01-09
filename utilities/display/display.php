@@ -270,7 +270,7 @@ EOF;
     echo <<<EOF
                 </div>
             </div>
-            <p class="text-muted"><span style="float:right">Dernière modification par $lastUser</span></p>
+            <p class="text-muted">Nombre de vues : $video->vues<span style="float:right">Dernière modification par $lastUser</span></p>
         </div>
     </div>
 EOF;

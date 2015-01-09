@@ -91,6 +91,7 @@ $videoBDD = Video::getVideoFromId($video);
 if (!$videoBDD == null) {
 //attention la variable $video a été initialisée dans index.php via $_GET['video']. La fonction videopage 
 //contient un module qui filtre $video et ne permet d'afficher quelque choses uniquement si $video correspond à une id de vidéo.
+    Video::ajouterVue($video);
     videopage($video, $videoBDD->format);
 } else {
     header("Location:index.php?page=error&error=videonotfound");

@@ -13,7 +13,8 @@ class Video {
     public $jtx;
     public $annee;
     public $format;
-    public $login; //les hcamps correspondent à cexu de la base de données utilisateurs.
+    public $login; //les champs correspondent à cexu de la base de données utilisateurs.
+    public $vues;
 
     public function __toString() {
         return $this->titre;
@@ -113,4 +114,11 @@ class Video {
         echo $titre['titre'];
     }
 
+    public static function ajouterVue($video) {
+        // opérations sur la base
+        $dbh = Database::connect();
+        $sth = $dbh->prepare("UPDATE `videos` SET vues=vues+1 WHERE video=?");
+        $sth->execute(array($video));
+        $dbh = null; // Déconnexion de MySQL
+    }
 }

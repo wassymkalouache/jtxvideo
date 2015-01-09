@@ -86,7 +86,7 @@ function RequeteTitre($query) {
     } elseif ($querytitre == "*") {
         //si étoile on prend tout
         $requetetitre = "SELECT videos.video FROM videos LEFT JOIN promotions ON videos.video = promotions.video LEFT JOIN categories ON categories.video = videos.video"
-                . " WHERE (($requetedate) AND ($requetecategorie)) GROUP BY videos.video";
+                . " WHERE (($requetedate) AND ($requetecategorie)) GROUP BY videos.video ORDER BY videos.vues DESC";
         $tableauparametresrequete = array();
     } else {
         $querytitre = explode(' ', $querytitre); //on découpe la requête titre sous forme de mots.
@@ -96,7 +96,7 @@ function RequeteTitre($query) {
             $querytitre[$cle] = '%' . $mottitre . '%';
             $requetetitre .= "(videos.titre LIKE ?) AND ";
         }
-        $requetetitre .= "true) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video"; //on termine d'écrire la requête.
+        $requetetitre .= "true) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video ORDER BY videos.vues DESC"; //on termine d'écrire la requête.
         $tableauparametresrequete = $querytitre;
         //la requete doit tenir compte de la table videos et promotions; LEFT JOIN pour ne pas exclure les vidéos ne possédant pas d'entrée dans la table promotion.
     }//Maintenant que la requête est construite, on la soumet à la base de donnée
@@ -127,7 +127,7 @@ function RequeteTags($query) {
     }
     $requetedate = CreerRequeteDate($query);
     $requetecategorie = CreerRequeteCategorie($query);
-    $requetetags .= "false) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video ORDER BY COUNT(tags.tag) DESC"; //on regroupe les résultats par vidéo (une vidéo n'appparaît
+    $requetetags .= "false) AND ($requetedate) AND ($requetecategorie)) GROUP BY videos.video ORDER BY COUNT(tags.tag) DESC, videos.vues DESC"; //on regroupe les résultats par vidéo (une vidéo n'appparaît
     // qu'une seule fois et on trie par le nombre de tags associé à chaque vidéo
     $dbh = Database::connect(); //maintenant on soumet la requête à la BDD. Comme les tags sont en ASCII et que $_GET a été sécurisé, pas de risques d'injection SQL.
     $sth = $dbh->prepare($requetetags);

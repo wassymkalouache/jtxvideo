@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 30 Décembre 2014 à 15:37
+-- Généré le :  Dim 04 Janvier 2015 à 17:03
 -- Version du serveur :  5.6.20
 -- Version de PHP :  5.5.15
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `categorie` varchar(256) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient la catégorisation de toutes les vidéos' AUTO_INCREMENT=153 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient la catégorisation de toutes les vidéos' AUTO_INCREMENT=171 ;
 
 --
 -- Contenu de la table `categories`
@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`id`, `video`, `categorie`) VALUES
 (92, 1, 'Musical'),
-(93, 2, 'Campagne Kès'),
-(94, 2, 'Musical'),
 (97, 4, 'Musical'),
 (98, 15, 'Campagne Kès'),
 (99, 15, 'Musical'),
@@ -67,7 +65,13 @@ INSERT INTO `categories` (`id`, `video`, `categorie`) VALUES
 (146, 22, 'Série'),
 (150, 24, 'Série'),
 (151, 25, 'Série'),
-(152, 26, 'Série');
+(152, 26, 'Série'),
+(153, 27, 'Musical'),
+(154, 28, 'Humoristique'),
+(155, 28, 'Youtube'),
+(156, 29, 'Humoristique'),
+(169, 2, 'Campagne Kès'),
+(170, 2, 'Musical');
 
 -- --------------------------------------------------------
 
@@ -79,14 +83,13 @@ CREATE TABLE IF NOT EXISTS `promotions` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `promotion` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les promotions concernées par les vidéos' AUTO_INCREMENT=63 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les promotions concernées par les vidéos' AUTO_INCREMENT=73 ;
 
 --
 -- Contenu de la table `promotions`
 --
 
 INSERT INTO `promotions` (`id`, `video`, `promotion`) VALUES
-(26, 2, 2010),
 (29, 4, 2009),
 (30, 4, 2010),
 (31, 15, 2010),
@@ -99,7 +102,11 @@ INSERT INTO `promotions` (`id`, `video`, `promotion`) VALUES
 (59, 18, 2012),
 (60, 18, 2011),
 (61, 19, 2011),
-(62, 19, 2012);
+(62, 19, 2012),
+(63, 28, 2013),
+(64, 29, 2012),
+(65, 29, 2011),
+(72, 2, 2010);
 
 -- --------------------------------------------------------
 
@@ -144,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 `id` int(11) NOT NULL,
   `video` int(11) NOT NULL,
   `tag` varchar(256) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient tous les tags des vidéos (table d''association)' AUTO_INCREMENT=2000 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient tous les tags des vidéos (table d''association)' AUTO_INCREMENT=2074 ;
 
 --
 -- Contenu de la table `tags`
@@ -157,10 +164,6 @@ INSERT INTO `tags` (`id`, `video`, `tag`) VALUES
 (1237, 1, 'scola'),
 (1238, 1, 'spam'),
 (1239, 1, 'starkes'),
-(1240, 2, 'bob'),
-(1241, 2, 'moule'),
-(1242, 2, 'pougne'),
-(1243, 2, 'rmpd'),
 (1259, 4, 'cycle'),
 (1260, 4, 'incorpo'),
 (1261, 4, 'mili'),
@@ -528,7 +531,69 @@ INSERT INTO `tags` (`id`, `video`, `tag`) VALUES
 (1996, 26, 'piscine'),
 (1997, 26, 'sherlock'),
 (1998, 26, 'toit'),
-(1999, 26, 'censier');
+(1999, 26, 'censier'),
+(2000, 27, 'gu'),
+(2001, 27, 'balavoine'),
+(2002, 27, 'defile'),
+(2003, 27, '14'),
+(2004, 27, 'juillet'),
+(2005, 27, 'tangente'),
+(2006, 27, 'styx'),
+(2007, 27, 'para'),
+(2008, 27, 'nabla'),
+(2009, 27, 'chanson'),
+(2010, 27, 'missaire'),
+(2011, 27, 'souterrains'),
+(2012, 27, 'khomiss'),
+(2013, 27, 'promotion'),
+(2014, 28, 'biscuits'),
+(2015, 28, 'combat'),
+(2016, 28, 'rasket'),
+(2017, 28, 'epic'),
+(2018, 28, 'whisky'),
+(2019, 28, 'rations'),
+(2020, 28, 'camembert'),
+(2021, 28, 'fondu'),
+(2022, 28, 'pain'),
+(2023, 28, 'mie'),
+(2024, 28, 'fromage'),
+(2025, 28, 'sauce'),
+(2026, 28, 'salade'),
+(2027, 28, 'mexicaine'),
+(2028, 28, 'porc'),
+(2029, 28, 'creole'),
+(2030, 28, 'muesli'),
+(2031, 28, 'terrine'),
+(2032, 28, 'cerf'),
+(2033, 28, 'chocolat'),
+(2034, 28, 'parmentier'),
+(2035, 28, 'canard'),
+(2036, 28, 'rechaud'),
+(2037, 28, 'potage'),
+(2038, 28, 'sansdiwch'),
+(2039, 28, 'degustation'),
+(2040, 29, 'treillis'),
+(2041, 29, 'rassemblement'),
+(2042, 29, 'compagnie'),
+(2043, 29, 'casert'),
+(2044, 29, 'carre'),
+(2045, 29, 'tos'),
+(2046, 29, 'merde'),
+(2047, 29, 'pompes'),
+(2048, 29, 'incorpo'),
+(2049, 29, 'chaussettes'),
+(2050, 29, 'armee'),
+(2051, 29, 'rangers'),
+(2052, 29, 'ceinturon'),
+(2053, 29, 'veste'),
+(2054, 29, 'sied'),
+(2055, 29, 'bien'),
+(2056, 29, 'geoffroy'),
+(2057, 29, 'chevalier'),
+(2070, 2, 'bob'),
+(2071, 2, 'moule'),
+(2072, 2, 'pougne'),
+(2073, 2, 'rmpd');
 
 -- --------------------------------------------------------
 
@@ -573,7 +638,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `annee` int(11) DEFAULT NULL,
   `format` varchar(16) NOT NULL DEFAULT 'webm',
   `login` varchar(64) DEFAULT NULL COMMENT 'Login du dernier utilisateur à avoir modifié la description de la vidéo'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Contient les informations sur toutes les vidéos du site' AUTO_INCREMENT=30 ;
 
 --
 -- Contenu de la table `videos`
@@ -581,7 +646,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
 
 INSERT INTO `videos` (`video`, `titre`, `adresse`, `proj`, `poster`, `description`, `jtx`, `annee`, `format`, `login`) VALUES
 (1, 'Spam me maybe', 'videosjtx/spammemaybe.webm', 'http://binet-jtx.com/blog/?p=1110', 'media/1.png', 'Considéré par certains comme le meilleur clip musical du JTX de tous les temps, Spam me maybe est une reprise de Call me maybe sur le thème du spam intensif qui est le quotidien de tous les polytechniciens. Le charme de l''actrice principale n''est sans doute pas étranger au succès du clip.\r\n                                        ', 2010, NULL, 'webm', 'denis.merigoux'),
-(2, 'Elle me dit pougne', 'videosjtx/ellemeditpougne.webm', 'http://binet-jtx.com/blog/?p=940', 'media/2.png', 'Reprise de Elle me dit de Mika, ce clip très rythmé et entraînant est idéal pour tuer toute culpabilité lors d''une séance de moule intensive.                                ', 2010, NULL, 'webm', 'denis.merigoux'),
+(2, 'Elle me dit pougne', 'videosjtx/ellemeditpougne.webm', 'http://binet-jtx.com/blog/?p=940', 'media/2.png', 'Reprise de [[https://www.youtube.com/watch?v=NiHWwKC8WjU|Elle me dit]] de Mika, ce clip très rythmé et entraînant est idéal pour tuer toute culpabilité lors d''une séance de moule intensive.                                ', 2010, 0, 'webm', 'denis.merigoux'),
 (3, 'Nous on subit', 'videosjtx/nousonsubit.webm', 'http://binet-jtx.com/blog/?p=1025', 'media/3.png', 'Ce clip est l''hymne officiel du binet Subaïsse. Pâles, cours, DE, binets, sports ; tout la vie à l''X est résumée dans ce clip à l''humour noir. C''est une des premières reprises des chansons de Stromae qui seront très prisées des JTX 2011 et 2012.                ', 2010, NULL, 'webm', 'denis.merigoux'),
 (4, 'RAS RAS tea bag', 'videosjtx/rasrasteabag.webm', 'http://binet-jtx.com/blog/?p=940', 'media/4.png', 'Ce clip semble avoir acquis un incontestable renommée, puisqu''il a été passé en pré-proj'' par le JTX 2011 en mars, et de l''avis général, résume assez bien la vie d''une promotion, avec toute la mélancolie convenable, mélancolie qui lui a malheureusement valu un accueil mitigé au sein de la promotion 2009, puisque projeté à quelques semaines de son départ, sonnait pour certains comme un adieu avant l''heure.                                     ', 2010, NULL, 'webm', 'denis.merigoux'),
 (5, 'S''amuser en conférence DFHM', 'videosjtx/29-s''amuser en conf DFHM.webm', 'http://binet-jtx.com/blog/?p=1496', 'media/5.jpg', '                    Ce clip présente le nouveau CD-ROM de Merdass'' Software intitulé « Comment s''amuser seul en conférence DFHM ». Production phare du JTX 2012, ce clip minimaliste ne contenant que des images fixe commenté par Marc Sanselme est à l''origine de la maxime « N''oublie pas ton papier d''alu en conf'' DFHM ! ».                ', 2012, 0, 'webm', 'denis.merigoux'),
@@ -605,7 +670,10 @@ INSERT INTO `videos` (`video`, `titre`, `adresse`, `proj`, `poster`, `descriptio
 (23, 'Facebook : groupe X2012', 'videosjtx/14-facebook X2012.webm', 'http://binet-jtx.com/blog/?p=1496', 'media/23.jpg', 'Facebook est devenu un moyen incontournable de communication pour les X, mais aussi une boîte à spam redoutable. Attention, ce clip est très proche de la réalité.', 2012, 2014, 'webm', 'denis.merigoux'),
 (24, 'SherlocX épisode 1', 'videosjtx/24-sherlocx episode 1.webm', 'http://binet-jtx.com/blog/?p=1496', 'media/24.jpg', 'Premier épisode de la série des SherlocX, adaptation plâtalienne de la série « Sherlock ». Quentin Censier joue le premier rôle et part à la chasse d''un mystérieux missaire...', 2012, 2014, 'webm', 'denis.merigoux'),
 (25, 'SherlocX épisode 2', 'videosjtx/10_SherlocX_Episode_2.webm', 'http://binet-jtx.com/blog/?p=1559', 'media/25.jpg', 'Pour le deuxième épisode de SherlockX, l''intrigue se complique : un faux missaire a détruit une borne du BL alors qu''un couple de bernaches détournait l''attention des kessiers. Watson est enlevé par une mystérieuse voiture à la fin de l''épisode...', 2012, 2014, 'webm', 'denis.merigoux'),
-(26, 'SherlocX épisode 3', 'videosjtx/19_SherlocX_Episode3.webm', 'http://binet-jtx.com/blog/?p=1559', 'media/26.jpg', 'Troisième épisode de la série SherlocX starring Quentin Censier as Sherlock and Aurélien Gouhier as Watson. C''est l''heure du combat final contre celui qui se cache derrière tout ça : Lobato-Moriarty. Ne manquez pas le suspense final !', 2012, 2014, 'webm', 'denis.merigoux');
+(26, 'SherlocX épisode 3', 'videosjtx/19_SherlocX_Episode3.webm', 'http://binet-jtx.com/blog/?p=1559', 'media/26.jpg', 'Troisième épisode de la série SherlocX starring Quentin Censier as Sherlock and Aurélien Gouhier as Watson. C''est l''heure du combat final contre celui qui se cache derrière tout ça : Lobato-Moriarty. Ne manquez pas le suspense final !', 2012, 2014, 'webm', 'denis.merigoux'),
+(27, 'Quand on arrive en ville', 'videosjtx/non_projete-Quand_on_arrive_en_ville.webm', 'http://binet-jtx.com/blog/?p=357', 'media/27.jpg', 'Sur l''air de « Quand on arrive en ville » de Daniel Balavoine, montage très à propos avec des images de la vie de la promotion 1998.', 1998, 2000, 'webm', 'denis.merigoux'),
+(28, 'Epic Bivouac Time', 'videosjtx/Epic Bivouac Time.webm', 'http://binet-jtx.com/blog/?p=1310', 'media/28.jpg', 'Inspiré de la chaîne Youtube « Epic Meal Time », cette vidéo a su capturer la quintessence de ce qu''est un repas sur le terrain à La Courtine.', 2011, 2013, 'webm', 'denis.merigoux'),
+(29, 'Clip de l''habillement', 'videosjtx/06-habillement.webm', 'http://binet-jtx.com/blog/?p=1094', 'media/29.jpg', 'Le clip de l''habillement est un clip réalisé par des X2011 (alors aspis JTX) pour l''inkhôrpo des X2012. Le clip a été utilisé en boucle pour contenir l''attente des 2012 lors des projections JTX à la Courtine, c''est pourquoi il est resté en mémoire pour les promotions 2011 et 2012. Le brillant acteur du TOS est Geoffroy Chevalier X2011. ', 2011, 2012, 'webm', 'denis.merigoux');
 
 --
 -- Index pour les tables exportées
@@ -655,12 +723,12 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=171;
 --
 -- AUTO_INCREMENT pour la table `promotions`
 --
 ALTER TABLE `promotions`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT pour la table `similaires`
 --
@@ -670,12 +738,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
 -- AUTO_INCREMENT pour la table `tags`
 --
 ALTER TABLE `tags`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2000;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2074;
 --
 -- AUTO_INCREMENT pour la table `videos`
 --
 ALTER TABLE `videos`
-MODIFY `video` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+MODIFY `video` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;
 --
 -- Contraintes pour les tables exportées
 --
